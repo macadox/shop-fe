@@ -1,0 +1,13 @@
+# dependencies 
+/node_modules
+/.pnp
+/.vscode
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+terraform/.terraform
+terraform/.terraform.lock.hcl
