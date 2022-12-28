@@ -5,6 +5,7 @@ import {
   JustifyContents,
   AlignItems,
   Positions,
+  CursorValues,
 } from "../../../constants/css.types";
 import { addSuffix } from "../../../utils/styleUtils";
 
@@ -36,6 +37,7 @@ type Props = {
   right: string;
   bottom: string;
   left: string;
+  cursor: CursorValues;
 };
 type HTMLDivProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
@@ -92,6 +94,8 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ right }) => right && `right: ${right};`}
   ${({ bottom }) => bottom && `bottom: ${bottom};`}
   ${({ left }) => left && `left: ${left};`}
+
+  ${({ cursor }) => cursor && `cursor: ${cursor};`}
 `;
 
 export default Container;

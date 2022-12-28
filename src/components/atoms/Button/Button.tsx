@@ -44,22 +44,34 @@ type ButtonTheme = {
   };
 };
 
+const defaultTheme: ButtonTheme = {
+  background: colors.BLACK,
+  bold: true,
+  border: `3px solid ${colors.BLACK}`,
+  color: colors.WHITE,
+  fontSize: "18px",
+  gap: "12px",
+  paddingBottom: "6px",
+  paddingLeft: "12px",
+  paddingRight: "12px",
+  paddingTop: "6px",
+  uppercase: true,
+  hover: {
+    background: colors.WHITE,
+    color: colors.BLACK,
+  },
+};
+
 export const buttonThemes: { [key: string]: ButtonTheme } = {
-  default: {
-    background: colors.BLACK,
-    bold: true,
-    border: `3px solid ${colors.BLACK}`,
-    color: colors.WHITE,
-    fontSize: "18px",
-    gap: "16px",
-    paddingBottom: "12px",
-    paddingLeft: "16px",
-    paddingRight: "16px",
-    paddingTop: "12px",
-    uppercase: true,
+  default: defaultTheme,
+  inverseDefault: {
+    ...defaultTheme,
+    background: colors.WHITE,
+    border: `3px solid ${colors.WHITE}`,
+    color: colors.BLACK,
     hover: {
-      background: colors.WHITE,
-      color: colors.BLACK,
+      background: colors.BLACK,
+      color: colors.WHITE,
     },
   },
   transparent: {
@@ -82,7 +94,7 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
 type Props = Partial<OverridableStyles> & {
   icon?: React.ReactNode;
   theme: ButtonTheme;
-  onClick?: () => void;
+  onClick: () => void;
   text?: string;
   hasFill?: boolean;
   hasStroke?: boolean;
@@ -114,10 +126,8 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
   ${({ theme }) => theme.gap && `gap: ${theme.gap};`}
 
   cursor: pointer;
-  border-radius: 4px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
 
   & svg {
     margin-top: 3px;

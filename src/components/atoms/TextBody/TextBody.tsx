@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextAlignValues } from "../../../constants/css.types";
+import { TextAlignValues, CursorValues } from "../../../constants/css.types";
 
 type Props = {
   size: string;
@@ -9,6 +9,8 @@ type Props = {
   lineHeight: number;
   maxWidth: string;
   textAlign: TextAlignValues;
+  opacity: number;
+  cursor: CursorValues;
 };
 
 type HTMLParagraphProps = React.DetailedHTMLProps<
@@ -24,6 +26,8 @@ const TextBody = styled.p<HTMLParagraphProps & Partial<Props>>`
   ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight}%;`}
   ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`}
   ${({ textAlign }) => textAlign && `text-align: ${textAlign};`}
+  ${({ opacity }) => opacity && `opacity: ${opacity};`}
+  ${({ cursor }) => cursor && `cursor: ${cursor};`}
 `;
 
 export default TextBody;
