@@ -9,6 +9,10 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest",
   },
 
+  moduleNameMapper: {
+    "\\.svg$": "<rootDir>/src/__mocks__/svg.js",
+  },
+
   // Runs special logic, such as cleaning up components
   // when using React Testing Library and adds special
   // extended assertions to Jest
