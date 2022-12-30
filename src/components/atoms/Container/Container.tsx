@@ -13,11 +13,18 @@ type Props = {
   background: string;
   borderRadius: string;
   width: string;
+  maxWidth: string;
+  minWidth: string;
   height: string;
+  maxHeight: string;
   minHeight: string;
   p: string | number;
   px: string | number;
   py: string | number;
+  pl: string | number;
+  pt: string | number;
+  pr: string | number;
+  pb: string | number;
   m: string | number;
   mx: string | number;
   my: string | number;
@@ -48,7 +55,10 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ background }) => background && `background: ${background};`}
   ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius};`}
   ${({ width }) => width && `width: ${width};`}
+  ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`}
+  ${({ minWidth }) => minWidth && `min-width: ${minWidth};`}
   ${({ height }) => height && `height: ${height};`}
+  ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
   ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
   ${({ p }) => p && `padding: ${p}${addSuffix(p)};`}
   ${({ px }) =>
@@ -63,6 +73,10 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
       padding-top: ${py}${addSuffix(py)};
       padding-bottom: ${py}${addSuffix(py)};
     `}
+  ${({ pl }) => pl && `padding-left: ${pl}${addSuffix(pl)};`}
+  ${({ pt }) => pt && `padding-top: ${pt}${addSuffix(pt)};`}
+  ${({ pr }) => pr && `padding-right: ${pr}${addSuffix(pr)};`}
+  ${({ pb }) => pb && `padding-bottom: ${pb}${addSuffix(pb)};`}
   ${({ m }) => m && `margin: ${m}${addSuffix(m)};`}
   ${({ mx }) =>
     mx &&
