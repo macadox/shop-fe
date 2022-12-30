@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -8,16 +8,12 @@ import { StyledProductWidget, LikeButton } from "./ProductWidget.style";
 import { ReactComponent as HeartEmpty } from "../../../assets/icons/heart.svg";
 import { ReactComponent as HeartFull } from "../../../assets/icons/heart-full.svg";
 import { PRODUCT_WIDGET_SIZE } from "../../../constants/layout";
+import { ProductWidgetType, ProductIdType } from "../../../constants/types";
 import * as colors from "../../../constants/colors";
 
-type Props = {
-  id: number | string;
-  name: string;
-  price: number;
-  favorited: boolean;
-  src: string;
-  onWidgetClick: () => void;
-  onHeartClick: () => void;
+type Props = ProductWidgetType & {
+  onWidgetClick: (id: ProductIdType) => void;
+  onHeartClick: (id: ProductIdType, favorited: boolean) => void;
 };
 
 const ProductWidget = ({
@@ -29,25 +25,37 @@ const ProductWidget = ({
   onWidgetClick,
   onHeartClick,
 }: Props) => {
+  const [isFavorited, setIsFavorited] = useState(favorited);
+
   const HeartIcon = useMemo(() => {
-    const label = `${favorited ? "unlike" : "like"} ${name}`;
+    const label = `${isFavorited ? "unlike" : "like"} ${name}`;
     const Icon = () => {
-      return favorited ? (
+      return isFavorited ? (
         <HeartFull aria-label={label} width="33.3%" />
       ) : (
         <HeartEmpty aria-label={label} width="33.3%" fill={colors.BLACK} />
       );
     };
     return Icon;
-  }, [favorited, name]);
+  }, [isFavorited, name]);
 
-  const handleHeartClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onHeartClick();
-  };
+  const handleHeartClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      const nextFavoritedValue = !isFavorited;
+
+      setIsFavorited(nextFavoritedValue);
+      onHeartClick(id, nextFavoritedValue);
+    },
+    [id, isFavorited, onHeartClick]
+  );
 
   return (
-    <StyledProductWidget tabIndex={0} onClick={onWidgetClick}>
+    <StyledProductWidget
+      data-testid="product-widget-container"
+      tabIndex={0}
+      onClick={() => onWidgetClick(id)}
+    >
       <img
         src={src}
         width={PRODUCT_WIDGET_SIZE}
