@@ -37,10 +37,12 @@ type ButtonTheme = {
   hover?: {
     background?: string;
     color?: string;
+    borderColor?: string;
   };
   press?: {
     background?: string;
     color?: string;
+    borderColor?: string;
   };
 };
 
@@ -82,12 +84,32 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
       color: colors.WHITE,
     },
   },
+  light: {
+    background: colors.WHITE,
+    bold: true,
+    border: `1px solid ${colors.SHADOW}`,
+    color: colors.BLACK,
+    fontSize: "18px",
+    gap: "12px",
+    paddingBottom: "6px",
+    paddingLeft: "12px",
+    paddingRight: "12px",
+    paddingTop: "6px",
+    hover: {
+      background: colors.LIGHTER,
+      borderColor: colors.LIGHT,
+    },
+    press: {
+      background: colors.LIGHTER,
+    },
+  },
   transparent: {
     background: "transparent",
     bold: false,
     border: "none",
     color: colors.GRAY,
-    fontSize: "18px",
+    fontSize: "16px",
+    gap: "8px",
     paddingTop: "0px",
     paddingBottom: "0px",
     paddingLeft: "0px",
@@ -156,6 +178,8 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
       theme?.hover?.background && `background: ${theme.hover.background};`}
     ${({ theme }: { theme: ButtonTheme }) =>
       theme?.hover?.color && `color: ${theme.hover.color};`}
+    ${({ theme }: { theme: ButtonTheme }) =>
+      theme?.hover?.borderColor && `border-color: ${theme.hover.borderColor};`}
 
     & svg {
       ${({ hasFill, theme }: { hasFill?: boolean; theme: ButtonTheme }) =>
@@ -170,6 +194,8 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
       theme?.press?.background && `background: ${theme.press.background};`}
     ${({ theme }: { theme: ButtonTheme }) =>
       theme?.press?.color && `color: ${theme.press.color};`}
+    ${({ theme }: { theme: ButtonTheme }) =>
+      theme?.press?.borderColor && `border-color: ${theme.press.borderColor};`}
 
     & svg {
       ${({ hasFill, theme }: { hasFill?: boolean; theme: ButtonTheme }) =>
