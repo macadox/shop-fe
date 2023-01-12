@@ -7,6 +7,7 @@ import {
   Positions,
   CursorValues,
 } from "../../../constants/css.types";
+import { HTMLDivProps } from "../../../constants/htmlProps.types";
 import { addSuffix } from "../../../utils/styleUtils";
 
 type Props = {
@@ -44,12 +45,11 @@ type Props = {
   right: string;
   bottom: string;
   left: string;
+  boxShadow: string;
   cursor: CursorValues;
+  zIndex: number;
+  transform: string;
 };
-type HTMLDivProps = React.DetailedHTMLProps<
-  React.HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
 
 const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ background }) => background && `background: ${background};`}
@@ -109,7 +109,10 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ bottom }) => bottom && `bottom: ${bottom};`}
   ${({ left }) => left && `left: ${left};`}
 
+  ${({ boxShadow }) => boxShadow && `box-shadow: ${boxShadow};`}
   ${({ cursor }) => cursor && `cursor: ${cursor};`}
+  ${({ zIndex }) => zIndex && `z-index: ${zIndex};`}
+  ${({ transform }) => transform && `transform: ${transform};`}
 `;
 
 export default Container;

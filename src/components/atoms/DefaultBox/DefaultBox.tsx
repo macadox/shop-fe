@@ -11,6 +11,7 @@ const DefaultBox = styled.div<Props>`
   background: transparent;
   color: ${colors.BLACK};
   outline: none;
+  font-size: 16px;
 
   border: 1px solid ${colors.SHADOW};
   padding: 6px 12px;

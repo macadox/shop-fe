@@ -12,3 +12,8 @@ export type HTMLUlProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLUListElement>,
   HTMLUListElement
 >;
+
+export type HTMLDivProps = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>;

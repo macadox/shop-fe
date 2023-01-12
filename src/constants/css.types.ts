@@ -1,4 +1,4 @@
-export type Displays = "flex" | "block" | "grid";
+export type Displays = "flex" | "block" | "grid" | "inline-flex";
 
 export type FlexDirections =
   | "row"

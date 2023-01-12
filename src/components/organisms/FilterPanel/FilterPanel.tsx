@@ -41,6 +41,7 @@ const AddFilterButton = ({
       handleClick();
     }}
     onKeyDownCapture={handleKeyDown}
+    tabIndex={0}
     role="combobox"
     aria-expanded={isExpanded}
     aria-controls={ariaControls}
@@ -134,10 +135,8 @@ const AddKeyPopup = ({
           dropdownId="add-filter-key"
           options={filterKeys}
           handleSelectCallback={(option) => option && selectKey(option.id)}
-          CustomCombobox={(props) => (
-            <AddFilterButton setStep={setStep} {...props} />
-          )}
           overrideIsExpanded={step > 0}
+          comboboxType="button"
         />
       </Container>
     }

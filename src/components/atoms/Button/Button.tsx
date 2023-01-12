@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { RefObject } from "react";
+import styled, { css, StyledProps } from "styled-components";
 import {
   Displays,
   JustifyContents,
@@ -73,7 +73,7 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
   inverseDefault: {
     ...defaultTheme,
     background: colors.WHITE,
-    border: `3px solid ${colors.WHITE}`,
+    border: `2px solid ${colors.WHITE}`,
     color: colors.BLACK,
     hover: {
       background: colors.BLACK,
@@ -87,7 +87,7 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
   light: {
     background: colors.WHITE,
     bold: true,
-    border: `1px solid ${colors.SHADOW}`,
+    border: `2px solid ${colors.SHADOW}`,
     color: colors.BLACK,
     fontSize: "18px",
     gap: "12px",
@@ -123,10 +123,11 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
 
 type Props = Partial<OverridableStyles> & {
   theme?: ButtonTheme;
-  onClick: () => void;
+  onClick?: () => void;
   isActive?: boolean;
   hasFill?: boolean;
   hasStroke?: boolean;
+  innerRef?: RefObject<HTMLButtonElement>;
 } & (
     | {
         icon: React.ReactNode;
@@ -138,7 +139,9 @@ type Props = Partial<OverridableStyles> & {
       }
   );
 
-const StyledButton = styled.button<HTMLButtonProps & Props>`
+const StyledButton = styled.button<
+  Omit<Props, "icon" | "text"> & HTMLButtonProps
+>`
   /* THEME */
   background: ${({ theme }) => theme.background};
 
@@ -218,10 +221,15 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
   }
 `;
 
-const Button: React.FC<Props> = (props) => (
-  <StyledButton {...props}>
-    {props.icon && <span>{props.icon}</span>}
-    {props.text && <span>{props.text}</span>}
+const Button = <T,>({
+  icon,
+  text,
+  innerRef,
+  ...rest
+}: Props & StyledProps<T> & HTMLButtonProps) => (
+  <StyledButton {...rest} ref={innerRef}>
+    {icon && <span>{icon}</span>}
+    {text && <span>{text}</span>}
   </StyledButton>
 );
 
