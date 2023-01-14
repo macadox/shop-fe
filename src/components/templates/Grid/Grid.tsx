@@ -34,7 +34,9 @@ const Grid = <T,>({
       itemMinWidth={itemMinWidth}
     >
       {rows.length === 0 ? (
-        <tr>No data is available to preview</tr>
+        <tr>
+          <td>No data is available to preview</td>
+        </tr>
       ) : (
         renderGridItems(rows, Component)
       )}

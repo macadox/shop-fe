@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useLayoutEffect,
   useMemo,
+  useEffect,
 } from "react";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -28,7 +29,7 @@ export type ComboboxProps = {
   handleKeyDown: (e: React.KeyboardEvent) => void;
 };
 
-const InputCombobox = ({
+const DefaultCombobox = ({
   isExpanded,
   ariaControls,
   ariaLabelledBy,
@@ -83,6 +84,7 @@ type Props = {
   dropdownId: string;
   CustomCombobox?: React.FC<ComboboxProps>;
   overrideIsExpanded?: boolean;
+  resetStateAfterClose?: boolean;
 };
 
 const SingleSelectDropdown = ({
@@ -93,6 +95,7 @@ const SingleSelectDropdown = ({
   dropdownId,
   CustomCombobox,
   overrideIsExpanded = false,
+  resetStateAfterClose = false,
 }: Props) => {
   const [isExpanded, setIsExpanded] = useState(
     overrideIsExpanded ? overrideIsExpanded : false
@@ -106,18 +109,18 @@ const SingleSelectDropdown = ({
   );
 
   const closeDropdown = useCallback(() => {
-    !overrideIsExpanded && setIsExpanded(false);
-  }, [overrideIsExpanded]);
+    setIsExpanded(false);
+  }, []);
 
   const toggleDropdown = useCallback(() => {
-    !overrideIsExpanded && setIsExpanded((prev) => !prev);
-  }, [overrideIsExpanded]);
+    setIsExpanded((prev) => !prev);
+  }, []);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
   const firstUpdateRef = useRef(true);
 
-  useOnClickOutside(dropdownRef, closeDropdown);
+  useOnClickOutside(dropdownRef, () => !overrideIsExpanded && closeDropdown());
 
   const selectOption = (id: string) => setSelectedId(id);
 
@@ -132,6 +135,7 @@ const SingleSelectDropdown = ({
       switch (e.code) {
         case KeyboardCodes.Enter:
         case KeyboardCodes.Space: {
+          e.preventDefault();
           toggleDropdown();
           break;
         }
@@ -149,12 +153,14 @@ const SingleSelectDropdown = ({
         }
         case KeyboardCodes.ArrowUp:
         case KeyboardCodes.ArrowLeft: {
+          e.preventDefault();
           const prevOptionIndex = Math.max(0, currentOptionIndex - 1);
           selectOption(options[prevOptionIndex].id);
           break;
         }
         case KeyboardCodes.ArrowDown:
         case KeyboardCodes.ArrowRight: {
+          e.preventDefault();
           const nextOptionIndex = Math.min(
             options.length - 1,
             currentOptionIndex + 1
@@ -169,9 +175,16 @@ const SingleSelectDropdown = ({
 
   const handleClick = (optionId: string) => {
     selectOption(optionId);
-    closeDropdown();
+    !overrideIsExpanded && closeDropdown();
     focusCombobox();
   };
+
+  useEffect(() => {
+    setIsExpanded(overrideIsExpanded);
+    if (overrideIsExpanded && resetStateAfterClose) {
+      setSelectedId(null);
+    }
+  }, [overrideIsExpanded, resetStateAfterClose]);
 
   useLayoutEffect(() => {
     if (firstUpdateRef.current) {
@@ -182,7 +195,10 @@ const SingleSelectDropdown = ({
     handleSelectCallback(selectedOption);
   }, [selectedOption, handleSelectCallback]);
 
-  const RenderedCombobox = CustomCombobox ? CustomCombobox : InputCombobox;
+  const RenderedCombobox = useMemo(
+    () => (CustomCombobox ? CustomCombobox : DefaultCombobox),
+    [CustomCombobox]
+  );
 
   return (
     <Container ref={dropdownRef} position="relative">
