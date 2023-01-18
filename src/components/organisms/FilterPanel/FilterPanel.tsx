@@ -1,61 +1,11 @@
-import React, { useMemo, useState, useRef, useCallback } from "react";
-import { Table, Column } from "@tanstack/react-table";
+import React, { useMemo } from "react";
+import { Table } from "@tanstack/react-table";
 import Container from "../../atoms/Container/Container";
 import Tag from "../../atoms/Tag/Tag";
-import TextBody from "../../atoms/TextBody/TextBody";
-import AddFilter, {
-  FilterValuesOpts,
-} from "../../molecules/AddFilter/AddFilter";
+import FilterTagContent from "./_components/FilterTagContent/FilterTagContent";
 import { getColumnHeaderText } from "./utils";
-
-type TagContentProps = {
-  label: string;
-  value: FilterValuesOpts;
-};
-
-const TagContent = ({ label, value }: TagContentProps) => {
-  if (!value) return null;
-
-  if (typeof value === "string") {
-    return (
-      <>
-        <strong>{label}</strong> is <strong>{value}</strong>
-      </>
-    );
-  }
-
-  if (value instanceof Array && value.length === 2) {
-    const min = value?.[0];
-    const max = value?.[1];
-    let res = null;
-
-    if (min && max) {
-      res = (
-        <>
-          <strong>{label}</strong> is between <strong>{min}</strong> and{" "}
-          <strong>{max}</strong>
-        </>
-      );
-    } else if (max)
-      res = (
-        <>
-          <strong>{label}</strong> is lesser than <strong>{max}</strong>
-        </>
-      );
-    else if (min)
-      res = (
-        <>
-          <strong>{label}</strong> is greater than <strong>{min}</strong>
-        </>
-      );
-
-    return res;
-  }
-
-  return <TextBody>Tag</TextBody>;
-};
-
-export type AddFilterSteps = 0 | 1 | 2;
+import AddFilter from "./_components/AddFilter/AddFilter";
+import { FilterValuesOpts } from "./types";
 
 type Props<T> = {
   table: Table<T>;
@@ -87,7 +37,7 @@ const FilterPanel = <T,>({ table }: Props<T>) => {
           <Tag
             key={column.id}
             content={
-              <TagContent
+              <FilterTagContent
                 label={getColumnHeaderText(column)}
                 value={column.getFilterValue() as FilterValuesOpts}
               />

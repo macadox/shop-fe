@@ -1,26 +1,26 @@
-import React, { HTMLInputTypeAttribute, RefObject } from "react";
+import React, { RefObject } from "react";
+import { HTMLInputProps } from "../../../constants/htmlProps.types";
 
 type Props = {
   placeholder?: string;
-  type?: HTMLInputTypeAttribute;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   innerRef: RefObject<HTMLInputElement>;
 };
 import DefaultBox from "../DefaultBox/DefaultBox";
 
-const Input: React.FC<Props> = ({
+const Input: React.FC<Props & HTMLInputProps> = ({
   placeholder = "",
-  type = "text",
   innerRef,
   onChange,
+  ...rest
 }) => {
   return (
     <DefaultBox
-      type={type}
-      placeholder={placeholder}
-      ref={innerRef}
-      as="input"
+      {...rest}
       {...(onChange && { onChange })}
+      placeholder={placeholder}
+      as="input"
+      ref={innerRef}
     />
   );
 };

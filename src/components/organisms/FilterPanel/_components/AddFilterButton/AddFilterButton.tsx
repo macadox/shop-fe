@@ -1,10 +1,9 @@
 import React from "react";
 import { StyledAddFilterButton } from "./AddFilterButton.style";
-import { AddFilterSteps } from "../../organisms/FilterPanel/FilterPanel";
-import { ComboboxProps } from "../SingleSelectDropdown/SingleSelectDropdown";
-import * as colors from "../../../constants/colors";
-
-import { ReactComponent as CircleAdd } from "../../../assets/icons/add-circle.svg";
+import { ComboboxProps } from "../../../../molecules/SingleSelectDropdown/SingleSelectDropdown";
+import { ReactComponent as CircleAdd } from "../../../../../assets/icons/add-circle.svg";
+import * as colors from "../../../../../constants/colors";
+import { AddFilterSteps } from "../../types";
 
 type AddFilterButtonProps = {
   setStep: (val: AddFilterSteps) => void;
