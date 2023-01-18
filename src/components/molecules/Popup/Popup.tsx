@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, cloneElement } from "react";
 import { usePopper } from "react-popper";
 import { Placement as PopperPlacement } from "@popperjs/core";
 import Container from "../../atoms/Container/Container";
 
 type Props = {
-  TriggerComponent: React.FC;
-  PoppedComponent: React.FC;
+  TriggerComponent: React.ReactElement;
+  PoppedComponent: React.ReactElement;
   isOpen: boolean;
   placement?: PopperPlacement;
-  padding?: number;
+  paddingMain?: number;
+  paddingAlt?: number;
 };
 
 const getFallbackPlacements = (
@@ -32,7 +33,8 @@ const Popup = ({
   PoppedComponent,
   isOpen,
   placement,
-  padding = 12,
+  paddingMain = 12,
+  paddingAlt = 0,
 }: Props) => {
   // Popper
   const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
@@ -44,7 +46,7 @@ const Popup = ({
       {
         name: "offset",
         options: {
-          offset: [0, padding],
+          offset: [paddingAlt, paddingMain],
         },
       },
       {
@@ -52,29 +54,35 @@ const Popup = ({
         options: {
           boundary: document.body,
           altAxis: true,
-          padding,
+          padding: paddingMain,
         },
       },
       {
         name: "flip",
         options: {
           fallbackPlacements: getFallbackPlacements(placement),
-          padding,
+          padding: paddingMain,
         },
       },
     ],
   });
 
+  const TriggerWithRef = cloneElement(TriggerComponent, {
+    ref: setContainerRef,
+  });
+
   return (
-    <Container ref={setContainerRef} position="relative">
-      <TriggerComponent />
+    <Container zIndex={10} position="relative" width="100%">
+      {TriggerWithRef}
       {isOpen && (
         <Container
+          width="100%"
+          position="absolute"
           ref={setPopperRef}
           style={styles.popper}
           {...attributes.popper}
         >
-          <PoppedComponent />
+          {PoppedComponent}
         </Container>
       )}
     </Container>

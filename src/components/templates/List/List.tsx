@@ -1,18 +1,29 @@
-import * as React from "react";
+import React, { useState } from "react";
 
 import {
   useReactTable,
   getCoreRowModel,
+  getSortedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
+  SortingState,
+  ColumnFiltersState,
   ColumnDef,
+  SortingFn,
+  FilterFn,
+  FilterFns,
 } from "@tanstack/react-table";
 
-import Pagination from "../../molecules/Pagination/Pagination";
+import Pagination from "../../organisms/Pagination/Pagination";
 import Container from "../../atoms/Container/Container";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import Grid from "../Grid/Grid";
+import FilterPanel from "../../organisms/FilterPanel/FilterPanel";
 
+export enum FilterFuncs {
+  "includesString" = "includesString",
+  "equals" = "equals",
+}
 export enum ViewEnum {
   "GRID" = "GRID",
   "TABLE" = "TABLE",
@@ -38,11 +49,22 @@ type TableType<T> = BaseProps<T> & {
 type Props<T> = TableType<T> | GridType<T>;
 
 const List = <T,>(props: Props<T>) => {
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
   const table = useReactTable({
     data: props.data,
     columns: props.columns,
     initialState: { pagination: { pageSize: 6 } },
+    state: {
+      sorting,
+      columnFilters,
+    },
+    onColumnFiltersChange: setColumnFilters,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   });
@@ -70,6 +92,9 @@ const List = <T,>(props: Props<T>) => {
 
   return (
     <Container>
+      <Container mb={32}>
+        <FilterPanel table={table} />
+      </Container>
       {renderComponent()}
       <Container mt={32}>
         <Pagination table={table} />

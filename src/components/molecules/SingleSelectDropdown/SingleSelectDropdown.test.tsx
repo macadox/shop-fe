@@ -3,7 +3,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SelectDropdown from "./SelectDropdown";
+import SingleSelectDropdown from "./SingleSelectDropdown";
 import { act } from "react-dom/test-utils";
 
 const mockOptions = [
@@ -15,10 +15,10 @@ const mockOptions = [
 
 const mockId = "dropdown-uniqueid";
 
-describe("SelectDropdown state", () => {
+describe("SingleSelectDropdown state", () => {
   it("should render the dropdown with combobox only visible", () => {
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -32,7 +32,7 @@ describe("SelectDropdown state", () => {
   });
   it("should present the default placeholder if it is passed", () => {
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -44,11 +44,11 @@ describe("SelectDropdown state", () => {
   });
   it("should present the default option selected", () => {
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
-        initialOptionId={mockOptions[2].id}
+        initialSelectedId={mockOptions[2].id}
       />
     );
 
@@ -59,11 +59,11 @@ describe("SelectDropdown state", () => {
     render(
       <>
         <label id={`${mockId}--label`}>Label For Dropdown</label>
-        <SelectDropdown
+        <SingleSelectDropdown
           options={mockOptions}
           handleSelectCallback={jest.fn()}
           dropdownId={mockId}
-          initialOptionId="test_1"
+          initialSelectedId="test_1"
         />
       </>
     );
@@ -95,7 +95,7 @@ describe("SelectDropdown state", () => {
   it("should rotate the caret, when the dropdown is open", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -115,11 +115,11 @@ describe("SelectDropdown state", () => {
   });
 });
 
-describe("SelectDropdown mouse interactions", () => {
+describe("SingleSelectDropdown mouse interactions", () => {
   it("should close the listbox, when we click outside of the listbox", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -137,7 +137,7 @@ describe("SelectDropdown mouse interactions", () => {
   it("should close the listbox if we click again on the combobox", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -155,7 +155,7 @@ describe("SelectDropdown mouse interactions", () => {
   it("should set the selected option & close listbox, when we click on another listitem", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -174,11 +174,11 @@ describe("SelectDropdown mouse interactions", () => {
     const user = userEvent.setup();
     const handleSelectCallbackMock = jest.fn();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={handleSelectCallbackMock}
         dropdownId={mockId}
-        initialOptionId="test_1"
+        initialSelectedId="test_1"
       />
     );
     const combobox = screen.getByRole("combobox");
@@ -191,11 +191,11 @@ describe("SelectDropdown mouse interactions", () => {
     const user = userEvent.setup();
     const handleSelectCallbackMock = jest.fn();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={handleSelectCallbackMock}
         dropdownId={mockId}
-        initialOptionId="test_1"
+        initialSelectedId="test_1"
       />
     );
     const combobox = screen.getByRole("combobox");
@@ -207,11 +207,11 @@ describe("SelectDropdown mouse interactions", () => {
   });
 });
 
-describe("SelectDropdown keyboard interactions", () => {
+describe("SingleSelectDropdown keyboard interactions", () => {
   it("should toggle the dropdown, when we press enter", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -232,7 +232,7 @@ describe("SelectDropdown keyboard interactions", () => {
   it("should toggle the dropdown, when we press SPACE", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -251,7 +251,7 @@ describe("SelectDropdown keyboard interactions", () => {
   it("should close the dropdown when we press ESCAPE", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -270,7 +270,7 @@ describe("SelectDropdown keyboard interactions", () => {
   it("should select all items when we press DOWN/RIGHT till the last item", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
@@ -299,12 +299,12 @@ describe("SelectDropdown keyboard interactions", () => {
   it("should select all items when we press LEFT/UP till the last item", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
         defaultPlaceholder="Select some value now"
-        initialOptionId="test_4"
+        initialSelectedId="test_4"
       />
     );
     const combobox = screen.getByRole("combobox");
@@ -325,11 +325,11 @@ describe("SelectDropdown keyboard interactions", () => {
   it("should jump to first item, when we press HOME", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}
-        initialOptionId="test_4"
+        initialSelectedId="test_4"
       />
     );
     const combobox = screen.getByRole("combobox");
@@ -343,7 +343,7 @@ describe("SelectDropdown keyboard interactions", () => {
   it("should jump to last item, when we press END", async () => {
     const user = userEvent.setup();
     render(
-      <SelectDropdown
+      <SingleSelectDropdown
         options={mockOptions}
         handleSelectCallback={jest.fn()}
         dropdownId={mockId}

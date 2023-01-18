@@ -21,7 +21,7 @@ export const StyledListItem = styled.li<HTMLLiProps & { isSelected: boolean }>`
   padding: 6px 12px;
 
   &:hover {
-    background: ${colors.LIGHT};
+    background: ${colors.LIGHTER};
   }
 
   ${({ isSelected }) =>
