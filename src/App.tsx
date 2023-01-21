@@ -1,13 +1,9 @@
-import React, { Suspense } from "react";
-const Container = React.lazy(() => import("ui/Container"));
+import React from "react";
 
 const App = () => {
   return (
     <div>
       <div>Hello from the App</div>
-      <Suspense fallback={<div>Loading remote...</div>}>
-        <Container />
-      </Suspense>
     </div>
   );
 };
