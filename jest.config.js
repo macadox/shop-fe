@@ -10,7 +10,10 @@ module.exports = {
   },
 
   moduleNameMapper: {
-    "\\.svg$": "<rootDir>/src/__mocks__/svg.js",
+    "\\.svg$": "<rootDir>/src/__mocks__/svg.ts",
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+      "<rootDir>/src/__mocks__/fileMock.ts",
+    "\\.(css|less)$": "<rootDir>/src/__mocks__/styleMock.ts",
   },
 
   // Runs special logic, such as cleaning up components

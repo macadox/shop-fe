@@ -41,7 +41,7 @@ const List = <T,>(props: Props<T>) => {
   const table = useReactTable({
     data: props.data,
     columns: props.columns,
-    initialState: { pagination: { pageSize: 5 } },
+    initialState: { pagination: { pageSize: 6 } },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
