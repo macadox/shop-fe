@@ -2,7 +2,7 @@ import React, {
   useState,
   useRef,
   useCallback,
-  useEffect,
+  useLayoutEffect,
   useMemo,
 } from "react";
 import Container from "../../atoms/Container/Container";
@@ -14,7 +14,7 @@ import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 import { handleRotate } from "../../../utils/styleUtils";
 import * as colors from "../../../constants/colors";
 import { KeyboardCodes } from "../../../constants/events";
-// import { ReactComponent as CaretDown } from "../../../assets/icons/caret-down.svg";
+import { ReactComponent as CaretDown } from "../../../assets/icons/caret-down.svg";
 
 type ComboboxProps = {
   isExpanded: boolean;
@@ -31,6 +31,7 @@ type ComboboxProps = {
 const Combobox = ({
   isExpanded,
   ariaControls,
+  ariaLabelledBy,
   ariaActiveDescendant,
   selectedItem,
   defaultPlaceholder,
@@ -45,13 +46,16 @@ const Combobox = ({
       role="combobox"
       aria-expanded={isExpanded}
       aria-controls={ariaControls}
-      aria-activedescendant={(isExpanded && ariaActiveDescendant) || undefined}
+      aria-activedescendant={
+        isExpanded && ariaActiveDescendant ? ariaActiveDescendant : undefined
+      }
       aria-haspopup="listbox"
+      aria-labelledby={ariaLabelledBy}
       hasFocus={isExpanded}
       as="div"
       tabIndex={0}
       onClick={handleClick}
-      onKeyDown={handleKeyDown}
+      onKeyDownCapture={handleKeyDown}
       ref={innerRef}
     >
       <Container cursor="pointer" display="flex" justifyContent="space-between">
@@ -59,12 +63,12 @@ const Combobox = ({
           {hasItem ? selectedItem.value : defaultPlaceholder}
         </TextBody>
         <Container>
-          {/* <CaretDown
+          <CaretDown
             transform={`${handleRotate(isExpanded ? 180 : 0)}`}
             style={{ marginBottom: `${isExpanded ? 2 : 0}px` }}
             fill={colors.BLACK}
             data-testid="caret-svg"
-          /> */}
+          />
         </Container>
       </Container>
     </DefaultBox>
@@ -105,6 +109,8 @@ const SelectDropdown = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
+  const firstUpdateRef = useRef(true);
+
   useOnClickOutside(dropdownRef, () => {
     setIsExpanded(false);
   });
@@ -115,18 +121,6 @@ const SelectDropdown = ({
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
-      if (
-        selectedId === null &&
-        [
-          KeyboardCodes.ArrowDown,
-          KeyboardCodes.ArrowUp,
-          KeyboardCodes.End,
-          KeyboardCodes.Home,
-        ].includes(e.code as KeyboardCodes)
-      ) {
-        return selectOption(options[0].id);
-      }
-
       const currentOptionIndex = options.findIndex(
         (option) => option.id === selectedId
       );
@@ -175,7 +169,12 @@ const SelectDropdown = ({
     focusCombobox();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (firstUpdateRef.current) {
+      firstUpdateRef.current = false;
+      return;
+    }
+
     handleSelectCallback(selectedOption);
   }, [selectedOption, handleSelectCallback]);
 
