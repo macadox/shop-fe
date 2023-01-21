@@ -60,8 +60,8 @@ const DefaultCombobox = ({
       ref={innerRef}
     >
       <Container
-        cursor="pointer"
-        display="flex"
+        $cursor="pointer"
+        $display="flex"
         $justifyContent="space-between"
       >
         <TextBody {...(!hasItem && { opacity: 0.5 })}>
@@ -206,7 +206,7 @@ const SingleSelectDropdown = ({
   );
 
   return (
-    <Container ref={dropdownRef} position="relative">
+    <Container ref={dropdownRef} $position="relative">
       <RenderedCombobox
         isExpanded={isExpanded}
         ariaControls={`${dropdownId}--listbox`}

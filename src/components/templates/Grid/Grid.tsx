@@ -30,8 +30,8 @@ const Grid = <T,>({
   const rows = table.getRowModel().rows;
 
   return rows.length === 0 ? (
-    <Container width="100%">
-      <TextBody textAlign="center">No data is available to preview</TextBody>
+    <Container $width="100%">
+      <TextBody $textAlign="center">No data is available to preview</TextBody>
     </Container>
   ) : (
     <StyledGrid

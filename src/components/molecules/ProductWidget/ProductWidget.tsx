@@ -59,8 +59,8 @@ const ProductWidget = ({
       onClick={() => onWidgetClick(id)}
     >
       <Container
-        width={PRODUCT_WIDGET_PHOTO_SIZE}
-        height={PRODUCT_WIDGET_PHOTO_SIZE}
+        $width={PRODUCT_WIDGET_PHOTO_SIZE}
+        $height={PRODUCT_WIDGET_PHOTO_SIZE}
         ref={imgContainerRef}
       >
         <img src={src} width="100%" height="100%" alt={name} />
@@ -68,9 +68,9 @@ const ProductWidget = ({
       <LikeButton onClick={handleHeartClick}>
         <HeartIcon />
       </LikeButton>
-      <Container pt={16} display="flex" flexDirection="column" gap="4px">
-        <TextBody size="18px">{price}zł</TextBody>
-        <TextTitle as="h3" size="16px" uppercase bold>
+      <Container $pt={16} $display="flex" $flexDirection="column" $gap="4px">
+        <TextBody $size="18px">{price}zł</TextBody>
+        <TextTitle as="h3" $size="16px" $uppercase $bold>
           {name}
         </TextTitle>
       </Container>

@@ -19,6 +19,7 @@ import Container from "../../atoms/Container/Container";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import Grid from "../Grid/Grid";
 import FilterPanel from "../../organisms/FilterPanel/FilterPanel";
+import Spinner from "../../atoms/Spinner/Spinner";
 
 export enum FilterFuncs {
   "includesString" = "includesString",
@@ -33,6 +34,7 @@ type BaseProps<T> = {
   data: T[];
   columns: ColumnDef<T>[];
   view: ViewEnum;
+  isLoading: boolean;
 };
 
 type GridType<T> = BaseProps<T> & {
@@ -92,11 +94,17 @@ const List = <T,>(props: Props<T>) => {
 
   return (
     <Container>
-      <Container mb={32}>
+      <Container $mb={32}>
         <FilterPanel table={table} />
       </Container>
-      {renderComponent()}
-      <Container mt={32}>
+      {props.isLoading ? (
+        <Container $width="100%" $display="flex" $justifyContent="center">
+          <Spinner />
+        </Container>
+      ) : (
+        renderComponent()
+      )}
+      <Container $mt={32}>
         <Pagination table={table} />
       </Container>
     </Container>

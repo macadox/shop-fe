@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const StyledAddFilterButton = styled.div<{ hasFocus: boolean }>`
+export const StyledAddFilterButton = styled.div`
   background: #ffffff;
   border: 2px solid #0000000d;
   color: #080402;

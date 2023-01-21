@@ -32,7 +32,7 @@ const FilterPanel = <T,>({ table }: Props<T>) => {
 
   return (
     <Container>
-      <Container display="flex" gap="8px" flexWrap="wrap">
+      <Container $display="flex" $gap="8px" $flexWrap="wrap">
         {filteredColumns.map((column) => (
           <Tag
             key={column.id}

@@ -13,15 +13,15 @@ type Props = {
 const Tag = ({ content, onClear }: Props) => {
   return (
     <Container
-      display="inline-flex"
+      $display="inline-flex"
       $alignItems="center"
-      gap="8px"
-      background={colors.LIGHT}
-      p={8}
-      boxShadow={`0px 0px 8px 0px ${colors.SHADOW}`}
-      height="36px"
+      $gap="8px"
+      $background={colors.LIGHT}
+      $p={8}
+      $boxShadow={`0px 0px 8px 0px ${colors.SHADOW}`}
+      $height="36px"
     >
-      <TextBody size="12px" color={colors.BLACK}>
+      <TextBody $size="12px" $color={colors.BLACK}>
         {content}
       </TextBody>
       {onClear && (

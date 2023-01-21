@@ -13,7 +13,7 @@ const MainRouter = () => {
     <Router>
       <Navbar />
       {/* APP WRAPPER */}
-      <Container flexGrow={1} background={colors.LIGHTER}>
+      <Container $flexGrow={1} $background={colors.LIGHTER}>
         <Routes>
           <Route path="/categories" element={<div>CategoriesPage</div>} />
           <Route path="/profile" element={<div>ProfilePage</div>} />

@@ -8,7 +8,7 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Container $minHeight="100vh" display="flex" flexDirection="column">
+      <Container $minHeight="100vh" $display="flex" $flexDirection="column">
         <MainRouter />
       </Container>
     </QueryClientProvider>

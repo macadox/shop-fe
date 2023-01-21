@@ -11,11 +11,17 @@ import {
 
 type Props = {
   list: GetAllProductsItem[];
+  isLoading: boolean;
   onWidgetClick: () => void;
   onHeartClick: () => void;
 };
 
-const ProductGrid = ({ list, onWidgetClick, onHeartClick }: Props) => {
+const ProductGrid = ({
+  list,
+  isLoading,
+  onWidgetClick,
+  onHeartClick,
+}: Props) => {
   const columns = useMemo<ColumnDef<GetAllProductsItem>[]>(
     () => [
       { header: "ID", accessorKey: "id", enableColumnFilter: false },
@@ -36,7 +42,7 @@ const ProductGrid = ({ list, onWidgetClick, onHeartClick }: Props) => {
           id={props.id}
           name={props.name}
           price={props.price}
-          favorited={true}
+          favorited={false}
           src={props.src}
           onHeartClick={onHeartClick}
           onWidgetClick={onWidgetClick}
@@ -54,6 +60,7 @@ const ProductGrid = ({ list, onWidgetClick, onHeartClick }: Props) => {
       GridComponent={renderProduct}
       maxColumnCount={3}
       itemMinWidth={PRODUCT_WIDGET_PHOTO_SIZE}
+      isLoading={isLoading}
     />
   );
 };

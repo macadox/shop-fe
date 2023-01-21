@@ -53,7 +53,7 @@ const MenuButton = ({
 
 const Logo = () => {
   return (
-    <TextBody $bold={true} size="20px" letterSpacing={4}>
+    <TextBody $bold={true} $size="20px" $letterSpacing={4}>
       ALPHASHOP
     </TextBody>
   );
@@ -106,11 +106,11 @@ const Navbar = () => {
   return (
     <StyledNav $active={open}>
       <Container
-        display="flex"
+        $display="flex"
         $justifyContent="space-between"
         $alignItems="center"
         $maxWidth={INNER_CONTAINER_MAX_WIDTH}
-        mx="auto"
+        $mx="auto"
       >
         <Logo />
         <Burger
