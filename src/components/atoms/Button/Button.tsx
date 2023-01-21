@@ -1,5 +1,5 @@
 import React, { RefObject } from "react";
-import styled, { css, StyledProps } from "styled-components";
+import { css, styled } from "styled-components";
 import {
   Displays,
   JustifyContents,
@@ -9,6 +9,7 @@ import { HTMLButtonProps } from "../../../constants/htmlProps.types";
 import * as colors from "../../../constants/colors";
 
 type OverridableStyles = {
+  fontSize: string;
   width: string;
   height: string;
   paddingTop: string;
@@ -17,7 +18,7 @@ type OverridableStyles = {
   paddingRight: string;
 };
 
-type ButtonTheme = {
+export type ButtonTheme = {
   background: string;
   bold: boolean;
   width?: string;
@@ -121,7 +122,7 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
   },
 };
 
-type Props = Partial<OverridableStyles> & {
+export type ButtonProps = Partial<OverridableStyles> & {
   theme?: ButtonTheme;
   onClick?: () => void;
   isActive?: boolean;
@@ -140,31 +141,36 @@ type Props = Partial<OverridableStyles> & {
   );
 
 const StyledButton = styled.button<
-  Omit<Props, "icon" | "text"> & HTMLButtonProps
+  Omit<ButtonProps, "icon" | "text"> & HTMLButtonProps
 >`
   /* THEME */
-  background: ${({ theme }) => theme.background};
+  background: ${({ theme }) => theme && theme.background};
 
-  border: ${({ theme }) => theme.border};
-  color: ${({ theme }) => theme.color};
-  font-size: ${({ theme }) => theme.fontSize};
+  border: ${({ theme }) => theme && theme.border};
+  color: ${({ theme }) => theme && theme.color};
   /* THEME, OVERRIDABLE */
-  width: ${({ theme, width }) => (width ? width : theme.width)};
-  height: ${({ theme, height }) => (height ? height : theme.height)};
+  font-size: ${({ theme, fontSize }) =>
+    fontSize ? fontSize : theme && theme.fontSize};
+  width: ${({ theme, width }) => (width ? width : theme && theme.width)};
+  height: ${({ theme, height }) => (height ? height : theme && theme.height)};
   padding-top: ${({ theme, paddingTop }) =>
-    paddingTop ? paddingTop : theme.paddingTop};
+    paddingTop ? paddingTop : theme && theme.paddingTop};
   padding-bottom: ${({ theme, paddingBottom }) =>
-    paddingBottom ? paddingBottom : theme.paddingBottom};
+    paddingBottom ? paddingBottom : theme && theme.paddingBottom};
   padding-left: ${({ theme, paddingLeft }) =>
-    paddingLeft ? paddingLeft : theme.paddingLeft};
+    paddingLeft ? paddingLeft : theme && theme.paddingLeft};
   padding-right: ${({ theme, paddingRight }) =>
-    paddingRight ? paddingRight : theme.paddingRight};
+    paddingRight ? paddingRight : theme && theme.paddingRight};
   /* OPTIONAL */
-  ${({ theme }) => theme.display && `display: ${theme.display};`}
   ${({ theme }) =>
-    theme.justifyContent && `justify-content: ${theme.justifyContent};`}
-  ${({ theme }) => theme.alignItems && `align-items: ${theme.alignItems};`}
-  ${({ theme }) => theme.gap && `gap: ${theme.gap};`}
+    theme && theme.display && `display: ${theme && theme.display};`}
+  ${({ theme }) =>
+    theme &&
+    theme.justifyContent &&
+    `justify-content: ${theme && theme.justifyContent};`}
+  ${({ theme }) =>
+    theme && theme.alignItems && `align-items: ${theme && theme.alignItems};`}
+  ${({ theme }) => theme && theme.gap && `gap: ${theme && theme.gap};`}
 
   cursor: pointer;
   display: inline-flex;
@@ -177,33 +183,33 @@ const StyledButton = styled.button<
 
   /* STATES  */
   &:hover:enabled {
-    ${({ theme }: { theme: ButtonTheme }) =>
+    ${({ theme }: { theme?: ButtonTheme }) =>
       theme?.hover?.background && `background: ${theme.hover.background};`}
-    ${({ theme }: { theme: ButtonTheme }) =>
+    ${({ theme }: { theme?: ButtonTheme }) =>
       theme?.hover?.color && `color: ${theme.hover.color};`}
-    ${({ theme }: { theme: ButtonTheme }) =>
+    ${({ theme }: { theme?: ButtonTheme }) =>
       theme?.hover?.borderColor && `border-color: ${theme.hover.borderColor};`}
 
     & svg {
-      ${({ hasFill, theme }: { hasFill?: boolean; theme: ButtonTheme }) =>
+      ${({ hasFill, theme }: { hasFill?: boolean; theme?: ButtonTheme }) =>
         hasFill && theme?.hover?.color && `fill: ${theme.hover.color};`}
-      ${({ hasStroke, theme }: { hasStroke?: boolean; theme: ButtonTheme }) =>
+      ${({ hasStroke, theme }: { hasStroke?: boolean; theme?: ButtonTheme }) =>
         hasStroke && theme?.hover?.color && `stroke: ${theme.hover.color};`}
     }
   }
 
   &:active:enabled {
-    ${({ theme }: { theme: ButtonTheme }) =>
+    ${({ theme }: { theme?: ButtonTheme }) =>
       theme?.press?.background && `background: ${theme.press.background};`}
-    ${({ theme }: { theme: ButtonTheme }) =>
+    ${({ theme }: { theme?: ButtonTheme }) =>
       theme?.press?.color && `color: ${theme.press.color};`}
-    ${({ theme }: { theme: ButtonTheme }) =>
+    ${({ theme }: { theme?: ButtonTheme }) =>
       theme?.press?.borderColor && `border-color: ${theme.press.borderColor};`}
 
     & svg {
-      ${({ hasFill, theme }: { hasFill?: boolean; theme: ButtonTheme }) =>
+      ${({ hasFill, theme }: { hasFill?: boolean; theme?: ButtonTheme }) =>
         hasFill && theme?.press?.color && `fill: ${theme.press.color};`}
-      ${({ hasStroke, theme }: { hasStroke?: boolean; theme: ButtonTheme }) =>
+      ${({ hasStroke, theme }: { hasStroke?: boolean; theme?: ButtonTheme }) =>
         hasStroke && theme?.press?.color && `stroke: ${theme.press.color};`}
     }
   }
@@ -221,20 +227,17 @@ const StyledButton = styled.button<
   }
 `;
 
-const Button = <T,>({
+const Button = ({
   icon,
   text,
   innerRef,
+  theme = buttonThemes.default,
   ...rest
-}: Props & StyledProps<T> & HTMLButtonProps) => (
-  <StyledButton {...rest} ref={innerRef}>
+}: ButtonProps & HTMLButtonProps) => (
+  <StyledButton {...rest} ref={innerRef} theme={theme}>
     {icon && <span>{icon}</span>}
     {text && <span>{text}</span>}
   </StyledButton>
 );
-
-Button.defaultProps = {
-  theme: buttonThemes.default,
-};
 
 export default Button;

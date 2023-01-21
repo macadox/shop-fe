@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import { css, styled } from "styled-components";
 import {
   FlexDirections,
   Displays,
@@ -14,11 +14,11 @@ type Props = {
   background: string;
   borderRadius: string;
   width: string;
-  maxWidth: string;
-  minWidth: string;
+  $maxWidth: string;
+  $minWidth: string;
   height: string;
-  maxHeight: string;
-  minHeight: string;
+  $maxHeight: string;
+  $minHeight: string;
   p: string | number;
   px: string | number;
   py: string | number;
@@ -55,11 +55,11 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ background }) => background && `background: ${background};`}
   ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius};`}
   ${({ width }) => width && `width: ${width};`}
-  ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`}
-  ${({ minWidth }) => minWidth && `min-width: ${minWidth};`}
+  ${({ $maxWidth }) => $maxWidth && `max-width: ${$maxWidth};`}
+  ${({ $minWidth }) => $minWidth && `min-width: ${$minWidth};`}
   ${({ height }) => height && `height: ${height};`}
-  ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
-  ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
+  ${({ $maxHeight }) => $maxHeight && `max-height: ${$maxHeight};`}
+  ${({ $minHeight }) => $minHeight && `min-height: ${$minHeight};`}
   ${({ p }) => p && `padding: ${p}${addSuffix(p)};`}
   ${({ px }) =>
     px &&

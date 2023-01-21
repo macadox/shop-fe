@@ -1,16 +1,12 @@
 import React from "react";
-import { Container } from "./components/atoms";
-import GlobalStyles from "./GlobalStyles";
+import Container from "./components/atoms/Container/Container";
+import MainRouter from "./components/Router/MainRouter";
 
 const App = () => {
   return (
-    <>
-      <GlobalStyles />
-      <div>
-        <Container p={25}></Container>
-        <div>Hello from the App</div>
-      </div>
-    </>
+    <Container $minHeight="200vh">
+      <MainRouter />
+    </Container>
   );
 };
 
