@@ -1,6 +1,5 @@
 import { styled } from "styled-components";
 import * as colors from "../../../constants/colors";
-import Container from "../../atoms/Container/Container";
 
 export const StyledMenu = styled.ul<{ $active: boolean }>`
   position: absolute;

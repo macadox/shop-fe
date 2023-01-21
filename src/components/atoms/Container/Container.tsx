@@ -37,6 +37,7 @@ type Props = {
   flexDirection: FlexDirections;
   justifyContent: JustifyContents;
   flexBasis: string;
+  flexGrow: number;
   alignItems: AlignItems;
   alignSelf: AlignItems;
   gap: string | number;
@@ -100,6 +101,7 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ justifyContent }) =>
     justifyContent && `justify-content: ${justifyContent};`}
   ${({ flexBasis }) => flexBasis && `flex-basis: ${flexBasis};`}
+  ${({ flexGrow }) => flexGrow && `flex-grow: ${flexGrow};`}
   ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
   ${({ alignSelf }) => alignSelf && `align-self: ${alignSelf};`}
   ${({ gap }) => gap && `gap: ${gap}${addSuffix(gap)};`}

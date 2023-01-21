@@ -4,7 +4,7 @@ import MainRouter from "./components/Router/MainRouter";
 
 const App = () => {
   return (
-    <Container $minHeight="200vh">
+    <Container $minHeight="200vh" display="flex" flexDirection="column">
       <MainRouter />
     </Container>
   );
