@@ -24,9 +24,13 @@ export type AlignItems =
 
 export type TextAlignValues = "left" | "right" | "center";
 
+export type TextCaseValues = "uppercase" | "lowercase" | "capitalize";
+
 export type Positions =
   | "relative"
   | "absolute"
   | "initial"
   | "sticky"
   | "fixed";
+
+export type HeadingTypes = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";

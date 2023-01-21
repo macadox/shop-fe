@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { TextAlignValues } from "../../../constants/css.types";
 
 type Props = {
-  background: string;
   size: string;
   bold: boolean;
+  color: string;
   semiBold: boolean;
   lineHeight: number;
   maxWidth: string;

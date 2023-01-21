@@ -1,10 +1,6 @@
 import React from "react";
 import { StyledBurger } from "./Burger.style";
-
-export type HTMLButtonProps = React.DetailedHTMLProps<
-  React.ButtonHTMLAttributes<HTMLButtonElement>,
-  HTMLButtonElement
->;
+import { HTMLButtonProps } from "../../../constants/htmlProps.types";
 
 export type BurgerProps = HTMLButtonProps & {
   isOpen: boolean;

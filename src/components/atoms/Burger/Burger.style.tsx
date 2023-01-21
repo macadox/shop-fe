@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import * as colors from "../../../constants/colors";
-import { HTMLButtonProps } from "./Burger";
+import { HTMLButtonProps } from "../../../constants/htmlProps.types";
 
 export const StyledBurger = styled.button<
   HTMLButtonProps & { isOpen: boolean }
