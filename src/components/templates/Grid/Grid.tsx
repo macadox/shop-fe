@@ -3,6 +3,8 @@ import {
   Table as ReactTableInterface,
   Row as ReactTableRowInterface,
 } from "@tanstack/react-table";
+import Container from "../../atoms/Container/Container";
+import TextBody from "../../atoms/TextBody/TextBody";
 import { StyledGrid } from "./Grid.style";
 
 type Props<T> = {
@@ -27,19 +29,17 @@ const Grid = <T,>({
 }: Props<T>) => {
   const rows = table.getRowModel().rows;
 
-  return (
+  return rows.length === 0 ? (
+    <Container width="100%">
+      <TextBody textAlign="center">No data is available to preview</TextBody>
+    </Container>
+  ) : (
     <StyledGrid
       gap={gridGap}
       maxColumnCount={maxColumnCount}
       itemMinWidth={itemMinWidth}
     >
-      {rows.length === 0 ? (
-        <tr>
-          <td>No data is available to preview</td>
-        </tr>
-      ) : (
-        renderGridItems(rows, Component)
-      )}
+      {renderGridItems(rows, Component)}
     </StyledGrid>
   );
 };

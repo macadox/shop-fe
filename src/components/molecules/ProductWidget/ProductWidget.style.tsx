@@ -1,11 +1,12 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 import * as colors from "../../../constants/colors";
-import { PRODUCT_WIDGET_SIZE } from "../../../constants/layout";
+import { PRODUCT_WIDGET_PHOTO_SIZE } from "../../../constants/layout";
 
 export const StyledProductWidget = styled.div`
   position: relative;
-  height: calc(${PRODUCT_WIDGET_SIZE} + "100px");
-  width: ${PRODUCT_WIDGET_SIZE};
+  background: ${colors.WHITE};
+  height: calc(${PRODUCT_WIDGET_PHOTO_SIZE} + "100px");
+  width: ${PRODUCT_WIDGET_PHOTO_SIZE};
   transition: box-shadow 0.2s 0.1s ease-in-out, transform 0.2s ease-in-out;
 
   button {

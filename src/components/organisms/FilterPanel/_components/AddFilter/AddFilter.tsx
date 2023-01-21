@@ -48,7 +48,7 @@ const AddValuePopup = <T,>({
       onSubmit={handleSubmit}
     >
       <Filter column={column} table={table} setLocalValue={setLocalValue} />
-      <Container mt={24} display="flex" alignItems="center" gap="16px">
+      <Container mt={24} display="flex" $alignItems="center" gap="16px">
         <Container flexBasis="33%">
           <Button
             width="100%"

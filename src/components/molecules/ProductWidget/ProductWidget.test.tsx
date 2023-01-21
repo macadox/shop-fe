@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductWidget from "./ProductWidget";
-import MOCK_PRODUCT_PHOTO from "../../../assets/photos/product1.jpg";
+import MOCK_PRODUCT_PHOTO from "../../../../public/assets/product1.jpg";
 
 const MOCK_PRODUCT_NAME = "Chuck Norris boots";
 const MOCK_PRODUCT_PRICE = 100000;

@@ -17,4 +17,11 @@ const useScreenOrientation = () => {
   return orientation;
 };
 
+export const ORIENTATIONS = {
+  "landscape-primary": "landscape-primary",
+  "landscape-secondary": "landscape-secondary",
+  "portrait-primary": "portrait-primary",
+  "portrait-secondary": "portrait-secondary",
+};
+
 export default useScreenOrientation;

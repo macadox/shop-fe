@@ -11,6 +11,3 @@
 /build
 terraform/.terraform
 terraform/.terraform.lock.hcl
-
-src/TemporaryProductGrid.tsx
-src/TemporaryTableOrganism.tsx

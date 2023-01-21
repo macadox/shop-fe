@@ -1,5 +1,19 @@
 export type ProductIdType = number | string;
 
+export type GetAllProductsItem = {
+  id: ProductIdType;
+  name: string;
+  price: number;
+  src: string;
+  favorited: boolean;
+  category: string;
+  materials?: string[];
+  sizes?: string[];
+  colors?: string[];
+};
+
+export type GetAllProductsResponse = GetAllProductsItem[];
+
 export type ProductWidgetType = {
   id: ProductIdType;
   name: string;
@@ -7,4 +21,3 @@ export type ProductWidgetType = {
   src: string;
   favorited: boolean;
 };
-// type ProductWidget = {};

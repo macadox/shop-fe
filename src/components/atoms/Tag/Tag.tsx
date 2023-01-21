@@ -14,7 +14,7 @@ const Tag = ({ content, onClear }: Props) => {
   return (
     <Container
       display="inline-flex"
-      alignItems="center"
+      $alignItems="center"
       gap="8px"
       background={colors.LIGHT}
       p={8}

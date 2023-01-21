@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 import { TextAlignValues, HeadingTypes } from "../../../constants/css.types";
 
 type Props = {

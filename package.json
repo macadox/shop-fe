@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "@popperjs/core": "^2.11.5",
+    "@tanstack/react-query": "^4.22.0",
     "@tanstack/react-table": "^8.7.4",
+    "axios": "^1.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-popper": "^2.2.5",

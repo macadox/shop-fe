@@ -6,6 +6,7 @@ import {
   AlignItems,
   Positions,
   CursorValues,
+  FlexWrapValues,
 } from "../../../constants/css.types";
 import { HTMLDivProps } from "../../../constants/htmlProps.types";
 import { addSuffix } from "../../../utils/styleUtils";
@@ -35,10 +36,11 @@ type Props = {
   mb: string | number;
   display: Displays;
   flexDirection: FlexDirections;
-  justifyContent: JustifyContents;
+  $justifyContent: JustifyContents;
   flexBasis: string;
   flexGrow: number;
-  alignItems: AlignItems;
+  flexWrap: FlexWrapValues;
+  $alignItems: AlignItems;
   alignSelf: AlignItems;
   gap: string | number;
   position: Positions;
@@ -98,11 +100,12 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
       
   ${({ display }) => display && `display: ${display};`}
   ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`}
-  ${({ justifyContent }) =>
-    justifyContent && `justify-content: ${justifyContent};`}
+  ${({ $justifyContent }) =>
+    $justifyContent && `justify-content: ${$justifyContent};`}
   ${({ flexBasis }) => flexBasis && `flex-basis: ${flexBasis};`}
   ${({ flexGrow }) => flexGrow && `flex-grow: ${flexGrow};`}
-  ${({ alignItems }) => alignItems && `align-items: ${alignItems};`}
+  ${({ flexWrap }) => flexWrap && `flex-wrap: ${flexWrap};`}
+  ${({ $alignItems }) => $alignItems && `align-items: ${$alignItems};`}
   ${({ alignSelf }) => alignSelf && `align-self: ${alignSelf};`}
   ${({ gap }) => gap && `gap: ${gap}${addSuffix(gap)};`}
   ${({ position }) => position && `position: ${position};`}

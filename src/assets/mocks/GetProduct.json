@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "name": "Leather belt",
+  "price": 399,
+  "category": "belts",
+  "colors": ["brown", "black"],
+  "sizes": ["41", "42", "43", "44", "45", "46"],
+  "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit voluptatem inventore dolores aliquid, itaque rem nesciunt ipsa ullam! A, obcaecati!",
+  "materialDescription": "Lorem ipsum dolor"
+}

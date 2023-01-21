@@ -1,1 +1,2 @@
-export const PRODUCT_WIDGET_SIZE = "300px";
+export const INNER_CONTAINER_MAX_WIDTH = "1280px";
+export const PRODUCT_WIDGET_PHOTO_SIZE = "300px";

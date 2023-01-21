@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import notFound from "../../assets/photos/not-found.svg";
+
 import Container from "../../components/atoms/Container/Container";
 import TextTitle from "../../components/atoms/TextTitle/TextTitle";
 import TextBody from "../../components/atoms/TextBody/TextBody";
 import Button from "../../components/atoms/Button/Button";
+
+import notFound from "../../assets/photos/not-found.svg";
 import { ROUTES } from "../../constants/routes";
 
 const ErrorPage = () => {
@@ -16,7 +18,7 @@ const ErrorPage = () => {
       <Container
         display="flex"
         flexDirection="column"
-        alignItems="center"
+        $alignItems="center"
         gap="16px"
         p={16}
       >

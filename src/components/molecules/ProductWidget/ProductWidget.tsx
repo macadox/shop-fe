@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -7,7 +7,7 @@ import { StyledProductWidget, LikeButton } from "./ProductWidget.style";
 
 import { ReactComponent as HeartEmpty } from "../../../assets/icons/heart.svg";
 import { ReactComponent as HeartFull } from "../../../assets/icons/heart-full.svg";
-import { PRODUCT_WIDGET_SIZE } from "../../../constants/layout";
+import { PRODUCT_WIDGET_PHOTO_SIZE } from "../../../constants/layout";
 import { ProductWidgetType, ProductIdType } from "../../../constants/types";
 import * as colors from "../../../constants/colors";
 
@@ -26,6 +26,7 @@ const ProductWidget = ({
   onHeartClick,
 }: Props) => {
   const [isFavorited, setIsFavorited] = useState(favorited);
+  const imgContainerRef = useRef<HTMLDivElement | null>(null);
 
   const HeartIcon = useMemo(() => {
     const label = `${isFavorited ? "unlike" : "like"} ${name}`;
@@ -36,6 +37,7 @@ const ProductWidget = ({
         <HeartEmpty aria-label={label} width="33.3%" fill={colors.BLACK} />
       );
     };
+
     return Icon;
   }, [isFavorited, name]);
 
@@ -56,12 +58,13 @@ const ProductWidget = ({
       tabIndex={0}
       onClick={() => onWidgetClick(id)}
     >
-      <img
-        src={src}
-        width={PRODUCT_WIDGET_SIZE}
-        height={PRODUCT_WIDGET_SIZE}
-        alt={name}
-      />
+      <Container
+        width={PRODUCT_WIDGET_PHOTO_SIZE}
+        height={PRODUCT_WIDGET_PHOTO_SIZE}
+        ref={imgContainerRef}
+      >
+        <img src={src} width="100%" height="100%" alt={name} />
+      </Container>
       <LikeButton onClick={handleHeartClick}>
         <HeartIcon />
       </LikeButton>

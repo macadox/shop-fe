@@ -31,7 +31,7 @@ export const StyledNav = styled.nav`
   background: ${colors.WHITE};
   top: 0px;
   left: 0px;
-  z-index: 10;
+  z-index: 100;
   padding: 24px;
   box-shadow: 0px 4px 12px ${colors.SHADOW};
 

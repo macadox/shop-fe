@@ -6,6 +6,8 @@ export type FlexDirections =
   | "row-reverse"
   | "column-reverse";
 
+export type FlexWrapValues = "nowrap" | "wrap" | "wrap-reverse";
+
 export type JustifyContents =
   | "start"
   | "end"

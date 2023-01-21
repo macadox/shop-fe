@@ -1,17 +1,28 @@
-import React, { useState, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useLayoutEffect, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
 import Burger from "../../atoms/Burger/Burger";
 import Button, { ButtonTheme, buttonThemes } from "../../atoms/Button/Button";
 import { StyledNav, StyledMenu, StyledMenuItem } from "./Navbar.style";
-import useScreenOrientation from "../../../hooks/useScreenOrientation";
+import useScreenOrientation, {
+  ORIENTATIONS,
+} from "../../../hooks/useScreenOrientation";
 
 import { valueof } from "../../../utils/typeUtils";
 import { ROUTES } from "../../../constants/routes";
+import { INNER_CONTAINER_MAX_WIDTH } from "../../../constants/layout";
 import * as colors from "../../../constants/colors";
+
 import { ReactComponent as BagIcon } from "../../../assets/icons/shopping-bag.svg";
 import { ReactComponent as HeartIcon } from "../../../assets/icons/heart.svg";
+
+const isLandscape = (orientation: keyof typeof ORIENTATIONS) => {
+  return [
+    ORIENTATIONS["landscape-primary"],
+    ORIENTATIONS["landscape-secondary"],
+  ].includes(orientation);
+};
 
 const MenuButton = ({
   theme = buttonThemes.transparent,
@@ -78,13 +89,16 @@ const Menu = ({ $active }: { $active: boolean }) => {
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const orientation = useScreenOrientation();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!isLandscape(orientation)) {
+      setOpen(false);
+    }
+  }, [location, orientation]);
 
   useLayoutEffect(() => {
-    const shouldOpen =
-      orientation === "landscape-primary" ||
-      orientation === "landscape-secondary"
-        ? true
-        : false;
+    const shouldOpen = isLandscape(orientation) ? true : false;
 
     setOpen(shouldOpen);
   }, [orientation]);
@@ -93,9 +107,9 @@ const Navbar = () => {
     <StyledNav $active={open}>
       <Container
         display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        $maxWidth="1280px"
+        $justifyContent="space-between"
+        $alignItems="center"
+        $maxWidth={INNER_CONTAINER_MAX_WIDTH}
         mx="auto"
       >
         <Logo />

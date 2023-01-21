@@ -6,12 +6,14 @@ import Navbar from "../molecules/Navbar/Navbar";
 import HomePage from "../../pages/HomePage/HomePage";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 
+import * as colors from "../../constants/colors";
+
 const MainRouter = () => {
   return (
     <Router>
       <Navbar />
       {/* APP WRAPPER */}
-      <Container flexGrow={1}>
+      <Container flexGrow={1} background={colors.LIGHTER}>
         <Routes>
           <Route path="/categories" element={<div>CategoriesPage</div>} />
           <Route path="/profile" element={<div>ProfilePage</div>} />
