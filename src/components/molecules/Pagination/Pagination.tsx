@@ -43,7 +43,9 @@ const Pagination = <T,>({ table }: Props<T>) => {
 
   return (
     <Container
-      width={`calc(40px * ${BLOCKS_TOTAL + 2} + 8px * ${BLOCKS_TOTAL + 1})`}
+      width={`calc(40px * ${pageBlocks.length + 2} + 8px * ${
+        pageBlocks.length + 1
+      })`}
       mx="auto"
       display="flex"
       gap="8px"
@@ -54,7 +56,7 @@ const Pagination = <T,>({ table }: Props<T>) => {
             width="40px"
             height="40px"
             onClick={table.previousPage}
-            icon={<ArrowLeft transform="scale(0.5)" fill={colors.WHITE} />}
+            icon={<ArrowLeft height="16px" fill={colors.WHITE} />}
             hasFill={true}
           />
         )}
@@ -75,7 +77,7 @@ const Pagination = <T,>({ table }: Props<T>) => {
             width="40px"
             height="40px"
             onClick={table.nextPage}
-            icon={<ArrowRight transform="scale(0.5)" fill={colors.WHITE} />}
+            icon={<ArrowRight height="16px" fill={colors.WHITE} />}
             hasFill={true}
           />
         )}
