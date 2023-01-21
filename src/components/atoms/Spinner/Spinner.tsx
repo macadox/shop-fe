@@ -20,7 +20,7 @@ const Spinner = ({
   color?: string;
 }) => {
   return (
-    <StyledSpinner size={sizes[size]} color={color}>
+    <StyledSpinner aria-label="loading" size={sizes[size]} color={color}>
       <SpinnerHead size={sizes[size]} color={color} />
     </StyledSpinner>
   );

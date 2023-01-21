@@ -14,7 +14,6 @@ const AddFilterButton = ({
   isExpanded,
   ariaControls,
   ariaActiveDescendant,
-  ariaLabelledBy,
   handleClick,
   handleKeyDown,
   innerRef,
@@ -27,7 +26,6 @@ const AddFilterButton = ({
       isExpanded && ariaActiveDescendant ? ariaActiveDescendant : undefined
     }
     aria-haspopup="listbox"
-    aria-labelledby={ariaLabelledBy}
     tabIndex={0}
     onClick={() => {
       setStep(1);

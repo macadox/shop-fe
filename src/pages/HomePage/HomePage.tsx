@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 
 import Container from "../../components/atoms/Container/Container";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
-import Spinner from "../../components/atoms/Spinner/Spinner";
 
 import { APIProducts } from "../../services/api";
 import { GetAllProductsResponse } from "../../constants/types";
