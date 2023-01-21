@@ -4,11 +4,12 @@ import React, {
   useCallback,
   useLayoutEffect,
   useMemo,
+  useEffect,
 } from "react";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
 import DefaultBox from "../../atoms/DefaultBox/DefaultBox";
-import { StyledList, StyledListItem } from "./SelectDropdown.style";
+import DropdownList, { DropdownOption } from "../DropdownList/DropdownList";
 
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 import { handleRotate } from "../../../utils/styleUtils";
@@ -16,7 +17,7 @@ import * as colors from "../../../constants/colors";
 import { KeyboardCodes } from "../../../constants/events";
 import { ReactComponent as CaretDown } from "../../../assets/icons/caret-down.svg";
 
-type ComboboxProps = {
+export type ComboboxProps = {
   isExpanded: boolean;
   ariaControls: string;
   ariaLabelledBy: string;
@@ -24,11 +25,11 @@ type ComboboxProps = {
   selectedItem: DropdownOption | null;
   defaultPlaceholder: string;
   innerRef: React.RefObject<HTMLDivElement>;
-  handleClick?: () => void;
-  handleKeyDown?: (e: React.KeyboardEvent) => void;
+  handleClick: () => void;
+  handleKeyDown: (e: React.KeyboardEvent) => void;
 };
 
-const Combobox = ({
+const DefaultCombobox = ({
   isExpanded,
   ariaControls,
   ariaLabelledBy,
@@ -66,7 +67,7 @@ const Combobox = ({
           <CaretDown
             transform={`${handleRotate(isExpanded ? 180 : 0)}`}
             style={{ marginBottom: `${isExpanded ? 2 : 0}px` }}
-            fill={colors.BLACK}
+            fill={colors.GRAY}
             data-testid="caret-svg"
           />
         </Container>
@@ -75,45 +76,51 @@ const Combobox = ({
   );
 };
 
-type DropdownOption = {
-  id: string;
-  value: string;
-};
-
 type Props = {
   options: DropdownOption[];
   handleSelectCallback: (option: DropdownOption | null) => void;
-  initialOptionId?: string;
+  initialSelectedId?: string;
   defaultPlaceholder?: string;
   dropdownId: string;
+  CustomCombobox?: React.FC<ComboboxProps>;
+  overrideIsExpanded?: boolean;
+  resetStateAfterClose?: boolean;
 };
 
-const SelectDropdown = ({
+const SingleSelectDropdown = ({
   options,
   handleSelectCallback,
-  initialOptionId,
+  initialSelectedId,
   defaultPlaceholder = "Select Item",
   dropdownId,
+  CustomCombobox,
+  overrideIsExpanded = false,
+  resetStateAfterClose = false,
 }: Props) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(
+    overrideIsExpanded ? overrideIsExpanded : false
+  );
   const [selectedId, setSelectedId] = useState<string | null>(
-    initialOptionId ?? null
+    initialSelectedId ?? null
   );
   const selectedOption = useMemo<DropdownOption | null>(
     () => options.find((option) => option.id === selectedId) || null,
     [selectedId, options]
   );
 
-  const closeDropdown = () => setIsExpanded(false);
-  const toggleDropdown = () => setIsExpanded((prev) => !prev);
+  const closeDropdown = useCallback(() => {
+    setIsExpanded(false);
+  }, []);
+
+  const toggleDropdown = useCallback(() => {
+    setIsExpanded((prev) => !prev);
+  }, []);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
   const firstUpdateRef = useRef(true);
 
-  useOnClickOutside(dropdownRef, () => {
-    setIsExpanded(false);
-  });
+  useOnClickOutside(dropdownRef, () => !overrideIsExpanded && closeDropdown());
 
   const selectOption = (id: string) => setSelectedId(id);
 
@@ -128,6 +135,7 @@ const SelectDropdown = ({
       switch (e.code) {
         case KeyboardCodes.Enter:
         case KeyboardCodes.Space: {
+          e.preventDefault();
           toggleDropdown();
           break;
         }
@@ -145,12 +153,14 @@ const SelectDropdown = ({
         }
         case KeyboardCodes.ArrowUp:
         case KeyboardCodes.ArrowLeft: {
+          e.preventDefault();
           const prevOptionIndex = Math.max(0, currentOptionIndex - 1);
           selectOption(options[prevOptionIndex].id);
           break;
         }
         case KeyboardCodes.ArrowDown:
         case KeyboardCodes.ArrowRight: {
+          e.preventDefault();
           const nextOptionIndex = Math.min(
             options.length - 1,
             currentOptionIndex + 1
@@ -160,14 +170,21 @@ const SelectDropdown = ({
         }
       }
     },
-    [options, selectedId]
+    [options, selectedId, closeDropdown, toggleDropdown]
   );
 
   const handleClick = (optionId: string) => {
     selectOption(optionId);
-    closeDropdown();
+    !overrideIsExpanded && closeDropdown();
     focusCombobox();
   };
+
+  useEffect(() => {
+    setIsExpanded(overrideIsExpanded);
+    if (overrideIsExpanded && resetStateAfterClose) {
+      setSelectedId(null);
+    }
+  }, [overrideIsExpanded, resetStateAfterClose]);
 
   useLayoutEffect(() => {
     if (firstUpdateRef.current) {
@@ -178,9 +195,14 @@ const SelectDropdown = ({
     handleSelectCallback(selectedOption);
   }, [selectedOption, handleSelectCallback]);
 
+  const RenderedCombobox = useMemo(
+    () => (CustomCombobox ? CustomCombobox : DefaultCombobox),
+    [CustomCombobox]
+  );
+
   return (
     <Container ref={dropdownRef} position="relative">
-      <Combobox
+      <RenderedCombobox
         isExpanded={isExpanded}
         ariaControls={`${dropdownId}--listbox`}
         ariaLabelledBy={`${dropdownId}--label`}
@@ -192,31 +214,15 @@ const SelectDropdown = ({
         handleKeyDown={handleKeyDown}
       />
       {isExpanded && (
-        <StyledList
-          role="listbox"
-          id={`${dropdownId}--listbox`}
-          aria-labelledby={`${dropdownId}--label`}
-        >
-          {options &&
-            options.map((option) => {
-              const isSelected = selectedId === option.id;
-
-              return (
-                <StyledListItem
-                  role="option"
-                  key={option.id}
-                  aria-selected={isSelected}
-                  isSelected={isSelected}
-                  onClick={() => handleClick(option.id)}
-                >
-                  {option.value}
-                </StyledListItem>
-              );
-            })}
-        </StyledList>
+        <DropdownList
+          dropdownId={dropdownId}
+          items={options}
+          selectedIds={[selectedId]}
+          onClick={handleClick}
+        />
       )}
     </Container>
   );
 };
 
-export default SelectDropdown;
+export default SingleSelectDropdown;

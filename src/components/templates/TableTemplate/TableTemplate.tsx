@@ -35,7 +35,9 @@ const TableTemplate = <T,>({ table }: Props<T>) => {
       </TableHead>
       <TableBody>
         {table.getRowModel().rows.length === 0 ? (
-          <tr>No data is available to preview</tr>
+          <tr>
+            <td>No data is available to preview</td>
+          </tr>
         ) : (
           table.getRowModel().rows.map((row) => (
             <TableRow key={row.id}>
