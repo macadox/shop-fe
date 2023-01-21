@@ -10,9 +10,9 @@ import { StyledGrid } from "./Grid.style";
 type Props<T> = {
   table: ReactTableInterface<T>;
   Component: React.FC<T>;
-  maxColumnCount: number;
-  itemMinWidth: string;
-  gridGap?: string;
+  $maxColumnCount: number;
+  $itemMinWidth: string;
+  $gridGap?: string;
 };
 
 const renderGridItems = <T,>(
@@ -23,9 +23,9 @@ const renderGridItems = <T,>(
 const Grid = <T,>({
   table,
   Component,
-  maxColumnCount,
-  itemMinWidth,
-  gridGap = "36px",
+  $maxColumnCount,
+  $itemMinWidth,
+  $gridGap = "36px",
 }: Props<T>) => {
   const rows = table.getRowModel().rows;
 
@@ -35,9 +35,9 @@ const Grid = <T,>({
     </Container>
   ) : (
     <StyledGrid
-      gap={gridGap}
-      maxColumnCount={maxColumnCount}
-      itemMinWidth={itemMinWidth}
+      $gap={$gridGap}
+      $maxColumnCount={$maxColumnCount}
+      $itemMinWidth={$itemMinWidth}
     >
       {renderGridItems(rows, Component)}
     </StyledGrid>

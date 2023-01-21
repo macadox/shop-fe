@@ -28,15 +28,15 @@ const MenuButton = ({
   theme = buttonThemes.transparent,
   text,
   icon,
-  hasFill,
-  hasStroke,
+  $hasFill,
+  $hasStroke,
   to,
 }: {
   theme?: ButtonTheme;
   text?: string;
   icon?: React.ReactNode;
-  hasFill?: boolean;
-  hasStroke?: boolean;
+  $hasFill?: boolean;
+  $hasStroke?: boolean;
   to: valueof<typeof ROUTES>;
 }) => (
   <Link to={to}>
@@ -44,9 +44,9 @@ const MenuButton = ({
       theme={theme}
       text={text}
       icon={icon}
-      hasFill={hasFill}
-      hasStroke={hasStroke}
-      fontSize="20px"
+      $hasFill={$hasFill}
+      $hasStroke={$hasStroke}
+      $fontSize="20px"
     />
   </Link>
 );
@@ -71,14 +71,14 @@ const Menu = ({ $active }: { $active: boolean }) => {
       <StyledMenuItem role="menuitem">
         <MenuButton
           to={ROUTES.FAVORITES}
-          hasFill
+          $hasFill
           icon={<HeartIcon fill={colors.BLACK} width={24} height={24} />}
         />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
         <MenuButton
           to={ROUTES.CART}
-          hasFill
+          $hasFill
           icon={<BagIcon fill={colors.BLACK} width={24} height={24} />}
         />
       </StyledMenuItem>

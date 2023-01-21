@@ -58,8 +58,8 @@ const ProductGrid = ({
       data={data}
       columns={columns}
       GridComponent={renderProduct}
-      maxColumnCount={3}
-      itemMinWidth={PRODUCT_WIDGET_PHOTO_SIZE}
+      $maxColumnCount={3}
+      $itemMinWidth={PRODUCT_WIDGET_PHOTO_SIZE}
       isLoading={isLoading}
     />
   );

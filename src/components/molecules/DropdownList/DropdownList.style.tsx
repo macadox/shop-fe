@@ -11,7 +11,7 @@ export const StyledList = styled.ul<HTMLUlProps>`
   box-shadow: 0px 4px 12px 0px ${colors.SHADOW};
 `;
 
-export const StyledListItem = styled.li<HTMLLiProps & { isSelected: boolean }>`
+export const StyledListItem = styled.li<HTMLLiProps & { $isSelected: boolean }>`
   width: 100%;
   height: 100%;
   background: transparent;
@@ -24,8 +24,8 @@ export const StyledListItem = styled.li<HTMLLiProps & { isSelected: boolean }>`
     background: ${colors.LIGHTER};
   }
 
-  ${({ isSelected }) =>
-    isSelected && `background: ${colors.SHADOW} !important;`}
+  ${({ $isSelected }) =>
+    $isSelected && `background: ${colors.SHADOW} !important;`}
 
   cursor: pointer;
 `;

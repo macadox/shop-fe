@@ -51,7 +51,7 @@ const AddValuePopup = <T,>({
       <Container $mt={24} $display="flex" $alignItems="center" $gap="16px">
         <Container $flexBasis="33%">
           <Button
-            width="100%"
+            $width="100%"
             theme={buttonThemes.transparent}
             text="Cancel"
             onClick={() => setStep(0)}
@@ -60,7 +60,7 @@ const AddValuePopup = <T,>({
         </Container>
         <Container $flexBasis="67%">
           <Button
-            width="100%"
+            $width="100%"
             theme={buttonThemes.default}
             text="Submit"
             type="submit"

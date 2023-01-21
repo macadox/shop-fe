@@ -22,14 +22,14 @@ const DropdownList = ({ dropdownId, items, selectedIds, onClick }: Props) => {
     >
       {items &&
         items.map((item) => {
-          const isSelected = selectedIds.includes(item.id);
+          const $isSelected = selectedIds.includes(item.id);
 
           return (
             <StyledListItem
               role="option"
               key={item.id}
-              aria-selected={isSelected}
-              isSelected={isSelected}
+              aria-selected={$isSelected}
+              $isSelected={$isSelected}
               onClick={() => onClick(item.id)}
             >
               {item.value}

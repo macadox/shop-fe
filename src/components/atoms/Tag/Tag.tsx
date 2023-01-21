@@ -36,7 +36,7 @@ const Tag = ({ content, onClear }: Props) => {
               />
             }
             onClick={onClear}
-            hasFill={true}
+            $hasFill={true}
             theme={buttonThemes.transparent}
           />
         </Container>

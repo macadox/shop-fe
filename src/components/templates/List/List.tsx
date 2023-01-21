@@ -40,8 +40,8 @@ type BaseProps<T> = {
 type GridType<T> = BaseProps<T> & {
   view: ViewEnum.GRID;
   GridComponent: React.FC<T>;
-  itemMinWidth: string;
-  maxColumnCount: number;
+  $itemMinWidth: string;
+  $maxColumnCount: number;
 };
 
 type TableType<T> = BaseProps<T> & {
@@ -81,8 +81,8 @@ const List = <T,>(props: Props<T>) => {
           <Grid
             table={table}
             Component={props.GridComponent}
-            itemMinWidth={props.itemMinWidth}
-            maxColumnCount={props.maxColumnCount}
+            $itemMinWidth={props.$itemMinWidth}
+            $maxColumnCount={props.$maxColumnCount}
           />
         );
       }

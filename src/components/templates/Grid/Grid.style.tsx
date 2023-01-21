@@ -1,18 +1,18 @@
 import { styled } from "styled-components";
 
 type Props = {
-  gap: string;
-  maxColumnCount: number;
-  itemMinWidth: string;
+  $gap: string;
+  $maxColumnCount: number;
+  $itemMinWidth: string;
 };
 
 export const StyledGrid = styled.div<Props>`
   /**
    * User input values.
    */
-  --grid-layout-gap: ${({ gap }) => gap};
-  --grid-column-count: ${({ maxColumnCount }) => maxColumnCount};
-  --grid-item--min-width: ${({ itemMinWidth }) => itemMinWidth};
+  --grid-layout-gap: ${({ $gap }) => $gap};
+  --grid-column-count: ${({ $maxColumnCount }) => $maxColumnCount};
+  --grid-item--min-width: ${({ $itemMinWidth }) => $itemMinWidth};
 
   /**
    * Calculated values.
