@@ -16,7 +16,7 @@
   "overrides": [
     {
       "files": ["src/**/*.ts", "src/**/*.tsx"],
-      "plugins": ["@typescript-eslint", "import"],
+      "plugins": ["@typescript-eslint", "import", "prettier"],
       "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
@@ -28,6 +28,7 @@
         "prettier"
       ],
       "rules": {
+        "prettier/prettier": ["error"],
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/consistent-type-definitions": ["error", "type"],
         "react/prop-types": "off",
