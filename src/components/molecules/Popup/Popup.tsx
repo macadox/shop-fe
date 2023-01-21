@@ -72,12 +72,12 @@ const Popup = ({
   });
 
   return (
-    <Container zIndex={10} position="relative" width="100%">
+    <Container $zIndex={10} $position="relative" $width="100%">
       {TriggerWithRef}
       {isOpen && (
         <Container
-          width="100%"
-          position="absolute"
+          $width="100%"
+          $position="absolute"
           ref={setPopperRef}
           style={styles.popper}
           {...attributes.popper}

@@ -40,16 +40,16 @@ const AddValuePopup = <T,>({
 
   return (
     <Container
-      p={16}
-      background={colors.WHITE}
-      boxShadow={`0px 4px 12px 0px ${colors.SHADOW}`}
-      width="320px"
+      $p={16}
+      $background={colors.WHITE}
+      $boxShadow={`0px 4px 12px 0px ${colors.SHADOW}`}
+      $width="320px"
       as="form"
       onSubmit={handleSubmit}
     >
       <Filter column={column} table={table} setLocalValue={setLocalValue} />
-      <Container mt={24} display="flex" alignItems="center" gap="16px">
-        <Container flexBasis="33%">
+      <Container $mt={24} $display="flex" $alignItems="center" $gap="16px">
+        <Container $flexBasis="33%">
           <Button
             width="100%"
             theme={buttonThemes.transparent}
@@ -58,7 +58,7 @@ const AddValuePopup = <T,>({
             type="button"
           />
         </Container>
-        <Container flexBasis="67%">
+        <Container $flexBasis="67%">
           <Button
             width="100%"
             theme={buttonThemes.default}
@@ -146,7 +146,7 @@ const AddFilter = <T,>({ table, columns, filterKeys }: AddFilterProps<T>) => {
   );
 
   return (
-    <Container display="inline-flex" ref={filterRef}>
+    <Container $display="inline-flex" ref={filterRef}>
       <AddKeyPopup
         table={table}
         column={displayedColumn}

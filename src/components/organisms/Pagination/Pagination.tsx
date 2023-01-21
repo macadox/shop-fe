@@ -43,14 +43,14 @@ const Pagination = <T,>({ table }: Props<T>) => {
 
   return (
     <Container
-      width={`calc(40px * ${pageBlocks.length + 2} + 8px * ${
+      $width={`calc(40px * ${pageBlocks.length + 2} + 8px * ${
         pageBlocks.length + 1
       })`}
-      mx="auto"
-      display="flex"
-      gap="8px"
+      $mx="auto"
+      $display="flex"
+      $gap="8px"
     >
-      <Container width="40px" height="40px">
+      <Container $width="40px" $height="40px">
         {table.getCanPreviousPage() && (
           <Button
             width="40px"
@@ -71,7 +71,7 @@ const Pagination = <T,>({ table }: Props<T>) => {
           isActive={pageIndex === block - 1}
         />
       ))}
-      <Container width="40px" height="40px">
+      <Container $width="40px" $height="40px">
         {table.getCanNextPage() && (
           <Button
             width="40px"

@@ -1,37 +1,48 @@
 import React, { useCallback, useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import List, { ViewEnum } from "./components/templates/List/List";
-import ProductWidget from "./components/molecules/ProductWidget/ProductWidget";
+import List, { ViewEnum } from "../../templates/List/List";
+import ProductWidget from "../../molecules/ProductWidget/ProductWidget";
 
-import { PRODUCT_WIDGET_SIZE } from "./constants/layout";
-import { ProductWidgetType } from "./constants/types";
+import { PRODUCT_WIDGET_PHOTO_SIZE } from "../../../constants/layout";
+import {
+  GetAllProductsItem,
+  ProductWidgetType,
+} from "../../../constants/types";
 
 type Props = {
-  list: ProductWidgetType[];
+  list: GetAllProductsItem[];
+  isLoading: boolean;
   onWidgetClick: () => void;
   onHeartClick: () => void;
 };
 
-const TemporaryProductGrid = ({ list, onWidgetClick, onHeartClick }: Props) => {
-  const columns = useMemo<ColumnDef<ProductWidgetType>[]>(
+const ProductGrid = ({
+  list,
+  isLoading,
+  onWidgetClick,
+  onHeartClick,
+}: Props) => {
+  const columns = useMemo<ColumnDef<GetAllProductsItem>[]>(
     () => [
-      { header: "ID", accessorKey: "id" },
+      { header: "ID", accessorKey: "id", enableColumnFilter: false },
       { header: "Name", accessorKey: "name" },
       { header: "Price", accessorKey: "price" },
+      { header: "Photo", accessorKey: "src", enableColumnFilter: false },
       { header: "Favorited", accessorKey: "favorited" },
+      { header: "Category", accessorKey: "category" },
     ],
     []
   );
   const data = useMemo(() => list, [list]);
 
   const renderProduct = useCallback(
-    (props: ProductWidgetType) => {
+    (props: Extract<GetAllProductsItem, ProductWidgetType>) => {
       return (
         <ProductWidget
           id={props.id}
           name={props.name}
           price={props.price}
-          favorited={true}
+          favorited={false}
           src={props.src}
           onHeartClick={onHeartClick}
           onWidgetClick={onWidgetClick}
@@ -48,9 +59,10 @@ const TemporaryProductGrid = ({ list, onWidgetClick, onHeartClick }: Props) => {
       columns={columns}
       GridComponent={renderProduct}
       maxColumnCount={3}
-      itemMinWidth={PRODUCT_WIDGET_SIZE}
+      itemMinWidth={PRODUCT_WIDGET_PHOTO_SIZE}
+      isLoading={isLoading}
     />
   );
 };
 
-export default TemporaryProductGrid;
+export default ProductGrid;

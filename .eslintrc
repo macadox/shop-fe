@@ -33,7 +33,9 @@
         "@typescript-eslint/consistent-type-definitions": ["error", "type"],
         "react/prop-types": "off",
         "import/no-unresolved": [2, { "ignore": ["^ui/"] }],
-        "jsx-a11y/click-events-have-key-events": "off"
+        "jsx-a11y/click-events-have-key-events": "off",
+        "newline-before-return": "error"
+        // "@typescript-eslint/consistent-type-imports": "error" TODO: ADD rule to the repo
       }
     }
   ]

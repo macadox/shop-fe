@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 type HTMLTBodyProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLTableSectionElement>,

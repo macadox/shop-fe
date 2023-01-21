@@ -1,16 +1,17 @@
 import React from "react";
-import { Container } from "./components/atoms";
-import GlobalStyles from "./GlobalStyles";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Container from "./components/atoms/Container/Container";
+import MainRouter from "./components/Router/MainRouter";
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <>
-      <GlobalStyles />
-      <div>
-        <Container p={25}></Container>
-        <div>Hello from the App</div>
-      </div>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Container $minHeight="100vh" $display="flex" $flexDirection="column">
+        <MainRouter />
+      </Container>
+    </QueryClientProvider>
   );
 };
 

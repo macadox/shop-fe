@@ -28,7 +28,6 @@ const AddFilterButton = ({
     }
     aria-haspopup="listbox"
     aria-labelledby={ariaLabelledBy}
-    hasFocus={isExpanded}
     tabIndex={0}
     onClick={() => {
       setStep(1);

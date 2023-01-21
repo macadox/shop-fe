@@ -59,7 +59,11 @@ const DefaultCombobox = ({
       onKeyDownCapture={handleKeyDown}
       ref={innerRef}
     >
-      <Container cursor="pointer" display="flex" justifyContent="space-between">
+      <Container
+        $cursor="pointer"
+        $display="flex"
+        $justifyContent="space-between"
+      >
         <TextBody {...(!hasItem && { opacity: 0.5 })}>
           {hasItem ? selectedItem.value : defaultPlaceholder}
         </TextBody>
@@ -189,6 +193,7 @@ const SingleSelectDropdown = ({
   useLayoutEffect(() => {
     if (firstUpdateRef.current) {
       firstUpdateRef.current = false;
+
       return;
     }
 
@@ -201,7 +206,7 @@ const SingleSelectDropdown = ({
   );
 
   return (
-    <Container ref={dropdownRef} position="relative">
+    <Container ref={dropdownRef} $position="relative">
       <RenderedCombobox
         isExpanded={isExpanded}
         ariaControls={`${dropdownId}--listbox`}

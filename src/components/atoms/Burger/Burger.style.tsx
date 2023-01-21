@@ -1,9 +1,20 @@
-import styled, { css } from "styled-components";
+import { styled, css } from "styled-components";
 import * as colors from "../../../constants/colors";
 import { HTMLButtonProps } from "../../../constants/htmlProps.types";
 
+export const StyledHam = styled.span`
+  position: absolute;
+  top: calc(50% - 2px);
+  left: calc(50% - 17px);
+  width: 34px;
+  height: 2px;
+  border-radius: 2px;
+  background: ${colors.BLACK};
+  transition: 0.15s ease-in-out;
+`;
+
 export const StyledBurger = styled.button<
-  HTMLButtonProps & { isOpen: boolean }
+  HTMLButtonProps & { $active: boolean }
 >`
   width: 40px;
   height: 36px;
@@ -11,19 +22,6 @@ export const StyledBurger = styled.button<
   position: relative;
   transition: 0.15s ease-in-out;
   cursor: pointer;
-
-  & > span {
-    position: absolute;
-    top: calc(50% - 2px);
-    left: calc(50% - 17px);
-    width: 34px;
-    height: 2px;
-    border-radius: 2px;
-    background: ${colors.BLACK};
-    transition: 0.15s ease-in-out;
-
-    ${({ isOpen }) => isOpen && `opacity: 0;`}
-  }
 
   &::after,
   &::before {
@@ -45,12 +43,12 @@ export const StyledBurger = styled.button<
     top: calc(50% + 10px);
   }
 
-  ${({ isOpen }) =>
-    isOpen &&
+  ${({ $active }) =>
+    $active &&
     css`
       transform: rotate(90deg);
 
-      & > span {
+      ${StyledHam} {
         opacity: 0;
       }
 

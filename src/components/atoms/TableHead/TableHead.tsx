@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 type HTMLTheadProps = React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLTableSectionElement>,

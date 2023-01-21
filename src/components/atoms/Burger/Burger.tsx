@@ -1,20 +1,21 @@
 import React from "react";
-import { StyledBurger } from "./Burger.style";
+import { StyledBurger, StyledHam } from "./Burger.style";
 import { HTMLButtonProps } from "../../../constants/htmlProps.types";
 
 export type BurgerProps = HTMLButtonProps & {
-  isOpen: boolean;
+  $active: boolean;
   onClickHandler: () => void;
 };
 
-const Burger = ({ isOpen, onClickHandler }: BurgerProps) => {
+const Burger = ({ $active, onClickHandler }: BurgerProps) => {
   return (
     <StyledBurger
-      aria-label={`${isOpen ? "hide" : "open"} navigation`}
-      isOpen={isOpen}
+      aria-label={`${$active ? "hide" : "open"} navigation`}
+      $active={$active}
       onClick={onClickHandler}
+      id="burger"
     >
-      <span />
+      <StyledHam />
     </StyledBurger>
   );
 };

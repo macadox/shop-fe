@@ -34,7 +34,7 @@ export const FilterRange = ({
   }, [initialValue]);
 
   return (
-    <Container display="flex" gap="12px">
+    <Container $display="flex" $gap="12px">
       <Input
         placeholder="min"
         type="number"
@@ -52,6 +52,7 @@ export const FilterRange = ({
               return [old?.[0], old?.[1]];
             }
             // Return new values
+
             return [inputValue ? Number(inputValue) : null, old?.[1]];
           })
         }
@@ -73,6 +74,7 @@ export const FilterRange = ({
               return [old?.[0], old?.[1]];
             }
             // Return new values
+
             return [old?.[0], inputValue ? Number(inputValue) : null];
           })
         }
