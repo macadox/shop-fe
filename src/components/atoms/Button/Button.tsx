@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   Displays,
   JustifyContents,
@@ -47,7 +47,7 @@ type ButtonTheme = {
 const defaultTheme: ButtonTheme = {
   background: colors.BLACK,
   bold: true,
-  border: `3px solid ${colors.BLACK}`,
+  border: `2px solid ${colors.BLACK}`,
   color: colors.WHITE,
   fontSize: "18px",
   gap: "12px",
@@ -57,6 +57,10 @@ const defaultTheme: ButtonTheme = {
   paddingTop: "6px",
   uppercase: true,
   hover: {
+    background: colors.WHITE,
+    color: colors.BLACK,
+  },
+  press: {
     background: colors.WHITE,
     color: colors.BLACK,
   },
@@ -70,6 +74,10 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
     border: `3px solid ${colors.WHITE}`,
     color: colors.BLACK,
     hover: {
+      background: colors.BLACK,
+      color: colors.WHITE,
+    },
+    press: {
       background: colors.BLACK,
       color: colors.WHITE,
     },
@@ -92,13 +100,21 @@ export const buttonThemes: { [key: string]: ButtonTheme } = {
 };
 
 type Props = Partial<OverridableStyles> & {
-  icon?: React.ReactNode;
-  theme: ButtonTheme;
+  theme?: ButtonTheme;
   onClick: () => void;
-  text?: string;
+  isActive?: boolean;
   hasFill?: boolean;
   hasStroke?: boolean;
-};
+} & (
+    | {
+        icon: React.ReactNode;
+        text?: string;
+      }
+    | {
+        icon?: React.ReactNode;
+        text: string;
+      }
+  );
 
 const StyledButton = styled.button<HTMLButtonProps & Props>`
   /* THEME */
@@ -128,6 +144,7 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 
   & svg {
     margin-top: 3px;
@@ -162,6 +179,14 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
     }
   }
 
+  ${({ isActive, theme }) =>
+    isActive &&
+    theme?.press?.background &&
+    css`
+      background: ${theme.press.background};
+      color: ${theme.press.color};
+    `}
+
   &:disabled {
     opacity: 0.7;
   }
@@ -170,8 +195,12 @@ const StyledButton = styled.button<HTMLButtonProps & Props>`
 const Button: React.FC<Props> = (props) => (
   <StyledButton {...props}>
     {props.icon && <span>{props.icon}</span>}
-    <span>{props.text}</span>
+    {props.text && <span>{props.text}</span>}
   </StyledButton>
 );
+
+Button.defaultProps = {
+  theme: buttonThemes.default,
+};
 
 export default Button;
