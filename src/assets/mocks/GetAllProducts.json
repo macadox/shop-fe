@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "name": "Leather belt",
+    "price": 399,
+    "category": "belts",
+    "colors": ["brown", "black"],
+    "sizes": ["41", "42", "43", "44", "45", "46"]
+  },
+  {
+    "id": 2,
+    "name": "Light Leather belt",
+    "price": 2559,
+    "category": "belts",
+    "colors": ["brown"],
+    "sizes": ["39"]
+  },
+  {
+    "id": 3,
+    "name": "Mosaic cufflinks",
+    "price": 129,
+    "category": "cufflinks",
+    "colors": ["black", "silver"],
+    "materials": ["silver"]
+  },
+  {
+    "id": 4,
+    "name": "Ornated cufflinks",
+    "price": 9000,
+    "category": "cufflinks",
+    "colors": ["black", "silver"],
+    "materials": ["silver"]
+  },
+  {
+    "id": 5,
+    "name": "Cufflinks - Englang",
+    "price": 49,
+    "category": "cufflinks",
+    "colors": ["blue", "red"],
+    "materials": ["metal"]
+  },
+  {
+    "id": 6,
+    "name": "Camping tent",
+    "price": 379,
+    "category": "survival",
+    "colors": ["orange", "darkblue"]
+  }
+]
