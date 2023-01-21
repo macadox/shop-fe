@@ -1,10 +1,16 @@
 import React from "react";
+import { Container } from "./components/atoms";
+import GlobalStyles from "./GlobalStyles";
 
 const App = () => {
   return (
-    <div>
-      <div>Hello from the App</div>
-    </div>
+    <>
+      <GlobalStyles />
+      <div>
+        <Container p={25}></Container>
+        <div>Hello from the App</div>
+      </div>
+    </>
   );
 };
 
