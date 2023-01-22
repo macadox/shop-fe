@@ -52,9 +52,11 @@ const HomePage = () => {
 
       <Container
         as="section"
-        $py={32}
+        $p={32}
+        $my={32}
         $mx="auto"
         $maxWidth={INNER_CONTAINER_MAX_WIDTH}
+        $background={colors.WHITE}
       >
         <ProductGrid
           list={data || []}

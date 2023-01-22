@@ -68,7 +68,7 @@ const ProductWidget = ({
       <LikeButton onClick={handleHeartClick}>
         <HeartIcon />
       </LikeButton>
-      <Container $pt={16} $display="flex" $flexDirection="column" $gap="4px">
+      <Container $p={8} $display="flex" $flexDirection="column" $gap="4px">
         <TextBody $size="18px">{price}zł</TextBody>
         <TextTitle as="h3" $size="16px" $uppercase $bold>
           {name}

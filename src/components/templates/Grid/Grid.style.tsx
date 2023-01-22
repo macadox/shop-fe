@@ -29,5 +29,5 @@ export const StyledGrid = styled.div<Props>`
     minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
   );
   grid-gap: var(--grid-layout-gap);
-  justify-items: center;
+  justify-items: space-between;
 `;
