@@ -1,8 +1,9 @@
-import React, { useMemo, useCallback, useState, useRef } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
 import TextTitle from "../../atoms/TextTitle/TextTitle";
+import Image from "../../atoms/Image/Image";
 import { StyledProductWidget, LikeButton } from "./ProductWidget.style";
 
 import { ReactComponent as HeartEmpty } from "../../../assets/icons/heart.svg";
@@ -26,7 +27,6 @@ const ProductWidget = ({
   onHeartClick,
 }: Props) => {
   const [isFavorited, setIsFavorited] = useState(favorited);
-  const imgContainerRef = useRef<HTMLDivElement | null>(null);
 
   const HeartIcon = useMemo(() => {
     const label = `${isFavorited ? "unlike" : "like"} ${name}`;
@@ -58,17 +58,17 @@ const ProductWidget = ({
       tabIndex={0}
       onClick={() => onWidgetClick(id)}
     >
-      <Container
+      <Image
         $width={PRODUCT_WIDGET_PHOTO_SIZE}
         $height={PRODUCT_WIDGET_PHOTO_SIZE}
-        ref={imgContainerRef}
-      >
-        <img src={src} width="100%" height="100%" alt={name} />
-      </Container>
+        alt={name}
+        src={src}
+        spinnerSize="m"
+      />
       <LikeButton onClick={handleHeartClick}>
         <HeartIcon />
       </LikeButton>
-      <Container $pt={16} $display="flex" $flexDirection="column" $gap="4px">
+      <Container $p={8} $display="flex" $flexDirection="column" $gap="4px">
         <TextBody $size="18px">{price}zł</TextBody>
         <TextTitle as="h3" $size="16px" $uppercase $bold>
           {name}

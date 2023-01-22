@@ -7,6 +7,7 @@ export const StyledProductWidget = styled.div`
   background: ${colors.WHITE};
   height: calc(${PRODUCT_WIDGET_PHOTO_SIZE} + "100px");
   width: ${PRODUCT_WIDGET_PHOTO_SIZE};
+  box-shadow: 0px 4px 12px 0px ${colors.SHADOW};
   transition: box-shadow 0.2s 0.1s ease-in-out, transform 0.2s ease-in-out;
 
   button {
@@ -16,11 +17,10 @@ export const StyledProductWidget = styled.div`
   &:hover,
   &:focus-within {
     transform: translateY(-1.5px);
-    box-shadow: 0px 4px 12px 0px ${colors.SHADOW};
+    box-shadow: 0px 4px 12px 8px ${colors.SHADOW};
     outline: none;
     button {
       opacity: 1;
-      outline: none;
     }
   }
 `;
@@ -28,7 +28,7 @@ export const StyledProductWidget = styled.div`
 export const LikeButton = styled.button`
   width: 50px;
   height: 50px;
-  background: white;
+  background: ${colors.WHITE};
   position: absolute;
   top: 0;
   right: 0;

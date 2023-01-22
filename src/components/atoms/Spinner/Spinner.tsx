@@ -10,7 +10,7 @@ export const sizes = {
   xs: 0.125,
 } as const;
 
-type Size = keyof typeof sizes;
+export type Size = keyof typeof sizes;
 
 const Spinner = ({
   size = "m",
@@ -20,7 +20,7 @@ const Spinner = ({
   color?: string;
 }) => {
   return (
-    <StyledSpinner size={sizes[size]} color={color}>
+    <StyledSpinner aria-label="loading" size={sizes[size]} color={color}>
       <SpinnerHead size={sizes[size]} color={color} />
     </StyledSpinner>
   );

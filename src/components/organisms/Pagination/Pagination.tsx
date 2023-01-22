@@ -53,32 +53,32 @@ const Pagination = <T,>({ table }: Props<T>) => {
       <Container $width="40px" $height="40px">
         {table.getCanPreviousPage() && (
           <Button
-            width="40px"
-            height="40px"
+            $width="40px"
+            $height="40px"
             onClick={table.previousPage}
             icon={<ArrowLeft height="16px" fill={colors.WHITE} />}
-            hasFill={true}
+            $hasFill={true}
           />
         )}
       </Container>
       {pageBlocks.map((block) => (
         <Button
           key={block}
-          width="40px"
-          height="40px"
+          $width="40px"
+          $height="40px"
           onClick={() => gotoPage(block - 1)}
           text={block.toString()}
-          isActive={pageIndex === block - 1}
+          $isActive={pageIndex === block - 1}
         />
       ))}
       <Container $width="40px" $height="40px">
         {table.getCanNextPage() && (
           <Button
-            width="40px"
-            height="40px"
+            $width="40px"
+            $height="40px"
             onClick={table.nextPage}
             icon={<ArrowRight height="16px" fill={colors.WHITE} />}
-            hasFill={true}
+            $hasFill={true}
           />
         )}
       </Container>
