@@ -11,7 +11,7 @@ import {
 import { HTMLDivProps } from "../../../constants/htmlProps.types";
 import { addSuffix } from "../../../utils/styleUtils";
 
-type Props = {
+export type Props = {
   $background: string;
   $borderRadius: string;
   $width: string;

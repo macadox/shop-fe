@@ -10,7 +10,7 @@ export const sizes = {
   xs: 0.125,
 } as const;
 
-type Size = keyof typeof sizes;
+export type Size = keyof typeof sizes;
 
 const Spinner = ({
   size = "m",
