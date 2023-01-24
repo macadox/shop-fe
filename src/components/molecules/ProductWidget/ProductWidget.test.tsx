@@ -5,6 +5,7 @@ import ProductWidget from "./ProductWidget";
 import MOCK_PRODUCT_PHOTO from "../../../../public/assets/product1.jpg";
 
 const MOCK_PRODUCT_NAME = "Chuck Norris boots";
+const MOCK_PRODUCT_SLUG = "chuck-norris-boots";
 const MOCK_PRODUCT_PRICE = 100000;
 const MOCK_PRODUCT_ID = 0;
 
@@ -13,6 +14,7 @@ describe("ProductWidget", () => {
     render(
       <ProductWidget
         id={MOCK_PRODUCT_ID}
+        slug={MOCK_PRODUCT_SLUG}
         name={MOCK_PRODUCT_NAME}
         src={MOCK_PRODUCT_PHOTO}
         price={MOCK_PRODUCT_PRICE}
@@ -34,6 +36,7 @@ describe("ProductWidget", () => {
     render(
       <ProductWidget
         id={MOCK_PRODUCT_ID}
+        slug={MOCK_PRODUCT_SLUG}
         name={MOCK_PRODUCT_NAME}
         src={MOCK_PRODUCT_PHOTO}
         price={MOCK_PRODUCT_PRICE}
@@ -66,6 +69,7 @@ describe("ProductWidget", () => {
     render(
       <ProductWidget
         id={MOCK_PRODUCT_ID}
+        slug={MOCK_PRODUCT_SLUG}
         name={MOCK_PRODUCT_NAME}
         src={MOCK_PRODUCT_PHOTO}
         price={MOCK_PRODUCT_PRICE}
@@ -79,7 +83,7 @@ describe("ProductWidget", () => {
     );
     await user.click(productWidgetContainer);
 
-    expect(onWidgetClickMock).toHaveBeenCalledWith(MOCK_PRODUCT_ID);
+    expect(onWidgetClickMock).toHaveBeenCalledWith(MOCK_PRODUCT_SLUG);
   });
   it("should call onHeartClick with correct value when we click on it", async () => {
     const user = userEvent.setup();
@@ -88,6 +92,7 @@ describe("ProductWidget", () => {
     render(
       <ProductWidget
         id={MOCK_PRODUCT_ID}
+        slug={MOCK_PRODUCT_SLUG}
         name={MOCK_PRODUCT_NAME}
         src={MOCK_PRODUCT_PHOTO}
         price={MOCK_PRODUCT_PRICE}
@@ -109,6 +114,7 @@ describe("ProductWidget", () => {
     render(
       <ProductWidget
         id={MOCK_PRODUCT_ID}
+        slug={MOCK_PRODUCT_SLUG}
         name={MOCK_PRODUCT_NAME}
         src={MOCK_PRODUCT_PHOTO}
         price={MOCK_PRODUCT_PRICE}

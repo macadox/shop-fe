@@ -6,7 +6,7 @@ import * as colors from "../../../constants/colors";
 
 const Footer = () => {
   return (
-    <Container $p={32} $background={colors.BLACK}>
+    <Container as="footer" $p={32} $background={colors.BLACK}>
       <TextBody $color={colors.WHITE} $textAlign="center">
         Alphashop, 2023 &#169; ALL RIGHTS RESERVED
       </TextBody>

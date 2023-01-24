@@ -9,9 +9,6 @@ import {
   SortingState,
   ColumnFiltersState,
   ColumnDef,
-  SortingFn,
-  FilterFn,
-  FilterFns,
 } from "@tanstack/react-table";
 
 import Pagination from "../../organisms/Pagination/Pagination";
@@ -35,6 +32,8 @@ type BaseProps<T> = {
   columns: ColumnDef<T>[];
   view: ViewEnum;
   isLoading: boolean;
+  hasFilter?: boolean;
+  hasPagination?: boolean;
 };
 
 type GridType<T> = BaseProps<T> & {
@@ -94,9 +93,12 @@ const List = <T,>(props: Props<T>) => {
 
   return (
     <Container>
-      <Container $mb={32}>
-        <FilterPanel table={table} />
-      </Container>
+      {props.hasFilter && (
+        <Container $mb={32}>
+          <FilterPanel table={table} />
+        </Container>
+      )}
+
       {props.isLoading ? (
         <Container $width="100%" $display="flex" $justifyContent="center">
           <Spinner />
@@ -104,11 +106,18 @@ const List = <T,>(props: Props<T>) => {
       ) : (
         renderComponent()
       )}
-      <Container $mt={32}>
-        <Pagination table={table} />
-      </Container>
+      {props.hasPagination && (
+        <Container $mt={32}>
+          <Pagination table={table} />
+        </Container>
+      )}
     </Container>
   );
+};
+
+List.defaultProps = {
+  hasFilter: true,
+  hasPagination: true,
 };
 
 export default List;

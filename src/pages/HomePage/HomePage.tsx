@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 import Container from "../../components/atoms/Container/Container";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
 import Banner from "../../components/organisms/Banner/Banner";
 
 import { APIProducts } from "../../services/api";
+import { joinRoute } from "../../utils/urlUtils";
+import { ROUTES } from "../../constants/routes";
 import { GetAllProductsResponse } from "../../constants/types";
 import { INNER_CONTAINER_MAX_WIDTH } from "../../constants/layout";
 import * as colors from "../../constants/colors";
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   const { isLoading, error, data, isFetching } = useQuery({
     queryKey: ["products"],
     queryFn: getAllProducts,
@@ -25,8 +30,15 @@ const HomePage = () => {
     }
   }
 
+  const goToProduct = useCallback(
+    (slug: string) => {
+      navigate(joinRoute(ROUTES.PRODUCT, slug));
+    },
+    [navigate]
+  );
+
   return (
-    <>
+    <Container $width="100%">
       <Container as="section">
         <Banner
           slides={[
@@ -62,12 +74,10 @@ const HomePage = () => {
           list={data || []}
           isLoading={isLoading || isFetching}
           onHeartClick={() => console.log("Implement on like")}
-          onWidgetClick={() =>
-            console.log("Implement redirect to product page")
-          }
+          onWidgetClick={goToProduct}
         />
       </Container>
-    </>
+    </Container>
   );
 };
 

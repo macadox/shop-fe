@@ -5,7 +5,9 @@ module.exports = {
   mode: "development",
   entry: "./src/index.tsx",
   output: {
-    path: __dirname + "/build/",
+    filename: "main.js",
+    path: __dirname + "/build",
+    publicPath: "/",
   },
   devServer: {
     port: 3001,
