@@ -2,6 +2,7 @@ export type ProductIdType = number | string;
 
 export type GetAllProductsItem = {
   id: ProductIdType;
+  slug: string;
   name: string;
   price: number;
   src: string;
@@ -16,6 +17,7 @@ export type GetAllProductsResponse = GetAllProductsItem[];
 
 export type ProductWidgetType = {
   id: ProductIdType;
+  slug: string;
   name: string;
   price: number;
   src: string;

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "slug": "leather-belt",
     "name": "Leather belt",
     "price": 399,
     "src": "/assets/product1.jpg",
@@ -10,6 +11,7 @@
   },
   {
     "id": 2,
+    "slug": "light-leather-belt",
     "name": "Light Leather belt",
     "price": 2559,
     "src": "/assets/product2.png",
@@ -20,6 +22,7 @@
   {
     "id": 3,
     "name": "Mosaic cufflinks",
+    "slug": "mosaic-cufflinks",
     "price": 129,
     "src": "/assets/product3.jpg",
     "category": "cufflinks",
@@ -29,6 +32,7 @@
   {
     "id": 4,
     "name": "Ornated cufflinks",
+    "slug": "ornated-cufflinks",
     "price": 9000,
     "src": "/assets/product4.jpg",
     "category": "cufflinks",
@@ -37,6 +41,7 @@
   },
   {
     "id": 5,
+    "slug": "cufflinks-england",
     "name": "Cufflinks - Englang",
     "price": 49,
     "src": "/assets/product5.jpg",
@@ -46,6 +51,7 @@
   },
   {
     "id": 6,
+    "slug": "camping-tent",
     "name": "Camping tent",
     "price": 379,
     "src": "/assets/product6.jpg",

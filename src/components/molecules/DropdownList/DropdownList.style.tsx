@@ -9,6 +9,9 @@ export const StyledList = styled.ul<HTMLUlProps>`
   right: 0;
   background: ${colors.WHITE};
   box-shadow: 0px 4px 12px 0px ${colors.SHADOW};
+  z-index: 100;
+  max-height: 150px;
+  overflow-y: scroll;
 `;
 
 export const StyledListItem = styled.li<HTMLLiProps & { $isSelected: boolean }>`

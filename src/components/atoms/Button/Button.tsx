@@ -10,6 +10,8 @@ import * as colors from "../../../constants/colors";
 
 type OverridableStyles = {
   $fontSize: string;
+  $bold: boolean;
+  $semiBold: boolean;
   $width: string;
   $height: string;
   $paddingTop: string;
@@ -162,6 +164,8 @@ const StyledButton = styled.button<
     $paddingLeft ? $paddingLeft : theme && theme.$paddingLeft};
   padding-right: ${({ theme, $paddingRight }) =>
     $paddingRight ? $paddingRight : theme && theme.$paddingRight};
+  font-weight: ${({ theme, $bold, $semiBold }) =>
+    $bold ? 700 : $semiBold ? 500 : theme?.$bold ? 700 : 400};
   /* OPTIONAL */
   ${({ theme }) =>
     theme && theme.$display && `display: ${theme && theme.$display};`}

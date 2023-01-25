@@ -70,6 +70,6 @@ describe("ProductGrid interactions", () => {
     const firstProductText = screen.getByText(mockData?.[0]?.name);
     await user.click(firstProductText);
 
-    expect(onWidgetClickMock).toHaveBeenCalledWith(mockData?.[0]?.id);
+    expect(onWidgetClickMock).toHaveBeenCalledWith(mockData?.[0]?.slug);
   });
 });

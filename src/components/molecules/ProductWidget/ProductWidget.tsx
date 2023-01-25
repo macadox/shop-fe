@@ -13,12 +13,13 @@ import { ProductWidgetType, ProductIdType } from "../../../constants/types";
 import * as colors from "../../../constants/colors";
 
 type Props = ProductWidgetType & {
-  onWidgetClick: (id: ProductIdType) => void;
+  onWidgetClick: (slug: string) => void;
   onHeartClick: (id: ProductIdType, favorited: boolean) => void;
 };
 
 const ProductWidget = ({
   id,
+  slug,
   name,
   price,
   favorited = false,
@@ -56,7 +57,7 @@ const ProductWidget = ({
     <StyledProductWidget
       data-testid="product-widget-container"
       tabIndex={0}
-      onClick={() => onWidgetClick(id)}
+      onClick={() => onWidgetClick(slug)}
     >
       <Image
         $width={PRODUCT_WIDGET_PHOTO_SIZE}

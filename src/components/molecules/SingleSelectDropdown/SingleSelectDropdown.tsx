@@ -52,7 +52,7 @@ const DefaultCombobox = ({
       }
       aria-haspopup="listbox"
       aria-labelledby={ariaLabelledBy}
-      hasFocus={isExpanded}
+      $hasFocus={isExpanded}
       as="div"
       tabIndex={0}
       onClick={handleClick}

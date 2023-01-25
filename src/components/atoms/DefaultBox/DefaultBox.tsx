@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import * as colors from "../../../constants/colors";
 
 type Props = {
-  hasFocus?: boolean;
+  $hasFocus?: boolean;
 };
 
 const DefaultBox = styled.div<Props>`
@@ -19,7 +19,7 @@ const DefaultBox = styled.div<Props>`
   &:focus-within {
     border-color: ${colors.BLACK};
   }
-  ${({ hasFocus }) => hasFocus && `border-color: ${colors.BLACK};`}
+  ${({ $hasFocus }) => $hasFocus && `border-color: ${colors.BLACK};`}
 `;
 
 export default DefaultBox;

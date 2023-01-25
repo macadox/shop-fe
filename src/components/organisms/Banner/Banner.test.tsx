@@ -25,7 +25,7 @@ describe("Banner Content", () => {
 
     expect(screen.getByAltText(FIRST_SLIDE.alt)).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: /see more/gi })
+      screen.getByRole("button", { name: /see more/i })
     ).toBeInTheDocument();
     expect(screen.getByText(FIRST_SLIDE.title)).toBeInTheDocument();
     expect(screen.getByText(FIRST_SLIDE.subtitle)).toBeInTheDocument();
