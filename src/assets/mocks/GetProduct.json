@@ -1,0 +1,43 @@
+{
+  "id": 1,
+  "name": "Leather belt",
+  "price": 399,
+  "category": "belts",
+  "images": ["/assets/product1.jpg", "/assets/product2.png"],
+  "colors": ["brown", "black"],
+  "sizes": ["41", "42", "43", "44", "45", "46"],
+  "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit voluptatem inventore dolores aliquid, itaque rem nesciunt ipsa ullam! A, obcaecati!",
+  "materialDescription": "Lorem ipsum dolor",
+  "suggestions": [
+    {
+      "id": 2,
+      "slug": "light-leather-belt",
+      "name": "Light Leather belt",
+      "price": 2559,
+      "src": "/assets/product2.png",
+      "category": "belts",
+      "colors": ["brown"],
+      "sizes": ["39"]
+    },
+    {
+      "id": 3,
+      "name": "Mosaic cufflinks",
+      "slug": "mosaic-cufflinks",
+      "price": 129,
+      "src": "/assets/product3.jpg",
+      "category": "cufflinks",
+      "colors": ["black", "silver"],
+      "materials": ["silver"]
+    },
+    {
+      "id": 4,
+      "name": "Ornated cufflinks",
+      "slug": "ornated-cufflinks",
+      "price": 9000,
+      "src": "/assets/product4.jpg",
+      "category": "cufflinks",
+      "colors": ["black", "silver"],
+      "materials": ["silver"]
+    }
+  ]
+}
