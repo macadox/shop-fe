@@ -28,12 +28,14 @@ type Props = {
   slides: Slide[];
   slideTimeout?: number;
   debounceTimeout?: number;
+  ctaButtonLabel: string;
 };
 
 const Banner = ({
   slides,
   slideTimeout = 5000,
   debounceTimeout = 800,
+  ctaButtonLabel = "SEE MORE",
 }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDebounced, setIsDebounced] = useState(false);
@@ -105,7 +107,7 @@ const Banner = ({
               {currentSlide.title}
             </TextTitle>
             <TextBody>{currentSlide.subtitle}</TextBody>
-            <Button text="SEE MORE" onClick={currentSlide.onClick} />
+            <Button text={ctaButtonLabel} onClick={currentSlide.onClick} />
           </div>
           <Container $display="flex" $gap="8px">
             <Button

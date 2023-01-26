@@ -1,7 +1,9 @@
 import React, { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
+import TextBody from "../../components/atoms/TextBody/TextBody";
 import Container from "../../components/atoms/Container/Container";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
 import Banner from "../../components/organisms/Banner/Banner";
@@ -15,6 +17,12 @@ import * as colors from "../../constants/colors";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation(["home"]);
+
+  const onClickLanguageChange = (e: any) => {
+    const language = e.target.value;
+    i18n.changeLanguage(language);
+  };
 
   const { isLoading, error, data, isFetching } = useQuery({
     queryKey: ["products"],
@@ -44,21 +52,27 @@ const HomePage = () => {
           slides={[
             {
               src: "https://picsum.photos/900/600",
-              alt: "random image",
-              title: "Awesome Shoes",
-              subtitle:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti molestiae doloribus fugiat velit. Ut, dolor!",
+              alt: t("bannerSlideTitle1", { ns: ["home"] }),
+              title: t("bannerSlideTitle1", { ns: ["home"] }),
+              subtitle: t("bannerSlideText1", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
             {
               src: "https://picsum.photos/900/601",
-              alt: "random image",
-              title: "Pwner siema",
-              subtitle:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti molestiae doloribus fugiat velit. Ut, dolor!",
+              alt: t("bannerSlideTitle2", { ns: ["home"] }),
+              title: t("bannerSlideTitle2", { ns: ["home"] }),
+              subtitle: t("bannerSlideText2", { ns: ["home"] }),
+              onClick: () => console.log("see more"),
+            },
+            {
+              src: "https://picsum.photos/900/602",
+              alt: t("bannerSlideTitle3", { ns: ["home"] }),
+              title: t("bannerSlideTitle3", { ns: ["home"] }),
+              subtitle: t("bannerSlideText3", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
           ]}
+          ctaButtonLabel={t("bannerCtaButtonText", { ns: ["home"] })}
         />
       </Container>
 
@@ -70,6 +84,12 @@ const HomePage = () => {
         $maxWidth={INNER_CONTAINER_MAX_WIDTH}
         $background={colors.WHITE}
       >
+        <select onChange={onClickLanguageChange}>
+          <option value="en">English</option>
+          <option value="de">German</option>
+          <option value="pl">Polish</option>
+        </select>
+
         <ProductGrid
           list={data || []}
           isLoading={isLoading || isFetching}
