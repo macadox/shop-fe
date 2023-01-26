@@ -1,0 +1,12 @@
+{
+  ".js": "application/javascript",
+  ".map": "application/json",
+  ".json": "application/json",
+  ".png": "image/png",
+  ".jpeg": "image/jpeg",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".css": "text/css",
+  ".html": "text/html",
+  ".txt": "text/plain"
+}
