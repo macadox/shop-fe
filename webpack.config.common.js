@@ -1,20 +1,12 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: "development",
   entry: "./src/index.tsx",
   output: {
     filename: "main.js",
     path: __dirname + "/build",
     publicPath: "/",
-  },
-  devServer: {
-    port: 3001,
-    hot: true,
-    open: true,
-    liveReload: true,
-    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -25,10 +17,6 @@ module.exports = {
           extensions: [".ts", ".tsx", ".js", ".json"],
         },
         use: "ts-loader",
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.svg$/i,
@@ -45,11 +33,12 @@ module.exports = {
       },
     ],
   },
-  devtool: "source-map",
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      filename: "index.html",
+      inject: true,
       template: "public/index.html",
     }),
-    new MiniCssExtractPlugin(),
   ],
 };
