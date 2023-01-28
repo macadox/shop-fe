@@ -10,6 +10,7 @@ i18next
     lng: "en",
     defaultNS: "translation",
     backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
+    fallbackLng: "en",
   });
 
 export default i18next;

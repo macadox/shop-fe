@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import TextBody from "../../components/atoms/TextBody/TextBody";
 import Container from "../../components/atoms/Container/Container";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
 import Banner from "../../components/organisms/Banner/Banner";
@@ -17,12 +16,7 @@ import * as colors from "../../constants/colors";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation(["home"]);
-
-  const onClickLanguageChange = (e: any) => {
-    const language = e.target.value;
-    i18n.changeLanguage(language);
-  };
+  const { t } = useTranslation(["home"]);
 
   const { isLoading, error, data, isFetching } = useQuery({
     queryKey: ["products"],

@@ -13,5 +13,6 @@
   "filterAnd": "oraz",
   "filterIsLesser": "mniejsza niż",
   "filterIsGreater": "większa niż",
-  "filterMatches": "zawiera"
+  "filterMatches": "zawiera",
+  "noDataAvaialable": "Brak wyników spełniających kryteria"
 }

@@ -12,9 +12,11 @@ type Props<T> = {
 };
 
 const FilterPanel = <T,>({ table }: Props<T>) => {
-  const filterableColumns = table
-    .getAllColumns()
-    .filter((column) => column.getCanFilter());
+  // TODO: fix problem when changing language
+  const filterableColumns = useMemo(
+    () => table.getAllColumns().filter((column) => column.getCanFilter()),
+    [table]
+  );
 
   const filteredColumns = table
     .getAllColumns()

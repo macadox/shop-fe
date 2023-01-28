@@ -4,6 +4,7 @@ import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
 import Burger from "../../atoms/Burger/Burger";
 import Button, { ButtonTheme, buttonThemes } from "../../atoms/Button/Button";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import { StyledNav, StyledMenu, StyledMenuItem } from "./Navbar.style";
 import useScreenOrientation, {
   ORIENTATIONS,
@@ -96,6 +97,9 @@ const Menu = ({ $active }: { $active: boolean }) => {
           icon={<BagIcon fill={colors.BLACK} width={24} height={24} />}
           aria-label={t("cart", defaults.CART) || ""}
         />
+      </StyledMenuItem>
+      <StyledMenuItem role="menuitem">
+        <LanguageSelector />
       </StyledMenuItem>
     </StyledMenu>
   );

@@ -13,5 +13,6 @@
   "filterAnd": "und",
   "filterIsLesser": "ist kleiner als",
   "filterIsGreater": "ist größer als",
-  "filterMatches": "ist passend"
+  "filterMatches": "ist passend",
+  "noDataAvaialable": "Keine Daten für die Vorschau verfügbar"
 }

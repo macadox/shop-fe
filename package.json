@@ -22,7 +22,7 @@
     "build:dev": "webpack --config=webpack.config.dev.js",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "start": "webpack-dev-server --config=webpack.config.dev.js --open",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "eslintConfig": {
