@@ -14,5 +14,5 @@
   "filterIsLesser": "ist kleiner als",
   "filterIsGreater": "ist größer als",
   "filterMatches": "ist passend",
-  "noDataAvaialable": "Keine Daten für die Vorschau verfügbar"
+  "noDataAvailable": "Keine Daten für die Vorschau verfügbar"
 }

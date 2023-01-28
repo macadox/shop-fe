@@ -36,6 +36,7 @@ const LanguageButton = ({
       }}
       onKeyDownCapture={handleKeyDown}
       ref={innerRef}
+      aria-label="Choose language"
     >
       <GlobeIcon stroke={colors.BLACK} width={24} height={24} />
     </StyledSelectButton>

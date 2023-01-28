@@ -3,6 +3,8 @@ import {
   Table as ReactTableInterface,
   flexRender,
 } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
+
 import Table from "../../atoms/Table/Table";
 import TableBody from "../../atoms/TableBody/TableBody";
 import TableCell from "../../atoms/TableCell/TableCell";
@@ -15,6 +17,8 @@ type Props<T> = {
 };
 
 const TableTemplate = <T,>({ table }: Props<T>) => {
+  const { t } = useTranslation();
+
   return (
     <Table>
       <TableHead>
@@ -36,7 +40,7 @@ const TableTemplate = <T,>({ table }: Props<T>) => {
       <TableBody>
         {table.getRowModel().rows.length === 0 ? (
           <tr>
-            <td>No data is available to preview</td>
+            <td>{t("noDataAvailable")}</td>
           </tr>
         ) : (
           table.getRowModel().rows.map((row) => (

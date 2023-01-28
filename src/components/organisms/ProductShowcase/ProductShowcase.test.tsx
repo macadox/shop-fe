@@ -29,7 +29,7 @@ describe("Product Showcase", () => {
       screen.getByRole("button", { name: "go to image 1" })
     ).toBeInTheDocument();
     expect(screen.getByText(MOCK_NAME)).toBeInTheDocument();
-    expect(screen.getByText(MOCK_PRICE.toString())).toBeInTheDocument();
+    expect(screen.getByText(`$${MOCK_PRICE.toString()}`)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "ADD TO CART" })
     ).toBeInTheDocument();
