@@ -26,7 +26,7 @@ describe("ProductWidget", () => {
 
     expect(screen.getByAltText(MOCK_PRODUCT_NAME));
     expect(screen.getByText(MOCK_PRODUCT_NAME)).toBeInTheDocument();
-    expect(screen.getByText(`${MOCK_PRODUCT_PRICE}zł`)).toBeInTheDocument();
+    expect(screen.getByText(`$${MOCK_PRODUCT_PRICE}`)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: `like ${MOCK_PRODUCT_NAME}` })
     ).toBeInTheDocument();

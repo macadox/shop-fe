@@ -1,8 +1,9 @@
 {
-  "bannerSlideTitle1": "Niesamowite buty",
-  "bannerSlideText1": "Zjadłem skarpetkę, ponieważ ludzie w Internecie kazali mi to zrobić.",
-  "bannerSlideTitle2": "Odzież męska",
-  "bannerSlideText2": "Kiedy miał na sobie strój klauna, robił wszystko, co w jego mocy.",
-  "bannerSlideTitle3": "Pobierz teraz",
-  "bannerSlideText3": "Zastanawiał się, czy można to nazwać plażą, gdyby nie było piasku."
+  "bannerFirstSlideTitle": "Niesamowite buty",
+  "bannerFirstSlideText": "Zjadłem skarpetkę, ponieważ ludzie w Internecie kazali mi to zrobić.",
+  "bannerSecondSlideTitle": "Odzież męska",
+  "bannerSecondSlideText": "Kiedy miał na sobie strój klauna, robił wszystko, co w jego mocy.",
+  "bannerThirdSlideTitle": "Pobierz teraz",
+  "bannerThirdSlideText": "Zastanawiał się, czy można to nazwać plażą, gdyby nie było piasku.",
+  "bannerCtaButtonText": "ZOBACZ WIĘCEJ"
 }

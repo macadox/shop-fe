@@ -1,9 +1,9 @@
 {
-  "bannerSlideTitle1": "Awesome Shoes",
-  "bannerSlideText1": "I ate a sock because people on the Internet told me to.",
-  "bannerSlideTitle2": "Men apparel",
-  "bannerSlideText2": "He was all business when he wore his clown suit.",
-  "bannerSlideTitle3": "Get it now",
-  "bannerSlideText3": "He wondered if it could be called a beach if there was no sand.",
+  "bannerFirstSlideTitle": "Awesome Shoes",
+  "bannerFirstSlideText": "I ate a sock because people on the Internet told me to.",
+  "bannerSecondSlideTitle": "Men apparel",
+  "bannerSecondSlideText": "He was all business when he wore his clown suit.",
+  "bannerThirdSlideTitle": "Get it now",
+  "bannerThirdSlideText": "He wondered if it could be called a beach if there was no sand.",
   "bannerCtaButtonText": "SEE MORE"
 }

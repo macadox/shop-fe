@@ -16,6 +16,14 @@ import * as colors from "../../../constants/colors";
 
 import { ReactComponent as BagIcon } from "../../../assets/icons/shopping-bag.svg";
 import { ReactComponent as HeartIcon } from "../../../assets/icons/heart.svg";
+import { useTranslation } from "react-i18next";
+
+const defaults = {
+  HOME: "HOME",
+  CATEGORIES: "CATEGORIES",
+  FAVORITES: "FAVORITES",
+  CART: "CART",
+};
 
 const isLandscape = (orientation: keyof typeof ORIENTATIONS) => {
   return [
@@ -60,19 +68,25 @@ const Logo = () => {
 };
 
 const Menu = ({ $active }: { $active: boolean }) => {
+  const { t } = useTranslation();
+
   return (
     <StyledMenu $active={$active} role="menu">
       <StyledMenuItem role="menuitem">
-        <MenuButton to={ROUTES.HOME} text="HOME" />
+        <MenuButton to={ROUTES.HOME} text={t("home", defaults.HOME) || ""} />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
-        <MenuButton to={ROUTES.CATEGORIES} text="CATEGORIES" />
+        <MenuButton
+          to={ROUTES.CATEGORIES}
+          text={t("categories", defaults.CATEGORIES) || ""}
+        />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
         <MenuButton
           to={ROUTES.FAVORITES}
           $hasFill
           icon={<HeartIcon fill={colors.BLACK} width={24} height={24} />}
+          aria-label={t("favorites", defaults.FAVORITES) || ""}
         />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
@@ -80,6 +94,7 @@ const Menu = ({ $active }: { $active: boolean }) => {
           to={ROUTES.CART}
           $hasFill
           icon={<BagIcon fill={colors.BLACK} width={24} height={24} />}
+          aria-label={t("cart", defaults.CART) || ""}
         />
       </StyledMenuItem>
     </StyledMenu>

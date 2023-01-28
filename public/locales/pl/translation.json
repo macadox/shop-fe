@@ -1,1 +1,17 @@
-{}
+{
+  "home": "STRONA GŁÓWNA",
+  "categories": "KATEGORIE",
+  "favorites": "ULUBIONE",
+  "cart": "KOSZYK",
+  "footer": "Alphashop, 2023 © WSZELKIE PRAWA ZASTRZEŻONE",
+  "addFilterButton": "Dodaj filtr",
+  "submitButton": "Prześlij",
+  "cancelButton": "Anuluj",
+  "addToCartButton": "DODAJ DO KOSZYKA",
+  "filterInputTextPlaceholder": "Wpisz i naciśnij enter",
+  "filterIsBetween": "między",
+  "filterAnd": "oraz",
+  "filterIsLesser": "mniejsza niż",
+  "filterIsGreater": "większa niż",
+  "filterMatches": "zawiera"
+}

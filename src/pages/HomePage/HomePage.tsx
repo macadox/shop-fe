@@ -52,23 +52,23 @@ const HomePage = () => {
           slides={[
             {
               src: "https://picsum.photos/900/600",
-              alt: t("bannerSlideTitle1", { ns: ["home"] }),
-              title: t("bannerSlideTitle1", { ns: ["home"] }),
-              subtitle: t("bannerSlideText1", { ns: ["home"] }),
+              alt: t("bannerFirstSlideTitle", { ns: ["home"] }),
+              title: t("bannerFirstSlideTitle", { ns: ["home"] }),
+              subtitle: t("bannerFirstSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
             {
               src: "https://picsum.photos/900/601",
-              alt: t("bannerSlideTitle2", { ns: ["home"] }),
-              title: t("bannerSlideTitle2", { ns: ["home"] }),
-              subtitle: t("bannerSlideText2", { ns: ["home"] }),
+              alt: t("bannerSecondSlideTitle", { ns: ["home"] }),
+              title: t("bannerSecondSlideTitle", { ns: ["home"] }),
+              subtitle: t("bannerSecondSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
             {
               src: "https://picsum.photos/900/602",
-              alt: t("bannerSlideTitle3", { ns: ["home"] }),
-              title: t("bannerSlideTitle3", { ns: ["home"] }),
-              subtitle: t("bannerSlideText3", { ns: ["home"] }),
+              alt: t("bannerThirdSlideTitle", { ns: ["home"] }),
+              title: t("bannerThirdSlideTitle", { ns: ["home"] }),
+              subtitle: t("bannerThirdSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
           ]}
@@ -84,12 +84,6 @@ const HomePage = () => {
         $maxWidth={INNER_CONTAINER_MAX_WIDTH}
         $background={colors.WHITE}
       >
-        <select onChange={onClickLanguageChange}>
-          <option value="en">English</option>
-          <option value="de">German</option>
-          <option value="pl">Polish</option>
-        </select>
-
         <ProductGrid
           list={data || []}
           isLoading={isLoading || isFetching}

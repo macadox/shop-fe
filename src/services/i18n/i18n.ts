@@ -8,7 +8,7 @@ i18next
   .use(HttpApi)
   .init({
     lng: "en",
-    defaultNS: "home",
+    defaultNS: "translation",
     backend: { loadPath: "/locales/{{lng}}/{{ns}}.json" },
   });
 

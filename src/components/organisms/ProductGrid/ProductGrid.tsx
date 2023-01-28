@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from "react";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
 import List, { ViewEnum } from "../../templates/List/List";
 import ProductWidget from "../../molecules/ProductWidget/ProductWidget";
 
@@ -8,6 +9,18 @@ import {
   GetAllProductsItem,
   ProductWidgetType,
 } from "../../../constants/types";
+
+const defaults = {
+  id: "ID",
+  name: "Name",
+  price: "Price",
+  src: "Photo",
+  favorited: "Favorited",
+  category: "Category",
+  colors: "Colors",
+  materials: "Materials",
+  sizes: "Sizes",
+};
 
 type Props = {
   list: GetAllProductsItem[];
@@ -26,16 +39,48 @@ const ProductGrid = ({
   hasFilter,
   hasPagination,
 }: Props) => {
+  const { t } = useTranslation("product");
+
   const columns = useMemo<ColumnDef<GetAllProductsItem>[]>(
     () => [
-      { header: "ID", accessorKey: "id", enableColumnFilter: false },
-      { header: "Name", accessorKey: "name" },
-      { header: "Price", accessorKey: "price" },
-      { header: "Photo", accessorKey: "src", enableColumnFilter: false },
-      { header: "Favorited", accessorKey: "favorited" },
-      { header: "Category", accessorKey: "category" },
+      {
+        header: t("id", defaults.id) || "",
+        accessorKey: "id",
+        enableColumnFilter: false,
+      },
+      { header: t("name", defaults.name) || "", accessorKey: "name" },
+      { header: t("price", defaults.price) || "", accessorKey: "price" },
+      {
+        header: t("src", defaults.src) || "",
+        accessorKey: "src",
+        enableColumnFilter: false,
+      },
+      {
+        header: t("favorited", defaults.favorited) || "",
+        accessorKey: "favorited",
+        enableColumnFilter: false,
+      },
+      {
+        header: t("category", defaults.category) || "",
+        accessorKey: "category",
+      },
+      {
+        header: t("colors", defaults.colors) || "",
+        accessorKey: "colors",
+        filterFn: "matchArrItem",
+      },
+      {
+        header: t("materials", defaults.materials) || "",
+        accessorKey: "materials",
+        filterFn: "matchArrItem",
+      },
+      {
+        header: t("sizes", defaults.sizes) || "",
+        accessorKey: "sizes",
+        filterFn: "matchArrItem",
+      },
     ],
-    []
+    [t]
   );
   const data = useMemo(() => list, [list]);
 

@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Container from "../../components/atoms/Container/Container";
 import TextBody from "../../components/atoms/TextBody/TextBody";
@@ -45,6 +46,7 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const { [PRODUCT_SUBROUTES.slug]: slug } = useParams();
   const { isLoading, error, data } = useQuery(["product", slug], getProduct);
+  const { t } = useTranslation("product");
 
   async function getProduct({
     queryKey,
@@ -95,14 +97,14 @@ const ProductPage = () => {
         >
           {/* SECTION: Product Description */}
           <Container $display="flex" $flexDirection="column" $gap="16px">
-            <ProductSectionTitle text="Product Description" />
+            <ProductSectionTitle text={t("description") || ""} />
             <TextBody $lineHeight={170} $size="14px">
               {data?.description}
             </TextBody>
           </Container>
           {/* SECTION: MATERIAL */}
           <Container $display="flex" $flexDirection="column" $gap="16px">
-            <ProductSectionTitle text="Material" />
+            <ProductSectionTitle text={t("materialDescription") || ""} />
             <TextBody $lineHeight={170} $size="14px">
               {data?.materialDescription}
             </TextBody>
@@ -119,7 +121,7 @@ const ProductPage = () => {
           $gap="16px"
         >
           <TextTitle as="h3" $size="20px" $uppercase $bold $letterSpacing="3px">
-            You may also like
+            {t("suggestions")}
           </TextTitle>
           <ProductGrid
             list={data?.suggestions || []}

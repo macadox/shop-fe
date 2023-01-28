@@ -70,7 +70,7 @@ const ProductWidget = ({
         <HeartIcon />
       </LikeButton>
       <Container $p={8} $display="flex" $flexDirection="column" $gap="4px">
-        <TextBody $size="18px">{price}zł</TextBody>
+        <TextBody $size="18px">${price}</TextBody>
         <TextTitle as="h3" $size="16px" $uppercase $bold>
           {name}
         </TextTitle>

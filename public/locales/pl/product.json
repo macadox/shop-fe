@@ -1,0 +1,14 @@
+{
+  "id": "ID",
+  "name": "Nazwa",
+  "price": "Cena",
+  "src": "Zdjęcia",
+  "favorited": "Ulubiony",
+  "category": "Kategoria",
+  "materials": "Materiały",
+  "sizes": "Rozmiary",
+  "colors": "Kolory",
+  "description": "Opis Produktu",
+  "materialDescription": "Materiały",
+  "suggestions": "Das könnte dir auch gefallen"
+}
