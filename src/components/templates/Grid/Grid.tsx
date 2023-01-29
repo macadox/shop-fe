@@ -3,6 +3,7 @@ import {
   Table as ReactTableInterface,
   Row as ReactTableRowInterface,
 } from "@tanstack/react-table";
+import { useTranslation } from "react-i18next";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
 import { StyledGrid } from "./Grid.style";
@@ -27,11 +28,12 @@ const Grid = <T,>({
   $itemMinWidth,
   $gridGap = "36px",
 }: Props<T>) => {
+  const { t } = useTranslation();
   const rows = table.getRowModel().rows;
 
   return rows.length === 0 ? (
     <Container $width="100%">
-      <TextBody $textAlign="center">No data is available to preview</TextBody>
+      <TextBody $textAlign="center">{t("noDataAvailable")}</TextBody>
     </Container>
   ) : (
     <StyledGrid

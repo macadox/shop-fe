@@ -1,0 +1,18 @@
+{
+  "home": "ZU HAUSE",
+  "categories": "KATEGORIEN",
+  "favorites": "FAVORITEN",
+  "cart": "WAGEN",
+  "footer": "Alphashop, 2023 © ALLE RECHTE VORBEHALTEN",
+  "addFilterButton": "Filter hinzufügen",
+  "submitButton": "Senden",
+  "cancelButton": "Abbrechen",
+  "addToCartButton": "ZUM WARENKORB HINZUFÜGEN",
+  "filterInputTextPlaceholder": "Schreib und drück ENTER",
+  "filterIsBetween": "liegt zwischen",
+  "filterAnd": "und",
+  "filterIsLesser": "ist kleiner als",
+  "filterIsGreater": "ist größer als",
+  "filterMatches": "ist passend",
+  "noDataAvailable": "Keine Daten für die Vorschau verfügbar"
+}

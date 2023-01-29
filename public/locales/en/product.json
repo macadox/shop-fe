@@ -1,0 +1,14 @@
+{
+  "id": "ID",
+  "name": "Name",
+  "price": "Price",
+  "src": "Photo",
+  "favorited": "Favorited",
+  "category": "Category",
+  "materials": "Materials",
+  "sizes": "Sizes",
+  "colors": "Colors",
+  "description": "Product Description",
+  "materialDescription": "Material",
+  "suggestions": "You may also like"
+}

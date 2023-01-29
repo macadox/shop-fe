@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Table, Column } from "@tanstack/react-table";
 import SingleSelectDropdown from "../../../../molecules/SingleSelectDropdown/SingleSelectDropdown";
 import { DropdownOption } from "../../../../molecules/DropdownList/DropdownList";
@@ -26,6 +27,7 @@ const AddValuePopup = <T,>({
   const [localValue, setLocalValue] = useState<FilterValuesOpts>(
     column?.getFilterValue() as FilterValuesOpts
   );
+  const { t } = useTranslation();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -53,7 +55,7 @@ const AddValuePopup = <T,>({
           <Button
             $width="100%"
             theme={buttonThemes.transparent}
-            text="Cancel"
+            text={t("cancelButton") || ""}
             onClick={() => setStep(0)}
             type="button"
           />
@@ -62,7 +64,7 @@ const AddValuePopup = <T,>({
           <Button
             $width="100%"
             theme={buttonThemes.default}
-            text="Submit"
+            text={t("submitButton") || ""}
             type="submit"
           />
         </Container>

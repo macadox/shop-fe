@@ -19,9 +19,13 @@ const SECOND_SLIDE = {
   onClick: jest.fn(),
 };
 
+const MOCK_BUTTON_TITLE = "SEE MORE";
+
 describe("Banner Content", () => {
   it("should present the first slide content", () => {
-    render(<Banner slides={[FIRST_SLIDE]} />);
+    render(
+      <Banner slides={[FIRST_SLIDE]} ctaButtonLabel={MOCK_BUTTON_TITLE} />
+    );
 
     expect(screen.getByAltText(FIRST_SLIDE.alt)).toBeInTheDocument();
     expect(
@@ -36,14 +40,25 @@ describe("Banner interactions", () => {
   it("should call onClick when we press see more button", async () => {
     const onClickMock = jest.fn();
     const user = userEvent.setup();
-    render(<Banner slides={[{ ...FIRST_SLIDE, onClick: onClickMock }]} />);
+    render(
+      <Banner
+        slides={[{ ...FIRST_SLIDE, onClick: onClickMock }]}
+        ctaButtonLabel={MOCK_BUTTON_TITLE}
+      />
+    );
 
     await user.click(screen.getByRole("button", { name: /see more/i }));
     expect(onClickMock).toHaveBeenCalled();
   });
   it("should switch to the next slide, when we press next button", async () => {
     const user = userEvent.setup();
-    render(<Banner slides={[FIRST_SLIDE, SECOND_SLIDE]} debounceTimeout={0} />);
+    render(
+      <Banner
+        slides={[FIRST_SLIDE, SECOND_SLIDE]}
+        debounceTimeout={0}
+        ctaButtonLabel={MOCK_BUTTON_TITLE}
+      />
+    );
 
     await user.click(screen.getByRole("button", { name: "go to next slide" }));
 
@@ -57,7 +72,13 @@ describe("Banner interactions", () => {
   });
   it("should switch to the prev slide, when we press prev button", async () => {
     const user = userEvent.setup();
-    render(<Banner slides={[FIRST_SLIDE, SECOND_SLIDE]} debounceTimeout={0} />);
+    render(
+      <Banner
+        slides={[FIRST_SLIDE, SECOND_SLIDE]}
+        debounceTimeout={0}
+        ctaButtonLabel={MOCK_BUTTON_TITLE}
+      />
+    );
 
     await user.click(
       screen.getByRole("button", { name: "go to previous slide" })

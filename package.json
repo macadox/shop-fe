@@ -8,8 +8,11 @@
     "@tanstack/react-query": "^4.22.0",
     "@tanstack/react-table": "^8.7.4",
     "axios": "^1.2.3",
+    "i18next": "^22.4.9",
+    "i18next-http-backend": "^2.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^12.1.4",
     "react-popper": "^2.2.5",
     "react-router-dom": "^6.6.2",
     "styled-components": "^6.0.0-beta.9"
@@ -19,7 +22,7 @@
     "build:dev": "webpack --config=webpack.config.dev.js",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "start": "webpack-dev-server --config=webpack.config.dev.js --open",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "eslintConfig": {

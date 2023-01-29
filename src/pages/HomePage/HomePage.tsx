@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Container from "../../components/atoms/Container/Container";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
@@ -15,6 +16,7 @@ import * as colors from "../../constants/colors";
 
 const HomePage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation(["home"]);
 
   const { isLoading, error, data, isFetching } = useQuery({
     queryKey: ["products"],
@@ -44,21 +46,27 @@ const HomePage = () => {
           slides={[
             {
               src: "https://picsum.photos/900/600",
-              alt: "random image",
-              title: "Awesome Shoes",
-              subtitle:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti molestiae doloribus fugiat velit. Ut, dolor!",
+              alt: t("bannerFirstSlideTitle", { ns: ["home"] }),
+              title: t("bannerFirstSlideTitle", { ns: ["home"] }),
+              subtitle: t("bannerFirstSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
             {
               src: "https://picsum.photos/900/601",
-              alt: "random image",
-              title: "Pwner siema",
-              subtitle:
-                "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corrupti molestiae doloribus fugiat velit. Ut, dolor!",
+              alt: t("bannerSecondSlideTitle", { ns: ["home"] }),
+              title: t("bannerSecondSlideTitle", { ns: ["home"] }),
+              subtitle: t("bannerSecondSlideText", { ns: ["home"] }),
+              onClick: () => console.log("see more"),
+            },
+            {
+              src: "https://picsum.photos/900/602",
+              alt: t("bannerThirdSlideTitle", { ns: ["home"] }),
+              title: t("bannerThirdSlideTitle", { ns: ["home"] }),
+              subtitle: t("bannerThirdSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
           ]}
+          ctaButtonLabel={t("bannerCtaButtonText", { ns: ["home"] })}
         />
       </Container>
 

@@ -4,8 +4,9 @@ import { HTMLLiProps, HTMLUlProps } from "../../../constants/htmlProps.types";
 
 export const StyledList = styled.ul<HTMLUlProps>`
   position: absolute;
-  top: calc(100% + 2px);
-  left: 0;
+  top: calc(100% + 4px);
+  min-width: min-content;
+  width: 100%;
   right: 0;
   background: ${colors.WHITE};
   box-shadow: 0px 4px 12px 0px ${colors.SHADOW};

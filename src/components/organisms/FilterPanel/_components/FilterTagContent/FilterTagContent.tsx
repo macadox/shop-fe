@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { FilterValuesOpts } from "../../types";
 
 type TagContentProps = {
@@ -7,11 +8,13 @@ type TagContentProps = {
 };
 
 const FilterTagContent = ({ label, value }: TagContentProps) => {
+  const { t } = useTranslation();
+
   const renderTagContent = () => {
     if (typeof value === "string") {
       return (
         <>
-          <strong>{label}</strong> matches <strong>{value}</strong>
+          <strong>{label}</strong> {t("filterMatches")} <strong>{value}</strong>
         </>
       );
     }
@@ -24,20 +27,22 @@ const FilterTagContent = ({ label, value }: TagContentProps) => {
       if (min && max) {
         res = (
           <>
-            <strong>{label}</strong> is between <strong>{min}</strong> and{" "}
-            <strong>{max}</strong>
+            <strong>{label}</strong> {t("filterIsBetween")}{" "}
+            <strong>{min}</strong> {t("filterAnd")} <strong>{max}</strong>
           </>
         );
       } else if (max)
         res = (
           <>
-            <strong>{label}</strong> is lesser than <strong>{max}</strong>
+            <strong>{label}</strong> {t("filterIsLesser")}{" "}
+            <strong>{max}</strong>
           </>
         );
       else if (min)
         res = (
           <>
-            <strong>{label}</strong> is greater than <strong>{min}</strong>
+            <strong>{label}</strong> {t("filterIsGreater")}{" "}
+            <strong>{min}</strong>
           </>
         );
 

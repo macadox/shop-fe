@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import Container from "../../atoms/Container/Container";
 import TextTitle from "../../atoms/TextTitle/TextTitle";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -25,6 +26,8 @@ const ProductShowcase = ({
   sizes,
   onAddToCart,
 }: Props) => {
+  const { t } = useTranslation(["product", "translation"]);
+
   const colorOpts = useMemo(
     () =>
       colors?.map((color, index) => ({
@@ -54,13 +57,13 @@ const ProductShowcase = ({
           </Container>
           <Container $width="100%" $mb={8}>
             <TextBody $size="24px" $bold $letterSpacing={3}>
-              {price} zł
+              ${price}
             </TextBody>
           </Container>
 
           {colorOpts && (
             <FormField
-              label="Color"
+              label={t("colors")}
               dropdownId="product-color"
               Component={() => (
                 <SingleSelectDropdown
@@ -75,7 +78,7 @@ const ProductShowcase = ({
           )}
           {sizeOpts && (
             <FormField
-              label="Size"
+              label={t("sizes")}
               dropdownId="product-size"
               Component={() => (
                 <SingleSelectDropdown
@@ -93,7 +96,7 @@ const ProductShowcase = ({
             $paddingTop="18px"
             $paddingBottom="18px"
             $fontSize="16px"
-            text="ADD TO CART"
+            text={t("addToCartButton", "", { ns: ["translation"] }) || ""}
             $semiBold
             onClick={onAddToCart}
           />

@@ -9,6 +9,7 @@ export const StyledProductWidget = styled.div`
   width: ${PRODUCT_WIDGET_PHOTO_SIZE};
   box-shadow: 0px 4px 12px 0px ${colors.SHADOW};
   transition: box-shadow 0.2s 0.1s ease-in-out, transform 0.2s ease-in-out;
+  cursor: pointer;
 
   button {
     opacity: 0;

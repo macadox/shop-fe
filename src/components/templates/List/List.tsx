@@ -9,6 +9,8 @@ import {
   SortingState,
   ColumnFiltersState,
   ColumnDef,
+  Row,
+  FilterFn,
 } from "@tanstack/react-table";
 
 import Pagination from "../../organisms/Pagination/Pagination";
@@ -18,10 +20,26 @@ import Grid from "../Grid/Grid";
 import FilterPanel from "../../organisms/FilterPanel/FilterPanel";
 import Spinner from "../../atoms/Spinner/Spinner";
 
-export enum FilterFuncs {
-  "includesString" = "includesString",
-  "equals" = "equals",
+declare module "@tanstack/table-core" {
+  interface FilterFns {
+    matchArrItem: FilterFn<unknown>;
+  }
 }
+
+const matchArrItem: FilterFn<any> = <TData,>(
+  row: Row<TData>,
+  columnId: string,
+  value: any
+) => {
+  const rowValues = row.getValue(columnId);
+  if (!rowValues) return false;
+  if (!Array.isArray(rowValues)) return false;
+
+  const valueRegex = new RegExp(value, "gi");
+
+  return rowValues.some((value) => valueRegex.test(value));
+};
+
 export enum ViewEnum {
   "GRID" = "GRID",
   "TABLE" = "TABLE",
@@ -57,6 +75,9 @@ const List = <T,>(props: Props<T>) => {
   const table = useReactTable({
     data: props.data,
     columns: props.columns,
+    filterFns: {
+      matchArrItem: matchArrItem,
+    },
     initialState: { pagination: { pageSize: 6 } },
     state: {
       sorting,
