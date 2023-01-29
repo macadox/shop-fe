@@ -8,6 +8,7 @@
   "sizes": ["41", "42", "43", "44", "45", "46"],
   "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit voluptatem inventore dolores aliquid, itaque rem nesciunt ipsa ullam! A, obcaecati!",
   "materialDescription": "Lorem ipsum dolor",
+  "materials": ["silver"],
   "suggestions": [
     {
       "id": 2,
