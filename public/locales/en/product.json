@@ -6,8 +6,10 @@
   "favorited": "Favorited",
   "category": "Category",
   "materials": "Materials",
-  "sizes": "Sizes",
-  "colors": "Colors",
+  "size_one": "Size",
+  "size_other": "Sizes",
+  "color_one": "Color",
+  "color_other": "Colors",
   "description": "Product Description",
   "materialDescription": "Material",
   "suggestions": "You may also like"

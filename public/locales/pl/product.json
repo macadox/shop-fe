@@ -6,8 +6,10 @@
   "favorited": "Ulubiony",
   "category": "Kategoria",
   "materials": "Materiały",
-  "sizes": "Rozmiary",
-  "colors": "Kolory",
+  "size_one": "Rozmiar",
+  "size_other": "Rozmiary",
+  "color_one": "Kolor",
+  "color_other": "Kolory",
   "description": "Opis Produktu",
   "materialDescription": "Materiały",
   "suggestions": "Polecane"

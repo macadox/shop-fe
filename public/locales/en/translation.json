@@ -14,5 +14,14 @@
   "filterIsLesser": "is lesser than",
   "filterIsGreater": "is greater than",
   "filterMatches": "matches",
-  "noDataAvailable": "No data is available to preview"
+  "noDataAvailable": "No data is available to preview",
+  "pageNotFound": "Page not Found",
+  "pageNotFoundSubtitle": "You've opened portal to another world. If you wish to stay...",
+  "pageNotFoundButton": "Go to Home",
+  "emptyCart": "Your cart is empty",
+  "emptyCartSubtitle": "Browse through the wide range of products and choose what you like",
+  "emptyCartButton": "Go to Products",
+  "cartSubtotal": "Subtotal",
+  "cartShipping": "Shipping",
+  "cartTotal": "TOTAL"
 }

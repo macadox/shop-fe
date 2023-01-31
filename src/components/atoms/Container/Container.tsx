@@ -13,6 +13,7 @@ import { addSuffix } from "../../../utils/styleUtils";
 
 export type Props = {
   $background: string;
+  $border: string;
   $borderRadius: string;
   $width: string;
   $maxWidth: string;
@@ -42,6 +43,7 @@ export type Props = {
   $flexWrap: FlexWrapValues;
   $alignItems: AlignItems;
   $alignSelf: AlignItems;
+  $justifySelf: AlignItems;
   $gap: string | number;
   $position: Positions;
   $top: string;
@@ -56,6 +58,7 @@ export type Props = {
 
 const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ $background }) => $background && `background: ${$background};`}
+  ${({ $border }) => $border && `border: ${$border};`}
   ${({ $borderRadius }) => $borderRadius && `border-radius: ${$borderRadius};`}
   ${({ $width }) => $width && `width: ${$width};`}
   ${({ $maxWidth }) => $maxWidth && `max-width: ${$maxWidth};`}
@@ -108,6 +111,7 @@ const Container = styled.div<HTMLDivProps & Partial<Props>>`
   ${({ $flexWrap }) => $flexWrap && `flex-wrap: ${$flexWrap};`}
   ${({ $alignItems }) => $alignItems && `align-items: ${$alignItems};`}
   ${({ $alignSelf }) => $alignSelf && `align-self: ${$alignSelf};`}
+  ${({ $justifySelf }) => $justifySelf && `justify-self: ${$justifySelf};`}
   ${({ $gap }) => $gap && `gap: ${$gap}${addSuffix($gap)};`}
   ${({ $position }) => $position && `position: ${$position};`}
   ${({ $top }) => $top && `top: ${$top};`}

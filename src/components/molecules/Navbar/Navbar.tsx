@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -9,6 +10,7 @@ import { StyledNav, StyledMenu, StyledMenuItem } from "./Navbar.style";
 import useScreenOrientation, {
   ORIENTATIONS,
 } from "../../../hooks/useScreenOrientation";
+import useCart from "../../../store/cart/cart";
 
 import { valueof } from "../../../utils/typeUtils";
 import { ROUTES } from "../../../constants/routes";
@@ -17,7 +19,6 @@ import * as colors from "../../../constants/colors";
 
 import { ReactComponent as BagIcon } from "../../../assets/icons/shopping-bag.svg";
 import { ReactComponent as HeartIcon } from "../../../assets/icons/heart.svg";
-import { useTranslation } from "react-i18next";
 
 const defaults = {
   HOME: "HOME",
@@ -70,6 +71,7 @@ const Logo = () => {
 
 const Menu = ({ $active }: { $active: boolean }) => {
   const { t } = useTranslation();
+  const totalProducts = useCart((cart) => cart.cartData.products.length);
 
   return (
     <StyledMenu $active={$active} role="menu">
@@ -96,6 +98,7 @@ const Menu = ({ $active }: { $active: boolean }) => {
           $hasFill
           icon={<BagIcon fill={colors.BLACK} width={24} height={24} />}
           aria-label={t("cart", defaults.CART) || ""}
+          text={totalProducts ? totalProducts.toString() : ""}
         />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">

@@ -14,5 +14,14 @@
   "filterIsLesser": "mniejsza niż",
   "filterIsGreater": "większa niż",
   "filterMatches": "zawiera",
-  "noDataAvailable": "Brak wyników spełniających kryteria"
+  "noDataAvailable": "Brak wyników spełniających kryteria",
+  "pageNotFound": "Nie znaleziono strony",
+  "pageNotFoundSubtitle": "Otworzyłeś portal do innego wymiaru. Jeśli chcesz z nami pozostać...",
+  "pageNotFoundButton": "Idź do Strony Głównej",
+  "emptyCart": "Twój koszyk jest pusty",
+  "emptyCartSubtitle": "Przejrzyj szeroką gamę produktów i wybierz to, co lubisz",
+  "emptyCartButton": "Idź do produktów",
+  "cartSubtotal": "Wartość zamówienia",
+  "cartShipping": "Dostawa",
+  "cartTotal": "SUMA"
 }

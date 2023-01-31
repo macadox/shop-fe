@@ -6,6 +6,7 @@ import Navbar from "../molecules/Navbar/Navbar";
 import HomePage from "../../pages/HomePage/HomePage";
 import ProductPage from "../../pages/ProductPage/ProductPage";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+import CartPage from "../../pages/CartPage/CartPage";
 import withScrollToTop from "../hoc/withScrollToTop";
 
 import { ROUTES, PRODUCT_SUBROUTES } from "../../constants/routes";
@@ -30,7 +31,7 @@ const MainRouter = () => {
             />
             <Route path={ROUTES.PROFILE} element={<div>ProfilePage</div>} />
             <Route path={ROUTES.FAVORITES} element={<div>FavoritesPage</div>} />
-            <Route path={ROUTES.CART} element={<div>CartPage</div>} />
+            <Route path={ROUTES.CART} element={<CartPage />} />
             <Route path={ROUTES.HOME} element={<HomePage />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>

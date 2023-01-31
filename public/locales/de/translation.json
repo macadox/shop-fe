@@ -14,5 +14,14 @@
   "filterIsLesser": "ist kleiner als",
   "filterIsGreater": "ist größer als",
   "filterMatches": "ist passend",
-  "noDataAvailable": "Keine Daten für die Vorschau verfügbar"
+  "noDataAvailable": "Keine Daten für die Vorschau verfügbar",
+  "pageNotFound": "Seite nicht gefunden",
+  "pageNotFoundSubtitle": "Du hast ein Portal zu einer anderen Welt geöffnet. Wenn du bleiben möchtest...",
+  "pageNotFoundButton": "Zur Startseite gehen",
+  "emptyCart": "Ihr Warenkorb ist leer",
+  "emptyCartSubtitle": "Stöbern Sie durch die breite Produktpalette und wählen Sie aus, was Ihnen gefällt",
+  "emptyCartButton": "Gehe zu Produkten",
+  "cartSubtotal": "Zwischensumme",
+  "cartShipping": "Versand",
+  "cartTotal": "GESAMT"
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Container from "../../components/atoms/Container/Container";
 import TextTitle from "../../components/atoms/TextTitle/TextTitle";
@@ -10,6 +11,8 @@ import notFound from "../../assets/photos/not-found.svg";
 import { ROUTES } from "../../constants/routes";
 
 const ErrorPage = () => {
+  const { t } = useTranslation();
+
   return (
     <Container $width="100%">
       <Container $maxWidth="500px" $mx="auto">
@@ -23,13 +26,11 @@ const ErrorPage = () => {
         $p={16}
       >
         <TextTitle as="h2" $textAlign="center" $size="24px" $semiBold>
-          Page not Found
+          {t("pageNotFound")}
         </TextTitle>
-        <TextBody $textAlign="center">
-          You&apos;ve opened portal to another world. If you wish to stay...
-        </TextBody>
+        <TextBody $textAlign="center">{t("pageNotFoundSubtitle")}</TextBody>
         <Link to={ROUTES.HOME}>
-          <Button text="Go to Home" />
+          <Button text={t("pageNotFoundButton") || ""} />
         </Link>
       </Container>
     </Container>

@@ -63,7 +63,7 @@ const ProductShowcase = ({
 
           {colorOpts && (
             <FormField
-              label={t("colors")}
+              label={t("color", { count: 2 })}
               dropdownId="product-color"
               Component={() => (
                 <SingleSelectDropdown
@@ -78,7 +78,7 @@ const ProductShowcase = ({
           )}
           {sizeOpts && (
             <FormField
-              label={t("sizes")}
+              label={t("size", { count: 2 })}
               dropdownId="product-size"
               Component={() => (
                 <SingleSelectDropdown
