@@ -8,6 +8,13 @@ module.exports = {
     path: __dirname + "/build",
     publicPath: "/",
   },
+  resolve: {
+    fallback: {
+      crypto: require.resolve("crypto-browserify"),
+      buffer: require.resolve("buffer/"),
+      stream: require.resolve("stream-browserify"),
+    },
+  },
   module: {
     rules: [
       {

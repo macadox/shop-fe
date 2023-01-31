@@ -1,19 +1,46 @@
 import { create } from "zustand";
 import cloneDeep from "lodash.clonedeep";
+import crypto from "crypto";
 
-export type CartProduct = {
-  id: string;
-  src: string;
-  name: string;
-  price: number;
-  quantity: number;
-  color?: string;
-  size?: string;
-  slug: string;
-};
+type UniqueId = string;
+type ApiId = string;
+
+export type CartProduct =
+  | {
+      id: ApiId;
+      src: string;
+      name: string;
+      price: number;
+      quantity: number;
+      color: string;
+      size: string;
+      slug: string;
+    }
+  | {
+      id: ApiId;
+      src: string;
+      name: string;
+      price: number;
+      quantity: number;
+      color?: string;
+      size: string;
+      slug: string;
+    }
+  | {
+      id: ApiId;
+      src: string;
+      name: string;
+      price: number;
+      quantity: number;
+      color: string;
+      size?: string;
+      slug: string;
+    };
+
+export type CartProductWithId = CartProduct & { uniqueId: UniqueId };
 
 export type CartData = {
-  products: CartProduct[];
+  products: CartProductWithId[];
   totals: {
     subtotal: number;
     shipping: number;
@@ -21,13 +48,15 @@ export type CartData = {
   };
 };
 
-export type AddProductAction = (product: CartProduct) => void;
-export type RemoveProductAction = (productId: string) => void;
+export type AddProductAction = (
+  product: CartProduct | CartProductWithId
+) => void;
+export type RemoveProductAction = (uniqueId: UniqueId) => void;
 export type UpdateQuantityAction = (
-  productId: string,
+  uniqueId: UniqueId,
   newQuantity: number
 ) => void;
-export type UpdateSubtotalAction = (products: CartProduct[]) => void;
+export type UpdateSubtotalAction = (products: CartProductWithId[]) => void;
 export type UpdateShippingAction = (shipping: number) => void;
 
 export type ClearCartAction = () => void;
@@ -42,6 +71,12 @@ export type CartState = {
   clearCart: ClearCartAction;
 };
 
+export const generateProductHash = (product: CartProduct): UniqueId =>
+  crypto
+    .createHash("sha256")
+    .update(`${product.id}-${product.color}-${product.size}`)
+    .digest("hex");
+
 export const initialCartData: CartData = {
   products: [],
   totals: {
@@ -55,42 +90,46 @@ const useCart = create<CartState>((set, get) => ({
   cartData: initialCartData,
   addProduct: (product) => {
     const newCart = cloneDeep(get().cartData);
-    const productInCart = newCart.products.find(
-      (cartProduct) => cartProduct.id === product.id
-    );
-    if (productInCart) {
-      return get().updateQuantity(product.id, productInCart.quantity + 1);
+    if ("uniqueId" in product) {
+      const productInCart = newCart.products.find(
+        (cartProduct) => cartProduct.uniqueId === product.uniqueId
+      );
+      if (productInCart) {
+        return get().updateQuantity(
+          product.uniqueId,
+          productInCart.quantity + 1
+        );
+      }
     }
-    newCart.products.push(product);
-    set({ cartData: newCart });
 
+    newCart.products.push({
+      ...product,
+      uniqueId: generateProductHash(product),
+    });
+
+    set({ cartData: newCart });
     get().updateSubtotal(newCart.products);
   },
-  removeProduct: (productId) => {
+  removeProduct: (uniqueId) => {
     const newCart = cloneDeep(get().cartData);
     newCart.products = newCart.products.filter(
-      (product) => product.id !== productId
+      (product) => product.uniqueId !== uniqueId
     );
-    set({ cartData: newCart });
 
+    set({ cartData: newCart });
     get().updateSubtotal(newCart.products);
   },
-  updateQuantity: (productId, newQuantity) => {
-    const newCart = cloneDeep(get().cartData);
-    const productIndex = newCart.products.findIndex((p) => p.id === productId);
-    if (productIndex < 0) return;
+  updateQuantity: (uniqueId, newQuantity) => {
+    if (newQuantity === 0) return get().removeProduct(uniqueId);
 
-    if (newQuantity === 0) {
-      // Remove the product
-      newCart.products = newCart.products.filter(
-        (product) => product.id !== productId
-      );
-    } else {
-      newCart.products[productIndex].quantity = newQuantity;
-    }
+    const newCart = cloneDeep(get().cartData);
+    const productIndex = newCart.products.findIndex(
+      (p) => p.uniqueId === uniqueId
+    );
+    if (productIndex < 0) return;
+    newCart.products[productIndex].quantity = newQuantity;
 
     set({ cartData: newCart });
-
     get().updateSubtotal(newCart.products);
   },
   updateSubtotal: (products) => {

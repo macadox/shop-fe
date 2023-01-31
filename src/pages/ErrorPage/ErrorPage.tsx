@@ -6,6 +6,7 @@ import Container from "../../components/atoms/Container/Container";
 import TextTitle from "../../components/atoms/TextTitle/TextTitle";
 import TextBody from "../../components/atoms/TextBody/TextBody";
 import Button from "../../components/atoms/Button/Button";
+import Image from "../../components/atoms/Image/Image";
 
 import notFound from "../../assets/photos/not-found.svg";
 import { ROUTES } from "../../constants/routes";
@@ -16,7 +17,12 @@ const ErrorPage = () => {
   return (
     <Container $width="100%">
       <Container $maxWidth="500px" $mx="auto">
-        <img width="100%" src={notFound} alt="portal to another dimension" />
+        <Image
+          $height="100%"
+          $width="100%"
+          src={notFound}
+          alt="portal to another dimension"
+        />
       </Container>
       <Container
         $display="flex"

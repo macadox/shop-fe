@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import useCart, { initialCartData } from "./cart";
+import useCart, { initialCartData, generateProductHash } from "./cart";
 
 const MOCK_PRODUCT_1 = {
   id: "1",
@@ -9,6 +9,8 @@ const MOCK_PRODUCT_1 = {
   quantity: 2,
   src: "https://picsum.photos/200/200",
   slug: "chuck-norris-boots",
+  color: "orange",
+  uniqueId: "1_boots",
 };
 
 const MOCK_PRODUCT_2 = {
@@ -18,6 +20,8 @@ const MOCK_PRODUCT_2 = {
   quantity: 1,
   src: "https://picsum.photos/200/200",
   slug: "chuck-norris-hat",
+  size: "m",
+  uniqueId: "2_hat",
 };
 
 const MOCK_PRODUCT_3 = {
@@ -27,6 +31,8 @@ const MOCK_PRODUCT_3 = {
   quantity: 1,
   src: "https://picsum.photos/200/200",
   slug: "chuck-norris-badge",
+  color: "gold",
+  uniqueId: "3_badge",
 };
 
 const MOCK_PRODUCT_4 = {
@@ -36,6 +42,8 @@ const MOCK_PRODUCT_4 = {
   quantity: 5,
   src: "https://picsum.photos/200/200",
   slug: "chuck-norris-gun",
+  size: "XXL",
+  uniqueId: "4_gun",
 };
 
 describe("cart store", () => {
@@ -164,5 +172,20 @@ describe("cart store totals", () => {
 
     expect(cartData.totals.shipping).toEqual(21);
     expect(cartData.totals.total).toEqual(21);
+  });
+});
+
+describe("generateProductHash", () => {
+  it("should generate the same hash for the same values", () => {
+    const value1 = generateProductHash(MOCK_PRODUCT_1);
+    const value2 = generateProductHash(MOCK_PRODUCT_1);
+
+    expect(value1).toEqual(value2);
+  });
+  it("should generate two different hashes for different products", () => {
+    const value1 = generateProductHash(MOCK_PRODUCT_1);
+    const value2 = generateProductHash(MOCK_PRODUCT_2);
+
+    expect(value1).not.toEqual(value2);
   });
 });

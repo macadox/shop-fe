@@ -7,24 +7,15 @@ import Image from "../../../components/atoms/Image/Image";
 import Button, { buttonThemes } from "../../../components/atoms/Button/Button";
 import Counter from "../../../components/atoms/Counter/Counter";
 import { StyledCartItemWrapper } from "./CartItem.style";
+import type { CartProductWithId } from "../../../store/cart/cart";
 
 import useCart from "../../../store/cart/cart";
 import { ReactComponent as TrashcanIcon } from "../../../assets/icons/trashcan.svg";
 import * as colors from "../../../constants/colors";
 
-type Props = {
-  id: string;
-  src: string;
-  name: string;
-  price: number;
-  quantity: number;
-  slug: string;
-  color?: string;
-  size?: string;
-};
+type Props = CartProductWithId;
 
 const CartItem = ({
-  id,
   src,
   name,
   price,
@@ -32,6 +23,7 @@ const CartItem = ({
   color,
   size,
   slug,
+  uniqueId,
 }: Props) => {
   const {
     addProduct,
@@ -43,18 +35,18 @@ const CartItem = ({
   const { t } = useTranslation("product");
 
   const onTrashcanClick = useCallback(
-    () => removeProduct(id),
-    [id, removeProduct]
+    () => removeProduct(uniqueId),
+    [uniqueId, removeProduct]
   );
 
   const onCounterPlusClick = useCallback(
-    () => updateQuantity(id, quantity + 1),
-    [id, quantity, updateQuantity]
+    () => updateQuantity(uniqueId, quantity + 1),
+    [uniqueId, quantity, updateQuantity]
   );
 
   const onCounterMinusClick = useCallback(
-    () => updateQuantity(id, quantity - 1),
-    [id, quantity, updateQuantity]
+    () => updateQuantity(uniqueId, quantity - 1),
+    [uniqueId, quantity, updateQuantity]
   );
 
   const onCartItemClick = useCallback(() => {

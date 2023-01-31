@@ -6,6 +6,7 @@ import TextBody from "../../components/atoms/TextBody/TextBody";
 import Button from "../../components/atoms/Button/Button";
 import Container from "../../components/atoms/Container/Container";
 import CartItem from "./CartItem/CartItem";
+import Image from "../../components/atoms/Image/Image";
 import { StyledCartPageWrapper } from "./CartPage.style";
 
 import emptyCart from "../../assets/photos/cart-empty.svg";
@@ -18,7 +19,12 @@ const EmptyCart = () => {
   return (
     <Container $width="100%">
       <Container $maxWidth="360px" $mx="auto" $mt={-64}>
-        <img width="100%" src={emptyCart} alt="no items in cart" />
+        <Image
+          $height="100%"
+          $width="100%"
+          src={emptyCart}
+          alt="no items in cart"
+        />
       </Container>
       <Container
         $display="flex"
@@ -56,7 +62,7 @@ const CartPage = () => {
               $gap="2px"
             >
               {cartData.products.map((product) => (
-                <CartItem key={product.id} {...product} />
+                <CartItem key={product.uniqueId} {...product} />
               ))}
             </Container>
           ) : (
