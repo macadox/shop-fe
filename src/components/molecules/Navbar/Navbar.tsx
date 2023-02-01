@@ -22,7 +22,7 @@ import { ReactComponent as HeartIcon } from "../../../assets/icons/heart.svg";
 
 const defaults = {
   HOME: "HOME",
-  CATEGORIES: "CATEGORIES",
+  SUSTAINABILITY: "SUSTAINABILITY",
   FAVORITES: "FAVORITES",
   CART: "CART",
 };
@@ -92,8 +92,8 @@ const Menu = ({ $active }: { $active: boolean }) => {
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
         <MenuButton
-          to={ROUTES.CATEGORIES}
-          text={t("categories", defaults.CATEGORIES) || ""}
+          to={ROUTES.SUSTAINABILITY}
+          text={t("sustainability", defaults.SUSTAINABILITY) || ""}
         />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">

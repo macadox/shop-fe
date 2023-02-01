@@ -1,13 +1,13 @@
 export const ROUTES: {
   PRODUCT: "/product";
-  CATEGORIES: "/categories";
+  SUSTAINABILITY: "/sustainability";
   PROFILE: "/profile";
   FAVORITES: "/favorites";
   CART: "/cart";
   HOME: "/";
 } = {
   PRODUCT: "/product",
-  CATEGORIES: "/categories",
+  SUSTAINABILITY: "/sustainability",
   PROFILE: "/profile",
   FAVORITES: "/favorites",
   CART: "/cart",

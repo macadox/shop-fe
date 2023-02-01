@@ -26,8 +26,8 @@ const MainRouter = () => {
               />
             </Route>
             <Route
-              path={ROUTES.CATEGORIES}
-              element={<div>CategoriesPage</div>}
+              path={ROUTES.SUSTAINABILITY}
+              element={<div>SUSTAINABILITY PAGE</div>}
             />
             <Route path={ROUTES.PROFILE} element={<div>ProfilePage</div>} />
             {/* <Route path={ROUTES.FAVORITES} element={<div>FavoritesPage</div>} /> */}
