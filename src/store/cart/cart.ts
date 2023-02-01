@@ -5,37 +5,16 @@ import crypto from "crypto";
 type UniqueId = string;
 type ApiId = string;
 
-export type CartProduct =
-  | {
-      id: ApiId;
-      src: string;
-      name: string;
-      price: number;
-      quantity: number;
-      color: string;
-      size: string;
-      slug: string;
-    }
-  | {
-      id: ApiId;
-      src: string;
-      name: string;
-      price: number;
-      quantity: number;
-      color?: string;
-      size: string;
-      slug: string;
-    }
-  | {
-      id: ApiId;
-      src: string;
-      name: string;
-      price: number;
-      quantity: number;
-      color: string;
-      size?: string;
-      slug: string;
-    };
+export type CartProduct = {
+  id: ApiId;
+  src: string;
+  name: string;
+  price: number;
+  quantity: number;
+  color?: string;
+  size?: string;
+  slug: string;
+};
 
 export type CartProductWithId = CartProduct & { uniqueId: UniqueId };
 
@@ -90,16 +69,13 @@ const useCart = create<CartState>((set, get) => ({
   cartData: initialCartData,
   addProduct: (product) => {
     const newCart = cloneDeep(get().cartData);
-    if ("uniqueId" in product) {
-      const productInCart = newCart.products.find(
-        (cartProduct) => cartProduct.uniqueId === product.uniqueId
-      );
-      if (productInCart) {
-        return get().updateQuantity(
-          product.uniqueId,
-          productInCart.quantity + 1
-        );
-      }
+    const productHash = generateProductHash(product);
+    const productInCart = newCart.products.find(
+      (cartProduct) => cartProduct.uniqueId === productHash
+    );
+
+    if (productInCart) {
+      return get().updateQuantity(productHash, productInCart.quantity + 1);
     }
 
     newCart.products.push({

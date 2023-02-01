@@ -8,6 +8,7 @@
   "submitButton": "Submit",
   "cancelButton": "Cancel",
   "addToCartButton": "ADD TO CART",
+  "addToCartButtonAdded": "PRODUCT ADDED",
   "filterInputTextPlaceholder": "Type and press enter",
   "filterIsBetween": "is between",
   "filterAnd": "and",

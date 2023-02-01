@@ -7,7 +7,7 @@ import MOCK_PRODUCT_PHOTO from "../../../../public/assets/product1.jpg";
 const MOCK_PRODUCT_NAME = "Chuck Norris boots";
 const MOCK_PRODUCT_SLUG = "chuck-norris-boots";
 const MOCK_PRODUCT_PRICE = 100000;
-const MOCK_PRODUCT_ID = 0;
+const MOCK_PRODUCT_ID = "0";
 
 describe("ProductWidget", () => {
   it("should present all of the details of the widget", () => {

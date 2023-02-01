@@ -8,6 +8,7 @@ import TextBody from "../../components/atoms/TextBody/TextBody";
 import TextTitle from "../../components/atoms/TextTitle/TextTitle";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
 import ProductShowcase from "../../components/organisms/ProductShowcase/ProductShowcase";
+import useCart from "../../store/cart/cart";
 
 import type {
   GetAllProductsResponse,
@@ -25,10 +26,6 @@ const ProductSectionTitle = ({ text }: { text: string }) => (
   </TextTitle>
 );
 
-function addToCart(id: ProductIdType) {
-  console.log("adding to cart", id);
-}
-
 type GetProductResponse = {
   id: ProductIdType;
   name: string;
@@ -38,6 +35,7 @@ type GetProductResponse = {
   colors?: string[];
   sizes?: string[];
   description: string;
+  slug: string;
   materialDescription: string;
   suggestions: GetAllProductsResponse;
 };
@@ -46,6 +44,7 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const { [PRODUCT_SUBROUTES.slug]: slug } = useParams();
   const { isLoading, error, data } = useQuery(["product", slug], getProduct);
+  const { addProduct } = useCart();
   const { t } = useTranslation("product");
 
   async function getProduct({
@@ -70,6 +69,26 @@ const ProductPage = () => {
     [navigate]
   );
 
+  const addProductToCart = useCallback(
+    ({ color, size }: { color?: string; size?: string }) => {
+      if (data) {
+        const cartProduct = {
+          id: data.id,
+          src: data.images?.[0],
+          name: data.name,
+          price: data.price,
+          quantity: 1,
+          slug: data.slug,
+          color: color,
+          size: size,
+        };
+
+        addProduct(cartProduct);
+      }
+    },
+    [addProduct, data]
+  );
+
   return (
     <Container $display="flex" $flexDirection="column" $flexGrow={1}>
       <Container $width="100%" $background={colors.LIGHTER} $p={32}>
@@ -81,7 +100,7 @@ const ProductPage = () => {
               price={data.price}
               colors={data.colors || []}
               sizes={data.sizes || []}
-              onAddToCart={() => addToCart(data.id)}
+              onAddToCart={addProductToCart}
             />
           )}
         </Container>

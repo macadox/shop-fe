@@ -30,7 +30,7 @@ const MainRouter = () => {
               element={<div>CategoriesPage</div>}
             />
             <Route path={ROUTES.PROFILE} element={<div>ProfilePage</div>} />
-            <Route path={ROUTES.FAVORITES} element={<div>FavoritesPage</div>} />
+            {/* <Route path={ROUTES.FAVORITES} element={<div>FavoritesPage</div>} /> */}
             <Route path={ROUTES.CART} element={<CartPage />} />
             <Route path={ROUTES.HOME} element={<HomePage />} />
             <Route path="*" element={<ErrorPage />} />

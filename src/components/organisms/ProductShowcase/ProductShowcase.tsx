@@ -1,4 +1,10 @@
-import React, { useMemo } from "react";
+import React, {
+  useMemo,
+  useRef,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
 import { useTranslation } from "react-i18next";
 import Container from "../../atoms/Container/Container";
 import TextTitle from "../../atoms/TextTitle/TextTitle";
@@ -15,7 +21,7 @@ type Props = {
   price: number;
   colors?: string[];
   sizes?: string[];
-  onAddToCart: () => void;
+  onAddToCart: ({ color, size }: { color?: string; size?: string }) => void;
 };
 
 const ProductShowcase = ({
@@ -27,6 +33,18 @@ const ProductShowcase = ({
   onAddToCart,
 }: Props) => {
   const { t } = useTranslation(["product", "translation"]);
+  const [productAdded, setProductAdded] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<{
+    id: string;
+    value: string;
+  } | null>();
+  const [selectedSize, setSelectedSize] = useState<{
+    id: string;
+    value: string;
+  } | null>();
+
+  // const selectedColor = useRef<{ id: string; value: string } | null>();
+  // const selectedSize = useRef<{ id: string; value: string } | null>();
 
   const colorOpts = useMemo(
     () =>
@@ -42,6 +60,22 @@ const ProductShowcase = ({
       sizes?.map((size, index) => ({ id: `${size}_${index}`, value: size })),
     [sizes]
   );
+
+  const handleSubmit = useCallback(() => {
+    try {
+      onAddToCart({
+        color: selectedColor?.value,
+        size: selectedSize?.value,
+      });
+      setProductAdded(true);
+    } catch (e) {
+      setProductAdded(false);
+    }
+  }, [onAddToCart, selectedColor, selectedSize]);
+
+  useEffect(() => {
+    setProductAdded(false);
+  }, [selectedColor, selectedSize]);
 
   return (
     <ProductShowcaseContainer>
@@ -70,8 +104,12 @@ const ProductShowcase = ({
                   options={colorOpts}
                   defaultPlaceholder="color"
                   dropdownId="product-color"
-                  initialSelectedId={colorOpts?.[0]?.id || ""}
-                  handleSelectCallback={() => console.log("selecting color")}
+                  initialSelectedId={
+                    selectedColor?.id || colorOpts?.[0]?.id || ""
+                  }
+                  handleSelectCallback={(option) => {
+                    setSelectedColor(option);
+                  }}
                 />
               )}
             />
@@ -85,8 +123,12 @@ const ProductShowcase = ({
                   options={sizeOpts}
                   defaultPlaceholder="size"
                   dropdownId="product-size"
-                  initialSelectedId={sizeOpts?.[0]?.id || ""}
-                  handleSelectCallback={() => console.log("selecting size")}
+                  initialSelectedId={
+                    selectedSize?.id || sizeOpts?.[0]?.id || ""
+                  }
+                  handleSelectCallback={(option) => {
+                    setSelectedSize(option);
+                  }}
                 />
               )}
             />
@@ -96,9 +138,14 @@ const ProductShowcase = ({
             $paddingTop="18px"
             $paddingBottom="18px"
             $fontSize="16px"
-            text={t("addToCartButton", "", { ns: ["translation"] }) || ""}
+            text={
+              (productAdded
+                ? t("addToCartButtonAdded", "", { ns: ["translation"] })
+                : t("addToCartButton", "", { ns: ["translation"] })) || ""
+            }
             $semiBold
-            onClick={onAddToCart}
+            disabled={productAdded}
+            onClick={handleSubmit}
           />
         </Container>
       </div>

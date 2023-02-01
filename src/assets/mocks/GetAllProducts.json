@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "slug": "leather-belt",
     "name": "Leather belt",
     "price": 399,
@@ -10,7 +10,7 @@
     "sizes": ["41", "42", "43", "44", "45", "46"]
   },
   {
-    "id": 2,
+    "id": "2",
     "slug": "light-leather-belt",
     "name": "Light Leather belt",
     "price": 2559,
@@ -20,7 +20,7 @@
     "sizes": ["39"]
   },
   {
-    "id": 3,
+    "id": "3",
     "name": "Mosaic cufflinks",
     "slug": "mosaic-cufflinks",
     "price": 129,
@@ -30,7 +30,7 @@
     "materials": ["silver"]
   },
   {
-    "id": 4,
+    "id": "4",
     "name": "Ornated cufflinks",
     "slug": "ornated-cufflinks",
     "price": 9000,
@@ -40,7 +40,7 @@
     "materials": ["silver"]
   },
   {
-    "id": 5,
+    "id": "5",
     "slug": "cufflinks-england",
     "name": "Cufflinks - Englang",
     "price": 49,
@@ -50,7 +50,7 @@
     "materials": ["metal"]
   },
   {
-    "id": 6,
+    "id": "6",
     "slug": "camping-tent",
     "name": "Camping tent",
     "price": 379,

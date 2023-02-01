@@ -8,6 +8,7 @@
   "submitButton": "Prześlij",
   "cancelButton": "Anuluj",
   "addToCartButton": "DODAJ DO KOSZYKA",
+  "addToCartButtonAdded": "DODANO DO KOSZYKA",
   "filterInputTextPlaceholder": "Wpisz i naciśnij enter",
   "filterIsBetween": "między",
   "filterAnd": "oraz",

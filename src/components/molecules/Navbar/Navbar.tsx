@@ -40,6 +40,7 @@ const MenuButton = ({
   icon,
   $hasFill,
   $hasStroke,
+  $isDisabled,
   to,
 }: {
   theme?: ButtonTheme;
@@ -47,9 +48,21 @@ const MenuButton = ({
   icon?: React.ReactNode;
   $hasFill?: boolean;
   $hasStroke?: boolean;
+  $isDisabled?: boolean;
   to: valueof<typeof ROUTES>;
-}) => (
-  <Link to={to}>
+}) =>
+  !$isDisabled ? (
+    <Link to={to}>
+      <Button
+        theme={theme}
+        text={text}
+        icon={icon}
+        $hasFill={$hasFill}
+        $hasStroke={$hasStroke}
+        $fontSize="20px"
+      />
+    </Link>
+  ) : (
     <Button
       theme={theme}
       text={text}
@@ -58,8 +71,7 @@ const MenuButton = ({
       $hasStroke={$hasStroke}
       $fontSize="20px"
     />
-  </Link>
-);
+  );
 
 const Logo = () => {
   return (
@@ -90,6 +102,7 @@ const Menu = ({ $active }: { $active: boolean }) => {
           $hasFill
           icon={<HeartIcon fill={colors.BLACK} width={24} height={24} />}
           aria-label={t("favorites", defaults.FAVORITES) || ""}
+          $isDisabled
         />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">

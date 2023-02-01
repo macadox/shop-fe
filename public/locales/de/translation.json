@@ -8,6 +8,7 @@
   "submitButton": "Senden",
   "cancelButton": "Abbrechen",
   "addToCartButton": "ZUM WARENKORB HINZUFÜGEN",
+  "addToCartButtonAdded": "PRODUKT HINZUGEFÜGT",
   "filterInputTextPlaceholder": "Schreib und drück ENTER",
   "filterIsBetween": "liegt zwischen",
   "filterAnd": "und",
