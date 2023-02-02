@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import Container from "../../components/atoms/Container/Container";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
-import Banner from "../../components/organisms/Banner/Banner";
+import ImageBanner from "../../components/organisms/ImageBanner/ImageBanner";
 
 import { APIProducts } from "../../services/api";
 import { joinRoute } from "../../utils/urlUtils";
@@ -42,7 +42,7 @@ const HomePage = () => {
   return (
     <Container $width="100%">
       <Container as="section">
-        <Banner
+        <ImageBanner
           slides={[
             {
               src: "https://picsum.photos/900/600",

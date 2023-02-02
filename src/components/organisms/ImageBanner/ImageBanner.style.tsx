@@ -55,6 +55,10 @@ export const StyledBanner = styled.section`
     .banner-content {
       flex: 0 50%;
     }
+
+    h2 {
+      font-size: 24px;
+    }
   }
 
   @container banner (width > 1280px) {
@@ -64,13 +68,6 @@ export const StyledBanner = styled.section`
       & > button {
         padding: 16px 92px;
       }
-    }
-
-    h2 {
-      font-size: 24px;
-    }
-    p {
-      font-size: 20px;
     }
   }
 `;

@@ -11,6 +11,7 @@ import withScrollToTop from "../hoc/withScrollToTop";
 
 import { ROUTES, PRODUCT_SUBROUTES } from "../../constants/routes";
 import * as colors from "../../constants/colors";
+import SustainabilityPage from "../../pages/SustainabilityPage/SustainabilityPage";
 
 const MainRouter = () => {
   return (
@@ -27,7 +28,7 @@ const MainRouter = () => {
             </Route>
             <Route
               path={ROUTES.SUSTAINABILITY}
-              element={<div>SUSTAINABILITY PAGE</div>}
+              element={<SustainabilityPage />}
             />
             <Route path={ROUTES.PROFILE} element={<div>ProfilePage</div>} />
             {/* <Route path={ROUTES.FAVORITES} element={<div>FavoritesPage</div>} /> */}

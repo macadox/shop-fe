@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Banner from "./Banner";
+import ImageBanner from "./ImageBanner";
 
 const FIRST_SLIDE = {
   src: "/first-slide",
@@ -21,10 +21,10 @@ const SECOND_SLIDE = {
 
 const MOCK_BUTTON_TITLE = "SEE MORE";
 
-describe("Banner Content", () => {
+describe("ImageBanner Content", () => {
   it("should present the first slide content", () => {
     render(
-      <Banner slides={[FIRST_SLIDE]} ctaButtonLabel={MOCK_BUTTON_TITLE} />
+      <ImageBanner slides={[FIRST_SLIDE]} ctaButtonLabel={MOCK_BUTTON_TITLE} />
     );
 
     expect(screen.getByAltText(FIRST_SLIDE.alt)).toBeInTheDocument();
@@ -36,12 +36,12 @@ describe("Banner Content", () => {
   });
 });
 
-describe("Banner interactions", () => {
+describe("ImageBanner interactions", () => {
   it("should call onClick when we press see more button", async () => {
     const onClickMock = jest.fn();
     const user = userEvent.setup();
     render(
-      <Banner
+      <ImageBanner
         slides={[{ ...FIRST_SLIDE, onClick: onClickMock }]}
         ctaButtonLabel={MOCK_BUTTON_TITLE}
       />
@@ -53,7 +53,7 @@ describe("Banner interactions", () => {
   it("should switch to the next slide, when we press next button", async () => {
     const user = userEvent.setup();
     render(
-      <Banner
+      <ImageBanner
         slides={[FIRST_SLIDE, SECOND_SLIDE]}
         debounceTimeout={0}
         ctaButtonLabel={MOCK_BUTTON_TITLE}
@@ -73,7 +73,7 @@ describe("Banner interactions", () => {
   it("should switch to the prev slide, when we press prev button", async () => {
     const user = userEvent.setup();
     render(
-      <Banner
+      <ImageBanner
         slides={[FIRST_SLIDE, SECOND_SLIDE]}
         debounceTimeout={0}
         ctaButtonLabel={MOCK_BUTTON_TITLE}

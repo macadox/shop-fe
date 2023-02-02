@@ -10,7 +10,7 @@ import TextBody from "../../atoms/TextBody/TextBody";
 import TextTitle from "../../atoms/TextTitle/TextTitle";
 import Image from "../../atoms/Image/Image";
 import Button, { buttonThemes } from "../../atoms/Button/Button";
-import { StyledBanner } from "./Banner.style";
+import { StyledBanner } from "./ImageBanner.style";
 
 import { ReactComponent as ArrowLeft } from "../../../assets/icons/arrow-left.svg";
 import { ReactComponent as ArrowRight } from "../../../assets/icons/arrow-right.svg";
@@ -31,7 +31,7 @@ type Props = {
   ctaButtonLabel: string;
 };
 
-const Banner = ({
+const ImageBanner = ({
   slides,
   slideTimeout = 5000,
   debounceTimeout = 800,
@@ -141,4 +141,4 @@ const Banner = ({
   );
 };
 
-export default Banner;
+export default ImageBanner;
