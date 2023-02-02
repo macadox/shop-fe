@@ -27,7 +27,9 @@ const defaults = {
   CART: "CART",
 };
 
-const isLandscape = (orientation: keyof typeof ORIENTATIONS) => {
+const isLandscape = (orientation: keyof typeof ORIENTATIONS | undefined) => {
+  if (typeof orientation === "undefined") return false;
+
   return [
     ORIENTATIONS["landscape-primary"],
     ORIENTATIONS["landscape-secondary"],

@@ -24,7 +24,14 @@ module.exports = {
         resolve: {
           extensions: [".ts", ".tsx", ".js", ".json"],
         },
-        use: "ts-loader",
+        use: [
+          {
+            loader: "babel-loader",
+          },
+          {
+            loader: "ts-loader",
+          },
+        ],
       },
       {
         test: /\.svg$/i,

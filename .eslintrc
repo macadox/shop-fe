@@ -7,7 +7,7 @@
       "jsx": true
     }
   },
-  "plugins": ["react"],
+  "plugins": ["react", "compat"],
   "env": {
     "browser": true,
     "es2021": true,
@@ -25,6 +25,7 @@
         "plugin:react-hooks/recommended",
         "plugin:import/recommended",
         "plugin:import/typescript",
+        "plugin:compat/recommended",
         "prettier"
       ],
       "rules": {
