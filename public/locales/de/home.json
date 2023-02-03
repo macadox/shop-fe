@@ -1,9 +1,12 @@
 {
-  "bannerFirstSlideTitle": "Tolle Schuhe",
-  "bannerFirstSlideText": "Ich habe eine Socke gegessen, weil Leute im Internet es mir gesagt haben.",
-  "bannerSecondSlideTitle": "Herrenbekleidung",
-  "bannerSecondSlideText": "Er war ganz geschäftstüchtig, als er seinen Clownsanzug trug.",
-  "bannerThirdSlideTitle": "Jetzt kaufen",
-  "bannerThirdSlideText": "Er fragte sich, ob man es Strand nennen könnte, wenn es keinen Sand gäbe.",
+  "bannerFirstSlideTitle": "Umweltfreundliche Socken",
+  "bannerFirstSlideText": "Halten Sie Ihre Füße warm mit unseren nachhaltig hergestellten Socken, die perfekte Ergänzung zu jedem Outfit.",
+  "bannerFirstSlideAlt": "Öko-Socken: Bild generiert mit Midjourney",
+  "bannerSecondSlideTitle": "Grünes Krypto-Zubehör",
+  "bannerSecondSlideText": "Von Hüten bis zu Taschen, unsere umweltfreundlichen Accessoires sind eine stilvolle Art, etwas zu bewegen. Zeigen Sie allen WAGMI.",
+  "bannerSecondSlideAlt": "Krypto-Zubehör auf dunklem Hintergrund: Bild generiert mit Midjourney",
+  "bannerThirdSlideTitle": "Bio-Hoodies",
+  "bannerThirdSlideText": "Bleib warm und setze ein Statement mit unseren Hoodies aus Bio-Baumwolle.",
+  "bannerThirdSlideAlt": "Bio-Hoodies: Bild generiert mit Midjourney",
   "bannerCtaButtonText": "MEHR ERFAHREN"
 }

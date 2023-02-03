@@ -79,7 +79,7 @@ const SustainabilityPage = () => {
           $width="100%"
           $height="100%"
           src={dandelion}
-          alt="Hand holding dandelion: Image generated with DALL-E"
+          alt={t("heroAlt", { ns: ["sustainability"] })}
         />
         <Container
           $position="absolute"
@@ -118,21 +118,21 @@ const SustainabilityPage = () => {
           slides={[
             {
               src: greenGlobe,
-              alt: t("bannerFirstSlideTitle", { ns: ["sustainability"] }),
+              alt: t("bannerFirstSlideAlt", { ns: ["sustainability"] }),
               title: t("bannerFirstSlideTitle", { ns: ["sustainability"] }),
               subtitle: t("bannerFirstSlideText", { ns: ["sustainability"] }),
               onClick: () => console.log("see more"),
             },
             {
               src: ecoProducts,
-              alt: t("bannerSecondSlideTitle", { ns: ["sustainability"] }),
+              alt: t("bannerSecondSlideAlt", { ns: ["sustainability"] }),
               title: t("bannerSecondSlideTitle", { ns: ["sustainability"] }),
               subtitle: t("bannerSecondSlideText", { ns: ["sustainability"] }),
               onClick: () => console.log("see more"),
             },
             {
               src: carbonFootprint,
-              alt: t("bannerThirdSlideTitle", { ns: ["sustainability"] }),
+              alt: t("bannerThirdSlideAlt", { ns: ["sustainability"] }),
               title: t("bannerThirdSlideTitle", { ns: ["sustainability"] }),
               subtitle: t("bannerThirdSlideText", { ns: ["sustainability"] }),
               onClick: () => console.log("see more"),
@@ -159,7 +159,7 @@ const SustainabilityPage = () => {
       >
         <Teaser
           src={metaverseModel}
-          alt="photo"
+          alt={t("teaserOneAlt", { ns: ["sustainability"] })}
           description={t("teaserOneDescription", { ns: ["sustainability"] })}
           slogan={t("teaserOneTitle", { ns: ["sustainability"] })}
           buttonText={t("bannerCtaButtonText", { ns: ["sustainability"] })}
@@ -183,7 +183,7 @@ const SustainabilityPage = () => {
       >
         <Teaser
           src={drillWell}
-          alt="photo"
+          alt={t("teaserTwoAlt", { ns: ["sustainability"] })}
           description={t("teaserTwoDescription", { ns: ["sustainability"] })}
           slogan={t("teaserTwoTitle", { ns: ["sustainability"] })}
           buttonText={t("bannerCtaButtonText", { ns: ["sustainability"] })}

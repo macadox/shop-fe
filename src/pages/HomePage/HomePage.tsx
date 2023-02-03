@@ -13,6 +13,9 @@ import { ROUTES } from "../../constants/routes";
 import { GetAllProductsResponse } from "../../constants/types";
 import { INNER_CONTAINER_MAX_WIDTH } from "../../constants/layout";
 import * as colors from "../../constants/colors";
+import cryptoAccessories from "../../assets/photos/crypto-accessories.png";
+import ecoSocks from "../../assets/photos/eco-socks.png";
+import organicHoodies from "../../assets/photos/organic-hoodies.png";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -45,22 +48,22 @@ const HomePage = () => {
         <ImageBanner
           slides={[
             {
-              src: "https://picsum.photos/900/600",
-              alt: t("bannerFirstSlideTitle", { ns: ["home"] }),
+              src: ecoSocks,
+              alt: t("bannerFirstSlideAlt", { ns: ["home"] }),
               title: t("bannerFirstSlideTitle", { ns: ["home"] }),
               subtitle: t("bannerFirstSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
             {
-              src: "https://picsum.photos/900/601",
-              alt: t("bannerSecondSlideTitle", { ns: ["home"] }),
+              src: cryptoAccessories,
+              alt: t("bannerSecondSlideAlt", { ns: ["home"] }),
               title: t("bannerSecondSlideTitle", { ns: ["home"] }),
               subtitle: t("bannerSecondSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
             },
             {
-              src: "https://picsum.photos/900/602",
-              alt: t("bannerThirdSlideTitle", { ns: ["home"] }),
+              src: organicHoodies,
+              alt: t("bannerThirdSlideAlt", { ns: ["home"] }),
               title: t("bannerThirdSlideTitle", { ns: ["home"] }),
               subtitle: t("bannerThirdSlideText", { ns: ["home"] }),
               onClick: () => console.log("see more"),
