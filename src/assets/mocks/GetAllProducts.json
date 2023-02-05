@@ -1,60 +1,60 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "slug": "leather-belt",
     "name": "Leather belt",
     "price": 399,
-    "src": "/assets/product1.jpg",
+    "src": "https://picsum.photos/250/250",
     "category": "belts",
     "colors": ["brown", "black"],
     "sizes": ["41", "42", "43", "44", "45", "46"]
   },
   {
-    "id": 2,
+    "id": "2",
     "slug": "light-leather-belt",
     "name": "Light Leather belt",
     "price": 2559,
-    "src": "/assets/product2.png",
+    "src": "https://picsum.photos/250/251",
     "category": "belts",
     "colors": ["brown"],
     "sizes": ["39"]
   },
   {
-    "id": 3,
+    "id": "3",
     "name": "Mosaic cufflinks",
     "slug": "mosaic-cufflinks",
     "price": 129,
-    "src": "/assets/product3.jpg",
+    "src": "https://picsum.photos/251/250",
     "category": "cufflinks",
     "colors": ["black", "silver"],
     "materials": ["silver"]
   },
   {
-    "id": 4,
+    "id": "4",
     "name": "Ornated cufflinks",
     "slug": "ornated-cufflinks",
     "price": 9000,
-    "src": "/assets/product4.jpg",
+    "src": "https://picsum.photos/249/250",
     "category": "cufflinks",
     "colors": ["black", "silver"],
     "materials": ["silver"]
   },
   {
-    "id": 5,
+    "id": "5",
     "slug": "cufflinks-england",
     "name": "Cufflinks - Englang",
     "price": 49,
-    "src": "/assets/product5.jpg",
+    "src": "https://picsum.photos/250/249",
     "category": "cufflinks",
     "colors": ["blue", "red"],
     "materials": ["metal"]
   },
   {
-    "id": 6,
+    "id": "6",
     "slug": "camping-tent",
     "name": "Camping tent",
     "price": 379,
-    "src": "/assets/product6.jpg",
+    "src": "https://picsum.photos/249/251",
     "category": "survival",
     "colors": ["orange", "darkblue"]
   }

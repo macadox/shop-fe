@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -7,6 +8,13 @@ module.exports = {
     filename: "main.js",
     path: __dirname + "/build",
     publicPath: "/",
+  },
+  resolve: {
+    fallback: {
+      crypto: require.resolve("crypto-browserify"),
+      buffer: require.resolve("buffer/"),
+      stream: require.resolve("stream-browserify"),
+    },
   },
   module: {
     rules: [
@@ -16,7 +24,14 @@ module.exports = {
         resolve: {
           extensions: [".ts", ".tsx", ".js", ".json"],
         },
-        use: "ts-loader",
+        use: [
+          {
+            loader: "babel-loader",
+          },
+          {
+            loader: "ts-loader",
+          },
+        ],
       },
       {
         test: /\.svg$/i,
@@ -39,6 +54,15 @@ module.exports = {
       filename: "index.html",
       inject: true,
       template: "public/index.html",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: "public",
+          to: ".",
+          filter: (file) => !file.endsWith("index.html"),
+        },
+      ],
     }),
   ],
 };

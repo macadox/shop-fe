@@ -2,12 +2,12 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ProductWidget from "./ProductWidget";
-import MOCK_PRODUCT_PHOTO from "../../../../public/assets/product1.jpg";
+import MOCK_PRODUCT_PHOTO from "../../../assets/photos/not-found.svg";
 
 const MOCK_PRODUCT_NAME = "Chuck Norris boots";
 const MOCK_PRODUCT_SLUG = "chuck-norris-boots";
 const MOCK_PRODUCT_PRICE = 100000;
-const MOCK_PRODUCT_ID = 0;
+const MOCK_PRODUCT_ID = "0";
 
 describe("ProductWidget", () => {
   it("should present all of the details of the widget", () => {
@@ -26,7 +26,7 @@ describe("ProductWidget", () => {
 
     expect(screen.getByAltText(MOCK_PRODUCT_NAME));
     expect(screen.getByText(MOCK_PRODUCT_NAME)).toBeInTheDocument();
-    expect(screen.getByText(`${MOCK_PRODUCT_PRICE}zł`)).toBeInTheDocument();
+    expect(screen.getByText(`$${MOCK_PRODUCT_PRICE}`)).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: `like ${MOCK_PRODUCT_NAME}` })
     ).toBeInTheDocument();

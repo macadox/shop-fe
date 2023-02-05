@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Table, Column } from "@tanstack/react-table";
 import Container from "../../../../atoms/Container/Container";
 import Input from "../../../../atoms/Input/Input";
@@ -89,6 +90,7 @@ export const FilterText = ({
   label,
 }: FilterTypeProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -98,7 +100,7 @@ export const FilterText = ({
 
   return (
     <Input
-      placeholder="Type and press enter"
+      placeholder={t("filterInputTextPlaceholder") || ""}
       type="text"
       aria-label={`filter ${label}`}
       innerRef={inputRef}

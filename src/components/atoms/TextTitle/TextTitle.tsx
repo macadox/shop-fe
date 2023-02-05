@@ -31,7 +31,7 @@ const TextTitle = styled.div<HTMLHeadingProps & RequiredProps & Partial<Props>>`
   ${({ $textAlign }) => $textAlign && `text-align: ${$textAlign};`}
   ${({ $letterSpacing }) =>
     $letterSpacing && `letter-spacing: ${$letterSpacing};`}
-  ${({ $lineHeight }) => $lineHeight && `line-height: ${$lineHeight};`}
+  ${({ $lineHeight }) => $lineHeight && `line-height: ${$lineHeight}%;`}
   /* Style */
   ${({ $italic }) => $italic && `font-style: italic;`}
   ${({ $uppercase }) => $uppercase && `text-transform: uppercase;`} 

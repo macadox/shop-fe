@@ -1,12 +1,14 @@
 import React, { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Container from "../../components/atoms/Container/Container";
 import TextBody from "../../components/atoms/TextBody/TextBody";
 import TextTitle from "../../components/atoms/TextTitle/TextTitle";
 import ProductGrid from "../../components/organisms/ProductGrid/ProductGrid";
 import ProductShowcase from "../../components/organisms/ProductShowcase/ProductShowcase";
+import useCart from "../../store/cart/cart";
 
 import type {
   GetAllProductsResponse,
@@ -24,10 +26,6 @@ const ProductSectionTitle = ({ text }: { text: string }) => (
   </TextTitle>
 );
 
-function addToCart(id: ProductIdType) {
-  console.log("adding to cart", id);
-}
-
 type GetProductResponse = {
   id: ProductIdType;
   name: string;
@@ -37,6 +35,7 @@ type GetProductResponse = {
   colors?: string[];
   sizes?: string[];
   description: string;
+  slug: string;
   materialDescription: string;
   suggestions: GetAllProductsResponse;
 };
@@ -45,6 +44,8 @@ const ProductPage = () => {
   const navigate = useNavigate();
   const { [PRODUCT_SUBROUTES.slug]: slug } = useParams();
   const { isLoading, error, data } = useQuery(["product", slug], getProduct);
+  const { addProduct } = useCart();
+  const { t } = useTranslation("product");
 
   async function getProduct({
     queryKey,
@@ -68,6 +69,26 @@ const ProductPage = () => {
     [navigate]
   );
 
+  const addProductToCart = useCallback(
+    ({ color, size }: { color?: string; size?: string }) => {
+      if (data) {
+        const cartProduct = {
+          id: data.id,
+          src: data.images?.[0],
+          name: data.name,
+          price: data.price,
+          quantity: 1,
+          slug: data.slug,
+          color: color,
+          size: size,
+        };
+
+        addProduct(cartProduct);
+      }
+    },
+    [addProduct, data]
+  );
+
   return (
     <Container $display="flex" $flexDirection="column" $flexGrow={1}>
       <Container $width="100%" $background={colors.LIGHTER} $p={32}>
@@ -79,7 +100,7 @@ const ProductPage = () => {
               price={data.price}
               colors={data.colors || []}
               sizes={data.sizes || []}
-              onAddToCart={() => addToCart(data.id)}
+              onAddToCart={addProductToCart}
             />
           )}
         </Container>
@@ -95,14 +116,14 @@ const ProductPage = () => {
         >
           {/* SECTION: Product Description */}
           <Container $display="flex" $flexDirection="column" $gap="16px">
-            <ProductSectionTitle text="Product Description" />
+            <ProductSectionTitle text={t("description") || ""} />
             <TextBody $lineHeight={170} $size="14px">
               {data?.description}
             </TextBody>
           </Container>
           {/* SECTION: MATERIAL */}
           <Container $display="flex" $flexDirection="column" $gap="16px">
-            <ProductSectionTitle text="Material" />
+            <ProductSectionTitle text={t("materialDescription") || ""} />
             <TextBody $lineHeight={170} $size="14px">
               {data?.materialDescription}
             </TextBody>
@@ -119,7 +140,7 @@ const ProductPage = () => {
           $gap="16px"
         >
           <TextTitle as="h3" $size="20px" $uppercase $bold $letterSpacing="3px">
-            You may also like
+            {t("suggestions")}
           </TextTitle>
           <ProductGrid
             list={data?.suggestions || []}

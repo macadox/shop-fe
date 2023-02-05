@@ -1,4 +1,11 @@
-import React, { useMemo } from "react";
+import React, {
+  useMemo,
+  useRef,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
+import { useTranslation } from "react-i18next";
 import Container from "../../atoms/Container/Container";
 import TextTitle from "../../atoms/TextTitle/TextTitle";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -14,7 +21,7 @@ type Props = {
   price: number;
   colors?: string[];
   sizes?: string[];
-  onAddToCart: () => void;
+  onAddToCart: ({ color, size }: { color?: string; size?: string }) => void;
 };
 
 const ProductShowcase = ({
@@ -25,6 +32,20 @@ const ProductShowcase = ({
   sizes,
   onAddToCart,
 }: Props) => {
+  const { t } = useTranslation(["product", "translation"]);
+  const [productAdded, setProductAdded] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<{
+    id: string;
+    value: string;
+  } | null>();
+  const [selectedSize, setSelectedSize] = useState<{
+    id: string;
+    value: string;
+  } | null>();
+
+  // const selectedColor = useRef<{ id: string; value: string } | null>();
+  // const selectedSize = useRef<{ id: string; value: string } | null>();
+
   const colorOpts = useMemo(
     () =>
       colors?.map((color, index) => ({
@@ -40,6 +61,22 @@ const ProductShowcase = ({
     [sizes]
   );
 
+  const handleSubmit = useCallback(() => {
+    try {
+      onAddToCart({
+        color: selectedColor?.value,
+        size: selectedSize?.value,
+      });
+      setProductAdded(true);
+    } catch (e) {
+      setProductAdded(false);
+    }
+  }, [onAddToCart, selectedColor, selectedSize]);
+
+  useEffect(() => {
+    setProductAdded(false);
+  }, [selectedColor, selectedSize]);
+
   return (
     <ProductShowcaseContainer>
       <div className="showcase-wrapper">
@@ -54,36 +91,44 @@ const ProductShowcase = ({
           </Container>
           <Container $width="100%" $mb={8}>
             <TextBody $size="24px" $bold $letterSpacing={3}>
-              {price} zł
+              ${price}
             </TextBody>
           </Container>
 
           {colorOpts && (
             <FormField
-              label="Color"
+              label={t("color", { count: 2 })}
               dropdownId="product-color"
               Component={() => (
                 <SingleSelectDropdown
                   options={colorOpts}
                   defaultPlaceholder="color"
                   dropdownId="product-color"
-                  initialSelectedId={colorOpts?.[0]?.id || ""}
-                  handleSelectCallback={() => console.log("selecting color")}
+                  initialSelectedId={
+                    selectedColor?.id || colorOpts?.[0]?.id || ""
+                  }
+                  handleSelectCallback={(option) => {
+                    setSelectedColor(option);
+                  }}
                 />
               )}
             />
           )}
           {sizeOpts && (
             <FormField
-              label="Size"
+              label={t("size", { count: 2 })}
               dropdownId="product-size"
               Component={() => (
                 <SingleSelectDropdown
                   options={sizeOpts}
                   defaultPlaceholder="size"
                   dropdownId="product-size"
-                  initialSelectedId={sizeOpts?.[0]?.id || ""}
-                  handleSelectCallback={() => console.log("selecting size")}
+                  initialSelectedId={
+                    selectedSize?.id || sizeOpts?.[0]?.id || ""
+                  }
+                  handleSelectCallback={(option) => {
+                    setSelectedSize(option);
+                  }}
                 />
               )}
             />
@@ -93,9 +138,14 @@ const ProductShowcase = ({
             $paddingTop="18px"
             $paddingBottom="18px"
             $fontSize="16px"
-            text="ADD TO CART"
+            text={
+              (productAdded
+                ? t("addToCartButtonAdded", "", { ns: ["translation"] })
+                : t("addToCartButton", "", { ns: ["translation"] })) || ""
+            }
             $semiBold
-            onClick={onAddToCart}
+            disabled={productAdded}
+            onClick={handleSubmit}
           />
         </Container>
       </div>

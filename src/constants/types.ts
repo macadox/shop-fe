@@ -1,4 +1,4 @@
-export type ProductIdType = number | string;
+export type ProductIdType = string;
 
 export type GetAllProductsItem = {
   id: ProductIdType;

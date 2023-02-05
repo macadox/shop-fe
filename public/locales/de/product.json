@@ -1,0 +1,16 @@
+{
+  "id": "ID",
+  "name": "Name",
+  "price": "Preis",
+  "src": "Foto",
+  "favorited": "Favorit",
+  "category": "Kategorie",
+  "materials": "Materialien",
+  "size_one": "Einheitsgröße",
+  "size_other": "Größen",
+  "color_one": "Farbe",
+  "color_other": "Farben",
+  "description": "Produktbeschreibung",
+  "materialDescription": "Material",
+  "suggestions": "Das könnte dir auch gefallen"
+}

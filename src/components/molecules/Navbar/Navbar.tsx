@@ -1,13 +1,16 @@
 import React, { useState, useLayoutEffect, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
 import Burger from "../../atoms/Burger/Burger";
 import Button, { ButtonTheme, buttonThemes } from "../../atoms/Button/Button";
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import { StyledNav, StyledMenu, StyledMenuItem } from "./Navbar.style";
 import useScreenOrientation, {
   ORIENTATIONS,
 } from "../../../hooks/useScreenOrientation";
+import useCart from "../../../store/cart/cart";
 
 import { valueof } from "../../../utils/typeUtils";
 import { ROUTES } from "../../../constants/routes";
@@ -17,7 +20,16 @@ import * as colors from "../../../constants/colors";
 import { ReactComponent as BagIcon } from "../../../assets/icons/shopping-bag.svg";
 import { ReactComponent as HeartIcon } from "../../../assets/icons/heart.svg";
 
-const isLandscape = (orientation: keyof typeof ORIENTATIONS) => {
+const defaults = {
+  HOME: "HOME",
+  SUSTAINABILITY: "SUSTAINABILITY",
+  FAVORITES: "FAVORITES",
+  CART: "CART",
+};
+
+const isLandscape = (orientation: keyof typeof ORIENTATIONS | undefined) => {
+  if (typeof orientation === "undefined") return false;
+
   return [
     ORIENTATIONS["landscape-primary"],
     ORIENTATIONS["landscape-secondary"],
@@ -30,6 +42,7 @@ const MenuButton = ({
   icon,
   $hasFill,
   $hasStroke,
+  $isDisabled,
   to,
 }: {
   theme?: ButtonTheme;
@@ -37,9 +50,21 @@ const MenuButton = ({
   icon?: React.ReactNode;
   $hasFill?: boolean;
   $hasStroke?: boolean;
+  $isDisabled?: boolean;
   to: valueof<typeof ROUTES>;
-}) => (
-  <Link to={to}>
+}) =>
+  !$isDisabled ? (
+    <Link to={to}>
+      <Button
+        theme={theme}
+        text={text}
+        icon={icon}
+        $hasFill={$hasFill}
+        $hasStroke={$hasStroke}
+        $fontSize="20px"
+      />
+    </Link>
+  ) : (
     <Button
       theme={theme}
       text={text}
@@ -48,8 +73,7 @@ const MenuButton = ({
       $hasStroke={$hasStroke}
       $fontSize="20px"
     />
-  </Link>
-);
+  );
 
 const Logo = () => {
   return (
@@ -60,19 +84,27 @@ const Logo = () => {
 };
 
 const Menu = ({ $active }: { $active: boolean }) => {
+  const { t } = useTranslation();
+  const totalProducts = useCart((cart) => cart.cartData.products.length);
+
   return (
     <StyledMenu $active={$active} role="menu">
       <StyledMenuItem role="menuitem">
-        <MenuButton to={ROUTES.HOME} text="HOME" />
+        <MenuButton to={ROUTES.HOME} text={t("home", defaults.HOME) || ""} />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
-        <MenuButton to={ROUTES.CATEGORIES} text="CATEGORIES" />
+        <MenuButton
+          to={ROUTES.SUSTAINABILITY}
+          text={t("sustainability", defaults.SUSTAINABILITY) || ""}
+        />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
         <MenuButton
           to={ROUTES.FAVORITES}
           $hasFill
           icon={<HeartIcon fill={colors.BLACK} width={24} height={24} />}
+          aria-label={t("favorites", defaults.FAVORITES) || ""}
+          $isDisabled
         />
       </StyledMenuItem>
       <StyledMenuItem role="menuitem">
@@ -80,7 +112,12 @@ const Menu = ({ $active }: { $active: boolean }) => {
           to={ROUTES.CART}
           $hasFill
           icon={<BagIcon fill={colors.BLACK} width={24} height={24} />}
+          aria-label={t("cart", defaults.CART) || ""}
+          text={totalProducts ? totalProducts.toString() : ""}
         />
+      </StyledMenuItem>
+      <StyledMenuItem role="menuitem">
+        <LanguageSelector />
       </StyledMenuItem>
     </StyledMenu>
   );

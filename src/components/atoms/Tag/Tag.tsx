@@ -16,7 +16,7 @@ const Tag = ({ content, onClear }: Props) => {
       $display="inline-flex"
       $alignItems="center"
       $gap="8px"
-      $background={colors.LIGHT}
+      $background={colors.LIGHTER}
       $p={8}
       $boxShadow={`0px 0px 8px 0px ${colors.SHADOW}`}
       $height="36px"
