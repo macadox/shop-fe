@@ -29,7 +29,7 @@ const ErrorPage = () => {
         $flexDirection="column"
         $alignItems="center"
         $gap="16px"
-        $p={16}
+        $p={32}
       >
         <TextTitle as="h2" $textAlign="center" $size="24px" $semiBold>
           {t("pageNotFound")}
