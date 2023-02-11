@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 import { sizes } from "./Spinner";
 
 type SizeValue = typeof sizes[keyof typeof sizes];
@@ -15,6 +15,15 @@ export const SpinnerHead = styled.div<{ size: SizeValue; color: string }>`
     transparent 50%,
     ${({ color }) => color} 50%
   );
+`;
+
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 `;
 
 export const StyledSpinner = styled.div<{ size: SizeValue; color: string }>`
@@ -40,14 +49,6 @@ export const StyledSpinner = styled.div<{ size: SizeValue; color: string }>`
     #000 calc(100% - ${({ size }) => size * 25 + "px"})
   );
 
+  /* Temporarily I reference style tag, because of @beta styled-components missing support with babel-plugin-styled-components */
   animation: spin 0.55s linear infinite;
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 `;

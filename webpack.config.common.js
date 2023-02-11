@@ -29,9 +29,6 @@ module.exports = {
           {
             loader: "babel-loader",
           },
-          {
-            loader: "ts-loader",
-          },
         ],
       },
       {

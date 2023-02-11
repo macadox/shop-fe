@@ -41,9 +41,6 @@
     "name": "Maciej Okniński",
     "email": "okninski.mac@gmail.com"
   },
-  "browserslist": [
-    "last 2 versions, not dead, > 0.2%"
-  ],
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -63,9 +60,10 @@
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
     "babel-loader": "^9.1.2",
+    "babel-plugin-macros": "^3.1.0",
+    "babel-plugin-styled-components": "^2.0.7",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.3",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.5.0",
