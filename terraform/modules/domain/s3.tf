@@ -36,25 +36,54 @@ resource "aws_s3_bucket_public_access_block" "block_public_access" {
 
 resource "aws_s3_bucket_policy" "static_app_bucket_policy" {
   bucket = aws_s3_bucket.static_app_bucket.id
-  policy = <<EOF
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObject"
-            ],
-            "Resource": [
-                "${aws_s3_bucket.static_app_bucket.arn}/*"
-            ],
-            "Principal":{
-                "AWS": [
-                    "${aws_cloudfront_origin_access_identity.oai.iam_arn}"
-                ]
-            }
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = ["s3:GetObject"],
+        Resource = ["${aws_s3_bucket.static_app_bucket.arn}/*"],
+        Principal = {
+          Service = "cloudfront.amazonaws.com"
+        },
+        Condition = {
+          StringEquals = {
+            "AWS:SourceArn" = "${aws_cloudfront_distribution.cf_distribution.arn}"
+          }
         }
+      }
     ]
+  })
 }
-EOF
+
+resource "aws_s3_bucket" "static_content_bucket" {
+  bucket        = "${var.project_name}-${terraform.workspace}-assets-${var.project_env}"
+  force_destroy = true
+  acl           = "public-read"
+  tags          = var.default_tags
+}
+
+resource "aws_s3_bucket_policy" "static_content_bucket_policy" {
+  bucket = aws_s3_bucket.static_content_bucket.id
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action    = ["s3:GetObject"],
+        Effect    = "Allow",
+        Resource  = "${aws_s3_bucket.static_content_bucket.arn}/*",
+        Principal = "*"
+      }
+    ]
+  })
+}
+
+resource "aws_s3_bucket_object" "static_content_objects" {
+  for_each     = fileset("../assets", "**")
+  bucket       = aws_s3_bucket.static_content_bucket.bucket
+  key          = each.value
+  source       = "../assets/${each.value}"
+  etag         = filemd5("../assets/${each.value}")
+  content_type = lookup(var.mime_types, regex("\\.[^.]+$", each.value), null)
+  tags         = var.default_tags
 }

@@ -9,8 +9,8 @@ import CartItem from "./CartItem/CartItem";
 import Image from "../../components/atoms/Image/Image";
 import { StyledCartPageWrapper } from "./CartPage.style";
 
-import emptyCart from "../../assets/photos/cart-empty.svg";
 import { ROUTES } from "../../constants/routes";
+import photos from "../../constants/assets";
 import * as colors from "../../constants/colors";
 
 const EmptyCart = () => {
@@ -22,7 +22,7 @@ const EmptyCart = () => {
         <Image
           $height="100%"
           $width="100%"
-          src={emptyCart}
+          src={photos.cartEmpty}
           alt="no items in cart"
         />
       </Container>
