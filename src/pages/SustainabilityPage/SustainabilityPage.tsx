@@ -9,13 +9,8 @@ import TextTitle from "../../components/atoms/TextTitle/TextTitle";
 import Teaser from "../../components/molecules/Teaser/Teaser";
 
 import { INNER_CONTAINER_MAX_WIDTH } from "../../constants/layout";
+import photos from "../../constants/assets";
 import * as colors from "../../constants/colors";
-import dandelion from "../../assets/photos/dandelion-sky.png";
-import ecoProducts from "../../assets/photos/eco-products.png";
-import greenGlobe from "../../assets/photos/green-globe.png";
-import carbonFootprint from "../../assets/photos/carbon-footpring.png";
-import metaverseModel from "../../assets/photos/metaverse-model.png";
-import drillWell from "../../assets/photos/drill-well.png";
 
 const Banner = ({
   color,
@@ -78,7 +73,7 @@ const SustainabilityPage = () => {
         <Image
           $width="100%"
           $height="100%"
-          src={dandelion}
+          src={photos.dandelion}
           alt={t("heroAlt", { ns: ["sustainability"] })}
         />
         <Container
@@ -117,21 +112,21 @@ const SustainabilityPage = () => {
         <ImageBanner
           slides={[
             {
-              src: greenGlobe,
+              src: photos.greenGlobe,
               alt: t("bannerFirstSlideAlt", { ns: ["sustainability"] }),
               title: t("bannerFirstSlideTitle", { ns: ["sustainability"] }),
               subtitle: t("bannerFirstSlideText", { ns: ["sustainability"] }),
               onClick: () => console.log("see more"),
             },
             {
-              src: ecoProducts,
+              src: photos.ecoProducts,
               alt: t("bannerSecondSlideAlt", { ns: ["sustainability"] }),
               title: t("bannerSecondSlideTitle", { ns: ["sustainability"] }),
               subtitle: t("bannerSecondSlideText", { ns: ["sustainability"] }),
               onClick: () => console.log("see more"),
             },
             {
-              src: carbonFootprint,
+              src: photos.carbonFootprint,
               alt: t("bannerThirdSlideAlt", { ns: ["sustainability"] }),
               title: t("bannerThirdSlideTitle", { ns: ["sustainability"] }),
               subtitle: t("bannerThirdSlideText", { ns: ["sustainability"] }),
@@ -158,7 +153,7 @@ const SustainabilityPage = () => {
         $background={colors.WHITE}
       >
         <Teaser
-          src={metaverseModel}
+          src={photos.metaverseModel}
           alt={t("teaserOneAlt", { ns: ["sustainability"] })}
           description={t("teaserOneDescription", { ns: ["sustainability"] })}
           slogan={t("teaserOneTitle", { ns: ["sustainability"] })}
@@ -182,7 +177,7 @@ const SustainabilityPage = () => {
         $background={colors.WHITE}
       >
         <Teaser
-          src={drillWell}
+          src={photos.drillWell}
           alt={t("teaserTwoAlt", { ns: ["sustainability"] })}
           description={t("teaserTwoDescription", { ns: ["sustainability"] })}
           slogan={t("teaserTwoTitle", { ns: ["sustainability"] })}

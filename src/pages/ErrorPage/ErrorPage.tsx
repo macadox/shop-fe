@@ -8,7 +8,7 @@ import TextBody from "../../components/atoms/TextBody/TextBody";
 import Button from "../../components/atoms/Button/Button";
 import Image from "../../components/atoms/Image/Image";
 
-import notFound from "../../assets/photos/not-found.svg";
+import photos from "../../constants/assets";
 import { ROUTES } from "../../constants/routes";
 
 const ErrorPage = () => {
@@ -20,7 +20,7 @@ const ErrorPage = () => {
         <Image
           $height="100%"
           $width="100%"
-          src={notFound}
+          src={photos.notFound}
           alt="portal to another dimension"
         />
       </Container>

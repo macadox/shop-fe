@@ -1,18 +1,17 @@
-resource "aws_cloudfront_origin_access_identity" "oai" {
-  comment = "alphashop oai"
+resource "aws_cloudfront_origin_access_control" "oac" {
+  name                              = "alphashop-oac"
+  description                       = "origin access control for alphashop"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
 }
 
 resource "aws_cloudfront_distribution" "cf_distribution" {
   origin {
-    domain_name = aws_s3_bucket.static_app_bucket.bucket_regional_domain_name
-    origin_id   = local.s3_origin_id
-
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
-    }
-
+    domain_name              = aws_s3_bucket.static_app_bucket.bucket_regional_domain_name
+    origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
+    origin_id                = local.s3_origin_id
   }
-
 
   enabled         = true
   is_ipv6_enabled = true
@@ -82,7 +81,10 @@ resource "aws_cloudfront_distribution" "cf_distribution" {
 
   restrictions {
     geo_restriction {
-      restriction_type = "none"
+      restriction_type = "blacklist"
+      locations        = ["RU"]
     }
   }
+
+  tags = var.default_tags
 }
