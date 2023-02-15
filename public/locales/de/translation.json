@@ -24,5 +24,6 @@
   "emptyCartButton": "Gehe zu Produkten",
   "cartSubtotal": "Zwischensumme",
   "cartShipping": "Versand",
-  "cartTotal": "GESAMT"
+  "cartTotal": "GESAMT",
+  "required": "ist erforderlich"
 }

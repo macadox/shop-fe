@@ -3,6 +3,7 @@ import * as colors from "../../../constants/colors";
 
 type Props = {
   $hasFocus?: boolean;
+  $hasError?: boolean;
 };
 
 const DefaultBox = styled.div<Props>`
@@ -19,6 +20,7 @@ const DefaultBox = styled.div<Props>`
   &:focus-within {
     border-color: ${colors.BLACK};
   }
+  ${({ $hasError }) => $hasError && `border-color: ${colors.RED};`}
   ${({ $hasFocus }) => $hasFocus && `border-color: ${colors.BLACK};`}
 `;
 

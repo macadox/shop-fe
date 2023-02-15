@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Container from "../../atoms/Container/Container";
 import TextBody from "../../atoms/TextBody/TextBody";
@@ -17,6 +17,25 @@ type Props = ProductWidgetType & {
   onHeartClick: (id: ProductIdType, favorited: boolean) => void;
 };
 
+const HeartIcon = ({
+  isFavorited,
+  name,
+}: {
+  isFavorited: boolean;
+  name: string;
+}) => {
+  const label = `${isFavorited ? "unlike" : "like"} ${name}`;
+  const Icon = () => {
+    return isFavorited ? (
+      <HeartFull aria-label={label} width="33.3%" />
+    ) : (
+      <HeartEmpty aria-label={label} width="33.3%" fill={colors.BLACK} />
+    );
+  };
+
+  return <Icon />;
+};
+
 const ProductWidget = ({
   id,
   slug,
@@ -29,35 +48,23 @@ const ProductWidget = ({
 }: Props) => {
   const [isFavorited, setIsFavorited] = useState(favorited);
 
-  const HeartIcon = useMemo(() => {
-    const label = `${isFavorited ? "unlike" : "like"} ${name}`;
-    const Icon = () => {
-      return isFavorited ? (
-        <HeartFull aria-label={label} width="33.3%" />
-      ) : (
-        <HeartEmpty aria-label={label} width="33.3%" fill={colors.BLACK} />
-      );
-    };
+  const handleHeartClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const nextFavoritedValue = !isFavorited;
 
-    return Icon;
-  }, [isFavorited, name]);
+    setIsFavorited(nextFavoritedValue);
+    onHeartClick(id, nextFavoritedValue);
+  };
 
-  const handleHeartClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation();
-      const nextFavoritedValue = !isFavorited;
-
-      setIsFavorited(nextFavoritedValue);
-      onHeartClick(id, nextFavoritedValue);
-    },
-    [id, isFavorited, onHeartClick]
-  );
+  const handleWidgetClick = () => {
+    onWidgetClick(slug);
+  };
 
   return (
     <StyledProductWidget
       data-testid="product-widget-container"
       tabIndex={0}
-      onClick={() => onWidgetClick(slug)}
+      onClick={handleWidgetClick}
     >
       <Image
         $width={PRODUCT_WIDGET_PHOTO_SIZE}
@@ -67,7 +74,7 @@ const ProductWidget = ({
         spinnerSize="m"
       />
       <LikeButton onClick={handleHeartClick}>
-        <HeartIcon />
+        <HeartIcon isFavorited={isFavorited} name={name} />
       </LikeButton>
       <Container $p={8} $display="flex" $flexDirection="column" $gap="4px">
         <TextBody $size="18px">${price}</TextBody>

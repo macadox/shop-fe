@@ -2,7 +2,6 @@ import React, {
   useState,
   useRef,
   useCallback,
-  useLayoutEffect,
   useMemo,
   useEffect,
 } from "react";
@@ -25,6 +24,7 @@ export type ComboboxProps = {
   selectedItem: DropdownOption | null;
   defaultPlaceholder: string;
   innerRef: React.RefObject<HTMLDivElement>;
+  hasError: boolean;
   handleClick: () => void;
   handleKeyDown: (e: React.KeyboardEvent) => void;
 };
@@ -37,6 +37,7 @@ const DefaultCombobox = ({
   selectedItem,
   defaultPlaceholder,
   innerRef,
+  hasError,
   handleClick,
   handleKeyDown,
 }: ComboboxProps) => {
@@ -53,6 +54,7 @@ const DefaultCombobox = ({
       aria-haspopup="listbox"
       aria-labelledby={ariaLabelledBy}
       $hasFocus={isExpanded}
+      $hasError={hasError}
       as="div"
       tabIndex={0}
       onClick={handleClick}
@@ -89,6 +91,7 @@ type Props = {
   CustomCombobox?: React.FC<ComboboxProps>;
   overrideIsExpanded?: boolean;
   resetStateAfterClose?: boolean;
+  hasError?: boolean;
 };
 
 const SingleSelectDropdown = ({
@@ -100,6 +103,7 @@ const SingleSelectDropdown = ({
   CustomCombobox,
   overrideIsExpanded = false,
   resetStateAfterClose = false,
+  hasError = false,
 }: Props) => {
   const [isExpanded, setIsExpanded] = useState(
     overrideIsExpanded ? overrideIsExpanded : false
@@ -122,11 +126,16 @@ const SingleSelectDropdown = ({
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const comboboxRef = useRef<HTMLDivElement>(null);
-  const firstUpdateRef = useRef(true);
 
   useOnClickOutside(dropdownRef, () => !overrideIsExpanded && closeDropdown());
 
-  const selectOption = (id: string) => setSelectedId(id);
+  const selectOption = useCallback(
+    (id: string) => {
+      setSelectedId(id);
+      handleSelectCallback(options.find((option) => option.id === id) || null);
+    },
+    [options, handleSelectCallback]
+  );
 
   const focusCombobox = () => comboboxRef.current?.focus();
 
@@ -174,14 +183,17 @@ const SingleSelectDropdown = ({
         }
       }
     },
-    [options, selectedId, closeDropdown, toggleDropdown]
+    [options, selectedId, closeDropdown, toggleDropdown, selectOption]
   );
 
-  const handleClick = (optionId: string) => {
-    selectOption(optionId);
-    !overrideIsExpanded && closeDropdown();
-    focusCombobox();
-  };
+  const handleClick = useCallback(
+    (optionId: string) => {
+      selectOption(optionId);
+      !overrideIsExpanded && closeDropdown();
+      focusCombobox();
+    },
+    [selectOption, closeDropdown, overrideIsExpanded]
+  );
 
   useEffect(() => {
     setIsExpanded(overrideIsExpanded);
@@ -189,16 +201,6 @@ const SingleSelectDropdown = ({
       setSelectedId(null);
     }
   }, [overrideIsExpanded, resetStateAfterClose]);
-
-  useLayoutEffect(() => {
-    if (firstUpdateRef.current) {
-      firstUpdateRef.current = false;
-
-      return;
-    }
-
-    handleSelectCallback(selectedOption);
-  }, [selectedOption, handleSelectCallback]);
 
   const RenderedCombobox = useMemo(
     () => (CustomCombobox ? CustomCombobox : DefaultCombobox),
@@ -217,6 +219,7 @@ const SingleSelectDropdown = ({
         innerRef={comboboxRef}
         handleClick={toggleDropdown}
         handleKeyDown={handleKeyDown}
+        hasError={hasError}
       />
       {isExpanded && (
         <DropdownList

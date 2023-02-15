@@ -24,5 +24,6 @@
   "emptyCartButton": "Go to Products",
   "cartSubtotal": "Subtotal",
   "cartShipping": "Shipping",
-  "cartTotal": "TOTAL"
+  "cartTotal": "TOTAL",
+  "required": "is required"
 }

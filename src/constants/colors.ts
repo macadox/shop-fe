@@ -6,3 +6,4 @@ export const LIGHTER = "#F1F1F3";
 export const SHADOW = "#0000000D";
 export const DARK = "#3E3E3E";
 export const PASTEL_BROWN = "#AF875C80";
+export const RED = "#A32120";

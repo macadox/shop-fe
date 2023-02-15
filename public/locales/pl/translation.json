@@ -24,5 +24,6 @@
   "emptyCartButton": "Idź do produktów",
   "cartSubtotal": "Wartość zamówienia",
   "cartShipping": "Dostawa",
-  "cartTotal": "SUMA"
+  "cartTotal": "SUMA",
+  "required": "jest wymagany"
 }

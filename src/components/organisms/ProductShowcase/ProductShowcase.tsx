@@ -1,10 +1,4 @@
-import React, {
-  useMemo,
-  useRef,
-  useCallback,
-  useState,
-  useEffect,
-} from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Container from "../../atoms/Container/Container";
 import TextTitle from "../../atoms/TextTitle/TextTitle";
@@ -14,6 +8,7 @@ import SingleSelectDropdown from "../../molecules/SingleSelectDropdown/SingleSel
 import ProductImageViewer from "../../molecules/ProductImageViewer/ProductImageViewer";
 import FormField from "../../molecules/FormField/FormField";
 import { ProductShowcaseContainer } from "./ProductShowcase.style";
+import type { DropdownOption } from "../../molecules/DropdownList/DropdownList";
 
 type Props = {
   name: string;
@@ -24,6 +19,25 @@ type Props = {
   onAddToCart: ({ color, size }: { color?: string; size?: string }) => void;
 };
 
+type FormFieldKeys = "color" | "size";
+
+type FormErrors = {
+  color: string[];
+  size: string[];
+};
+
+const checkHasErrors =
+  (errors: FormErrors) =>
+  (...fieldNames: FormFieldKeys[]): boolean => {
+    // If no field names passed, we want to handle all fields
+    const _fieldNames =
+      fieldNames.length === 0 ? Object.keys(errors) : [...fieldNames];
+
+    return Object.entries(errors)
+      .filter(([key]) => _fieldNames.includes(key))
+      .some(([_, errorValues]) => errorValues.length > 0);
+  };
+
 const ProductShowcase = ({
   name,
   images,
@@ -33,18 +47,17 @@ const ProductShowcase = ({
   onAddToCart,
 }: Props) => {
   const { t } = useTranslation(["product", "translation"]);
-  const [productAdded, setProductAdded] = useState(false);
-  const [selectedColor, setSelectedColor] = useState<{
-    id: string;
-    value: string;
-  } | null>();
-  const [selectedSize, setSelectedSize] = useState<{
-    id: string;
-    value: string;
-  } | null>();
 
-  // const selectedColor = useRef<{ id: string; value: string } | null>();
-  // const selectedSize = useRef<{ id: string; value: string } | null>();
+  const [fieldValues, setFieldValues] = useState<{
+    color: DropdownOption | null;
+    size: DropdownOption | null;
+  }>({ color: null, size: null });
+  const [formErrors, setFormErrors] = useState<FormErrors>({
+    color: [],
+    size: [],
+  });
+  const [showErrors, setShowErrors] = useState(false);
+  const [productAdded, setProductAdded] = useState(false);
 
   const colorOpts = useMemo(
     () =>
@@ -61,21 +74,59 @@ const ProductShowcase = ({
     [sizes]
   );
 
+  const handleValidation = useCallback(() => {
+    const errors: FormErrors = { color: [], size: [] };
+
+    if (!fieldValues.color) {
+      errors.color = [
+        `${t("color", { count: 1 })} ${t("required", "", {
+          ns: ["translation"],
+        })}`,
+      ];
+    }
+    if (!fieldValues.size) {
+      errors.size = [
+        `${t("size", { count: 1 })} ${t("required", "", {
+          ns: ["translation"],
+        })}`,
+      ];
+    }
+    setFormErrors(errors);
+    if (checkHasErrors(errors)()) throw Error("Validation Error");
+  }, [fieldValues, t]);
+
   const handleSubmit = useCallback(() => {
     try {
+      handleValidation();
       onAddToCart({
-        color: selectedColor?.value,
-        size: selectedSize?.value,
+        color: fieldValues.color?.value,
+        size: fieldValues.size?.value,
       });
       setProductAdded(true);
+      setShowErrors(false);
     } catch (e) {
       setProductAdded(false);
+      setShowErrors(true);
     }
-  }, [onAddToCart, selectedColor, selectedSize]);
+  }, [onAddToCart, fieldValues, handleValidation]);
+
+  const handleFieldUpdate = useCallback(
+    (field: FormFieldKeys) => (option: DropdownOption | null) => {
+      setFieldValues((prev) => ({ ...prev, [field]: option }));
+      setFormErrors((prev) => ({ ...prev, [field]: [] }));
+      setShowErrors(false);
+      setProductAdded(false);
+    },
+    []
+  );
 
   useEffect(() => {
-    setProductAdded(false);
-  }, [selectedColor, selectedSize]);
+    try {
+      showErrors && handleValidation();
+    } catch (e) {
+      setShowErrors(true);
+    }
+  }, [handleValidation, showErrors, t]);
 
   return (
     <ProductShowcaseContainer>
@@ -102,16 +153,14 @@ const ProductShowcase = ({
               Component={() => (
                 <SingleSelectDropdown
                   options={colorOpts}
-                  defaultPlaceholder="color"
+                  defaultPlaceholder={t("color", { count: 1 }) || undefined}
                   dropdownId="product-color"
-                  initialSelectedId={
-                    selectedColor?.id || colorOpts?.[0]?.id || ""
-                  }
-                  handleSelectCallback={(option) => {
-                    setSelectedColor(option);
-                  }}
+                  initialSelectedId={fieldValues.color?.id}
+                  handleSelectCallback={handleFieldUpdate("color")}
+                  hasError={checkHasErrors(formErrors)("color")}
                 />
               )}
+              errors={formErrors.color}
             />
           )}
           {sizeOpts && (
@@ -121,16 +170,14 @@ const ProductShowcase = ({
               Component={() => (
                 <SingleSelectDropdown
                   options={sizeOpts}
-                  defaultPlaceholder="size"
+                  defaultPlaceholder={t("size", { count: 1 }) || undefined}
                   dropdownId="product-size"
-                  initialSelectedId={
-                    selectedSize?.id || sizeOpts?.[0]?.id || ""
-                  }
-                  handleSelectCallback={(option) => {
-                    setSelectedSize(option);
-                  }}
+                  initialSelectedId={fieldValues.size?.id}
+                  handleSelectCallback={handleFieldUpdate("size")}
+                  hasError={checkHasErrors(formErrors)("size")}
                 />
               )}
+              errors={formErrors.size}
             />
           )}
 

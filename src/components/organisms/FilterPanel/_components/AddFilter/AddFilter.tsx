@@ -76,7 +76,7 @@ const AddValuePopup = <T,>({
 type AddKeyPopupProps<T> = {
   table: Table<T>;
   column?: Column<T, unknown>;
-  filterKeys: { id: string; value: string }[];
+  filterKeys: DropdownOption[];
   step: AddFilterSteps;
   setStep: (val: AddFilterSteps) => void;
   selectKey: (val: string) => void;
@@ -127,7 +127,7 @@ const AddKeyPopup = <T,>({
 type AddFilterProps<T> = {
   table: Table<T>;
   columns: Column<T, unknown>[];
-  filterKeys: { id: string; value: string }[];
+  filterKeys: DropdownOption[];
 };
 
 const AddFilter = <T,>({ table, columns, filterKeys }: AddFilterProps<T>) => {
