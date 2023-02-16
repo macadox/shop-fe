@@ -6,9 +6,11 @@ module.exports = merge(commonConfig, {
   mode: "production",
   devtool: false,
   optimization: {
+    minimize: true,
     minimizer: [
       new TerserPlugin({
         parallel: true,
+        extractComments: "all",
         terserOptions: {
           compress: true,
           keep_classnames: false,

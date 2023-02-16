@@ -1,7 +1,7 @@
-import React from "react";
+import React, { lazy } from "react";
 import App from "./App";
-import GlobalStyles from "./GlobalStyles";
-import "./services/i18n/i18n";
+const GlobalStyles = lazy(() => import("./GlobalStyles"));
+import("./services/i18n/i18n");
 
 import { createRoot } from "react-dom/client";
 

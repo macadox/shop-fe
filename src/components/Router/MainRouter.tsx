@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Container from "../atoms/Container/Container";
-import Footer from "../molecules/Footer/Footer";
-import Navbar from "../molecules/Navbar/Navbar";
 import Loading from "../molecules/Loading/Loading";
+const Footer = lazy(() => import("../molecules/Footer/Footer"));
+const Navbar = lazy(() => import("../molecules/Navbar/Navbar"));
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const ProductPage = lazy(() => import("../../pages/ProductPage/ProductPage"));
@@ -21,7 +21,9 @@ import * as colors from "../../constants/colors";
 const MainRouter = () => {
   return (
     <Router>
-      <Navbar />
+      <Suspense fallback={<Loading />}>
+        <Navbar />
+      </Suspense>
       <Container
         $flexGrow={1}
         $width="100%"
@@ -41,8 +43,6 @@ const MainRouter = () => {
                 path={ROUTES.SUSTAINABILITY}
                 element={<SustainabilityPage />}
               />
-              <Route path={ROUTES.PROFILE} element={<div>ProfilePage</div>} />
-              {/* <Route path={ROUTES.FAVORITES} element={<div>FavoritesPage</div>} /> */}
               <Route path={ROUTES.CART} element={<CartPage />} />
               <Route path={ROUTES.HOME} element={<HomePage />} />
               <Route path="*" element={<ErrorPage />} />
@@ -50,7 +50,9 @@ const MainRouter = () => {
           ))}
         </Suspense>
       </Container>
-      <Footer />
+      <Suspense fallback={<Loading />}>
+        <Footer />
+      </Suspense>
     </Router>
   );
 };
