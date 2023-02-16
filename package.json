@@ -24,10 +24,11 @@
     "zustand": "^4.3.2"
   },
   "scripts": {
-    "build": "webpack --config=webpack.config.prod.js",
-    "build:dev": "webpack --config=webpack.config.dev.js",
+    "build": "webpack --config=webpack.config.prod.js --env NODE_ENV=production",
+    "build:dev": "webpack --config=webpack.config.dev.js --env NODE_ENV=development",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "start": "webpack-dev-server --config=webpack.config.dev.js",
+    "start": "webpack-dev-server --config=webpack.config.dev.js --env NODE_ENV=development",
+    "start:prod": "webpack-dev-server --config=webpack.config.prod.js --env NODE_ENV=production",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
