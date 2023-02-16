@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import cloneDeep from "lodash.clonedeep";
-import crypto from "crypto";
 
-type UniqueId = string;
+type UniqueId = number;
 type ApiId = string;
 
 export type CartProduct = {
@@ -50,11 +49,23 @@ export type CartState = {
   clearCart: ClearCartAction;
 };
 
+// Lightweight djb2 algorithm
+const hash = (str: string) => {
+  let hash = 0;
+  if (str.length === 0) {
+    return hash;
+  }
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+
+  return hash;
+};
+
 export const generateProductHash = (product: CartProduct): UniqueId =>
-  crypto
-    .createHash("sha256")
-    .update(`${product.id}-${product.color}-${product.size}`)
-    .digest("hex");
+  hash(`${product.id}-${product.color}-${product.size}`);
 
 export const initialCartData: CartData = {
   products: [],
